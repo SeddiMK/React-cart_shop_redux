@@ -4,7 +4,7 @@ import { selectGoods } from '../store/goodsSlice';
 
 import { selectCart, minus, del } from '../store/cartSlice';
 
-import Cart from '../components/Cart';
+import Cart from '../components/cart/Cart';
 
 export default function CartList() {
   const goods = useSelector(selectGoods);

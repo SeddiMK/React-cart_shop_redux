@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100%;
+    width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+button {
+    background-color: var(--btn-send-com);
+    border-radius: 0.4rem;
+
+    padding: clamp(0.4rem, 1vw, 1rem);
+    transition: all 0.25s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--btn-send-com);
+    box-shadow: -3px -3px 3px #888;
+    transform: translate(2px, 2px);
+}
+
+button:active {
+    background-color: var(--btn-send-com);
+    box-shadow: none;
+    transform: translate(-2px, -2px);
+}

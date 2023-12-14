@@ -1,16 +1,17 @@
 import './Null.css';
 import './App.css';
-import Header from '../components/header/Header';
-import Main from '../components/main/Main';
-import Footer from '../components/footer/Footer';
+import './Common.css';
+import GoodsList from '../containers/GoodsList';
+import CartList from '../containers/СartList';
 
-export default function App() {
-  const nav = [];
+function App() {
   return (
     <div className="container">
-      <Header nav={nav} />
-      <Main />
-      <Footer />
+      {/* Вывод данных из хранилища */}
+      <GoodsList />
+      <CartList />
     </div>
   );
 }
+
+export default App;

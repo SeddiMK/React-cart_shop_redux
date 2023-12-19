@@ -14,7 +14,6 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
       }
       state.cartVal[articul]++;
-      console.log(state.cartVal[articul]);
     },
     minus: (state, data) => {
       // let priceVal = +data.payload;

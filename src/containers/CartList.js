@@ -49,7 +49,6 @@ export default function CartList() {
   // );
   let fullQuantity = () => Object.values(cart).reduce((a, b) => a + b, 0);
 
-  console.log(cart);
   console.log(fullQuantity()); // количество товаров всего, для ярлыка корзины
 
   return (

@@ -1,34 +1,38 @@
 export default function Cart(props) {
   return (
     <>
-      <div className="carts-block">
+      <div className=" cart__one-product">
         <table>
           <tbody>
-            <tr className="goods">
+            <tr className="cart__goods-list">
               <td>Name good</td>
               <td>Price for one item</td>
               <td>Quantity</td>
               <td>Price all item</td>
             </tr>
-            <tr className="goods">
-              <td className="goods-name">
+            <tr className="cart__goods">
+              <td className="cart__goods-name">
                 {props.title}
                 <img
-                  className="image-table-td"
+                  className="cart__image-table-td"
                   src={props.image}
                   alt={props.title}
                 />
               </td>
-              <td className="goods-price-one">{props.cost}</td>
-              <td className="goods-quantity">{props.quantity}</td>
-              <td className="goods-price-all">{props.priceAllItem}</td>
+              <td className="cart__goods-price-one">{props.cost}</td>
+              <td className="cart__goods-quantity">{props.quantity}</td>
+              <td className="cart__goods-price-all">{props.priceAllItem}</td>
             </tr>
           </tbody>
         </table>
-        <button className="delete-one-position" data-key={props.articul}>
+        <button
+          className="cart__delete-one-position delete-one-position"
+          data-key={props.articul}>
           Delete one position
         </button>
-        <button className="delete-quantity" data-key={props.articul}>
+        <button
+          className="cart__delete-quantity delete-quantity"
+          data-key={props.articul}>
           Delete quantity
         </button>
       </div>

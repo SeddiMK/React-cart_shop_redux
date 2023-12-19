@@ -4,7 +4,7 @@ export default function Header(props) {
   console.log(props);
   return (
     <header className="header">
-      <div className="header__container">
+      <div className="header__wrapper">
         <a className="header__logo">
           ME
           {/* <img src="#" alt="Image logo" /> */}

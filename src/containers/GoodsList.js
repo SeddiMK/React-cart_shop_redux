@@ -23,7 +23,7 @@ export default function GoodsList() {
 
   return (
     <>
-      <div className="goods-field" onClick={clickHandler}>
+      <div className="main__goods-field goods-field" onClick={clickHandler}>
         {goods.map((el) => (
           <Goods
             title={el.title}

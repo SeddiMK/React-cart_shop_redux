@@ -21,6 +21,7 @@ export default function CartList() {
 
   let clickHandler = (e) => {
     e.preventDefault();
+
     let targ = e.target;
     if (targ.classList.contains('delete-one-position')) {
       dispath(minus(targ.getAttribute('data-key')));
@@ -28,6 +29,7 @@ export default function CartList() {
       // return true;
     }
     if (targ.classList.contains('delete-quantity')) {
+      // для ярлыка удаления в корзине !!!!!!!
       dispath(del(targ.getAttribute('data-key')));
       // return true;
     }
@@ -40,9 +42,20 @@ export default function CartList() {
     return fullPrice;
   });
 
+  // full Quantity
+  // let fullQuantity = 0;
+  // let fullQuantitySumm = Object.keys(cart).map(
+  //   (el) => (fullQuantity += Number(cart[el]))
+  // );
+  let fullQuantity = () => Object.values(cart).reduce((a, b) => a + b, 0);
+
+  console.log(cart);
+  console.log(fullQuantity()); // количество товаров всего, для ярлыка корзины
+
   return (
-    <div className="goods-table" onClick={clickHandler}>
-      <ul>
+    <div className="main__goods-table goods-table" onClick={clickHandler}>
+      {/* fullGoods */}
+      <ul className="goods-table__full-goods">
         {Object.keys(cart).map((el) => (
           <li key={el + goodsObj[el]['title']}>
             {goodsObj[el]['title']} - {cart[el]}
@@ -50,7 +63,7 @@ export default function CartList() {
         ))}
       </ul>
 
-      <div>
+      <div className="goods-table__cart cart">
         {Object.keys(cart).map((el) => (
           <Cart
             title={goodsObj[el]['title']}
@@ -62,7 +75,7 @@ export default function CartList() {
             key={el + goodsObj[el]['title']}
           />
         ))}
-        <div className="fullPrice">Full price: {fullPrice}</div>
+        <div className="cart__fullPrice">Full price: {fullPrice}</div>
       </div>
     </div>
   );

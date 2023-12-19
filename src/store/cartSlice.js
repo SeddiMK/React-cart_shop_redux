@@ -14,6 +14,7 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
       }
       state.cartVal[articul]++;
+      console.log(state.cartVal[articul]);
     },
     minus: (state, data) => {
       // let priceVal = +data.payload;
@@ -25,13 +26,14 @@ export const cartSlice = createSlice({
       }
 
       // // delete one goods
-      // console.log(state.cartVal[articul]);
+      console.log(state.cartVal[articul]);
       if (state.cartVal[articul] > 0) {
         state.cartVal[articul]--;
       }
       // // delete to cart
       if (state.cartVal[articul] === 0) {
         state.cartVal[articul] = 0;
+        delete state.cartVal[articul];
       }
     },
     del: (state, data) => {
@@ -41,6 +43,7 @@ export const cartSlice = createSlice({
       // // delete to cart
       if (state.cartVal[articul] > 0) {
         state.cartVal[articul] = 0;
+        delete state.cartVal[articul];
       }
     },
   },

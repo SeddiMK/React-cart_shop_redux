@@ -26,12 +26,12 @@ export default function Cart(props) {
           </tbody>
         </table>
         <button
-          className="cart__delete-one-position delete-one-position"
+          className="cart__delete-one-position delete-one-position btn"
           data-key={props.articul}>
           Delete one position
         </button>
         <button
-          className="cart__delete-quantity delete-quantity"
+          className="cart__delete-quantity delete-quantity btn"
           data-key={props.articul}>
           Delete quantity
         </button>

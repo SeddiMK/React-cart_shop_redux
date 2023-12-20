@@ -15,9 +15,8 @@ export default function GoodsList() {
     e.preventDefault();
     let targ = e.target;
 
-    if (!targ.classList.contains('add-to-cart')) {
-      return true;
-    }
+    if (!targ.classList.contains('add-to-cart')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
+
     dispath(increment(targ.getAttribute('data-key')));
   };
 

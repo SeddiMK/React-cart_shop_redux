@@ -16,7 +16,6 @@ export default function CartList() {
     accum[item['articul']] = item;
     return accum;
   }, {});
-
   // console.log(goodsObj);
 
   let clickHandler = (e) => {
@@ -56,7 +55,7 @@ export default function CartList() {
       {/* fullGoods */}
       <ul className="goods-table__full-goods">
         {Object.keys(cart).map((el) => (
-          <li key={el + goodsObj[el]['title']}>
+          <li className="goods-table__item" key={el + goodsObj[el]['title']}>
             {goodsObj[el]['title']} - {cart[el]}
           </li>
         ))}

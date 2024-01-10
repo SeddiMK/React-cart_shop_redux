@@ -30,6 +30,9 @@ export default function GoodsList() {
             image={el.image}
             articul={el.articul}
             key={el.articul}
+            raiting={el.raiting}
+            description={el.description}
+            currency={el.currency}
           />
         ))}
       </div>

@@ -1,7 +1,19 @@
 import './Header.css';
 import '../../app/Common.css';
+// import { useState } from 'react';
+// import Goods from '../goods/Goods';
 
+export let selectCurrency = 0;
 export default function Header(props) {
+  // const [selCurState, setSelCurState] = useState(0);
+
+  console.log(selectCurrency);
+
+  const handlerSelCurrency = (e) => {
+    console.log('click' + e.target.value);
+    // selectCurrency = +e.target.value;
+    // setSelCurState(selectCurrency);
+  };
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -35,7 +47,13 @@ export default function Header(props) {
                   className="menu__link btn-search btn-icon"></button>
               </form>
               <div className="block-search-cart__cart cart-header">
-                <button className="cart-header__btn btn-cart btn-icon"></button>
+                <button className="cart-header__btn btn-cart btn-icon"></button>{' '}
+                <select
+                  onChange={handlerSelCurrency}
+                  className="cart-header__currency">
+                  <option value="USD">USD</option>
+                  <option value="RUB">RUB</option>
+                </select>
               </div>
             </div>
           </ul>

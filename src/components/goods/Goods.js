@@ -1,4 +1,16 @@
+import { useEffect } from 'react';
+// import { selectCurrency } from '../header/Header';
+
 export default function Goods(props) {
+  // const [selCurState, setSelCurState] = useState(0);
+  // console.log(props.currency[selectCurrency]);
+  // console.log(props.selCurState);
+  console.log(props.currency);
+
+  // useEffect(() => {
+  //   console.log(props.selCurState);
+  //   if (props.selCurState !== 0) return props.currency[props.selCurState];
+  // }, [props.selCurState]); {props.currency[props.selCurState]}
   return (
     <div className="goods-block">
       <div className="goods-block__imgage-wrap">
@@ -7,7 +19,8 @@ export default function Goods(props) {
 
       <div className="goods-block__title-coast">
         <p>{props.title}</p>
-        <p>{props.cost}</p>
+
+        <p>{props.cost + ' '}</p>
       </div>
 
       <button

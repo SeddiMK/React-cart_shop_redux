@@ -1,6 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGoods } from '../store/goodsSlice';
+import {
+  selectCostFlag,
+  selectCurrensy,
+  selectGoods,
+} from '../store/goodsSlice';
 
 import Goods from '../components/goods/Goods';
 import { increment } from '../store/cartSlice';
@@ -8,6 +12,8 @@ import { increment } from '../store/cartSlice';
 // get data from store
 // list data
 export default function GoodsList() {
+  const selCostFlag = useSelector(selectCostFlag);
+  const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
   const dispath = useDispatch();
 
@@ -26,13 +32,13 @@ export default function GoodsList() {
         {goods.map((el) => (
           <Goods
             title={el.title}
-            cost={el.cost}
+            cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
             image={el.image}
             articul={el.articul}
             key={el.articul}
             raiting={el.raiting}
             description={el.description}
-            currency={el.currency}
+            currency={currency}
           />
         ))}
       </div>

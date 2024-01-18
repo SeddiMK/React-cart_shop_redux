@@ -19,7 +19,9 @@ export default function Cart(props) {
                   alt={props.title}
                 />
               </td>
-              <td className="cart__goods-price-one">{props.cost}</td>
+              <td className="cart__goods-price-one">
+                {props.cost} {props.currency}
+              </td>
               <td className="cart__goods-quantity">{props.quantity}</td>
               <td className="cart__goods-price-all">{props.priceAllItem}</td>
             </tr>

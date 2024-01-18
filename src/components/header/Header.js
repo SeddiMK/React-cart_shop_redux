@@ -1,19 +1,17 @@
 import './Header.css';
 import '../../app/Common.css';
-// import { useState } from 'react';
-// import Goods from '../goods/Goods';
 
-export let selectCurrency = 0;
+import { useDispatch } from 'react-redux';
+import { selCostFlag, selCurrensy } from '../../store/goodsSlice';
+
 export default function Header(props) {
-  // const [selCurState, setSelCurState] = useState(0);
-
-  console.log(selectCurrency);
+  const dispath = useDispatch();
 
   const handlerSelCurrency = (e) => {
-    console.log('click' + e.target.value);
-    // selectCurrency = +e.target.value;
-    // setSelCurState(selectCurrency);
+    dispath(selCostFlag(e.target.value !== 'RUB'));
+    dispath(selCurrensy(e.target.value));
   };
+
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -51,8 +49,8 @@ export default function Header(props) {
                 <select
                   onChange={handlerSelCurrency}
                   className="cart-header__currency">
-                  <option value="USD">USD</option>
                   <option value="RUB">RUB</option>
+                  <option value="USD">USD</option>
                 </select>
               </div>
             </div>

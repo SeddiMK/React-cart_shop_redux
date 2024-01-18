@@ -6,7 +6,8 @@
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/342/uvkd72u0d21kn6m3z2im71e4yoilsmjt/480_300_1/BOSS_vento_birysa-_-8.jpg",
     "raiting":0, 
     "description": "Description wait?",
-    "currency" :[]
+    "currency": "RUB",
+    "exchangeRate": 95
   },
   {
     "articul": "7xxaq78d",
@@ -15,7 +16,7 @@
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/e19/ltsotlld7fxxj9xoaq85w7zfeqky7ucx/480_300_1/stul-TYRIN-_-9.jpg",
     "raiting":0, 
     "description": "Description wait?", 
-    "currency" : []
+    "currency" : "RUB"
   },
   {
     "articul": "7xxa3333221q78d",
@@ -24,7 +25,7 @@
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/760/480_300_1/nv0en3u804q5psmtan06avz8e7m0lqkv.jpg",
     "raiting":0, 
     "description": "Description wait?", 
-    "currency" : []
+    "currency" : "RUB"
   },
   {
     "articul": "asd686da",
@@ -33,7 +34,7 @@
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/ae0/480_300_1/wtco6eoatyanhe51wh2bi3t1im9wz8f5.jpg",
     "raiting":0, 
     "description": "Description wait?", 
-    "currency" : []
+    "currency" : "RUB"
   },
   {
     "articul": "hwq78d",
@@ -42,6 +43,6 @@
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/659/8sfaozl6qb6skh42drnxpajo8vmmd4ig/480_300_1/17a49d31668162b2cd3c0e5e0d8bf811.jpg",
     "raiting":0, 
     "description": "Description wait?", 
-    "currency" : [] 
+    "currency" : "RUB"
   }
 ]

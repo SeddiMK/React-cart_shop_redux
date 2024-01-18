@@ -1,12 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGoods } from '../store/goodsSlice';
+import {
+  selectCostFlag,
+  selectCurrensy,
+  selectGoods,
+} from '../store/goodsSlice';
 
 import { selectCart, minus, del } from '../store/cartSlice';
 
 import Cart from '../components/cart/Cart';
 
 export default function CartList() {
+  const selCostFlag = useSelector(selectCostFlag);
+  const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
   const dispath = useDispatch();
@@ -16,7 +22,7 @@ export default function CartList() {
     accum[item['articul']] = item;
     return accum;
   }, {});
-  // console.log(goodsObj);
+  console.log(goodsObj);
 
   let clickHandler = (e) => {
     e.preventDefault();
@@ -37,7 +43,10 @@ export default function CartList() {
   //full price
   let fullPrice = 0;
   Object.keys(cart).map((el) => {
-    fullPrice += goodsObj[el]['cost'] * cart[el];
+    fullPrice +=
+      (!selCostFlag
+        ? goodsObj[el]['cost']
+        : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el];
     return fullPrice;
   });
 
@@ -65,15 +74,29 @@ export default function CartList() {
         {Object.keys(cart).map((el) => (
           <Cart
             title={goodsObj[el]['title']}
-            cost={goodsObj[el]['cost']}
+            cost={
+              !selCostFlag
+                ? goodsObj[el]['cost']
+                : (goodsObj[el]['cost'] / 95).toFixed(0)
+            } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+            currency={currency}
             quantity={cart[el]}
-            priceAllItem={goodsObj[el]['cost'] * cart[el]}
+            priceAllItem={
+              (!selCostFlag
+                ? goodsObj[el]['cost']
+                : (goodsObj[el]['cost'] / 95).toFixed(0)) *
+                cart[el] +
+              ' ' +
+              currency
+            }
             image={goodsObj[el]['image']}
             articul={goodsObj[el]['articul']}
             key={el + goodsObj[el]['title']}
           />
         ))}
-        <div className="cart__fullPrice">Full price: {fullPrice}</div>
+        <div className="cart__fullPrice">
+          Full price: {fullPrice} {currency}
+        </div>
       </div>
     </div>
   );

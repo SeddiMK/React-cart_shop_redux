@@ -1,10 +1,16 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import { useDispatch } from 'react-redux';
-import { selCostFlag, selCurrensy } from '../../store/goodsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selCostFlag,
+  selCurrensy,
+  fullQuantityGoods,
+} from '../../store/goodsSlice';
 
 export default function Header(props) {
+  let fullQuantity = useSelector(fullQuantityGoods);
+  const cartClass = document.querySelector('.goods-table');
   const dispath = useDispatch();
 
   const handlerSelCurrency = (e) => {
@@ -12,6 +18,10 @@ export default function Header(props) {
     dispath(selCurrensy(e.target.value));
   };
 
+  const handleCart = () => {
+    console.log(fullQuantity === 0);
+    if (cartClass && fullQuantity !== 0) cartClass.classList.toggle('activ');
+  };
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -41,11 +51,18 @@ export default function Header(props) {
               <form className="block-search-cart__search search-header">
                 <input type="search" placeholder="Search..." />
                 <button
-                  type="submit"
+                  type="search"
                   className="menu__link btn-search btn-icon"></button>
               </form>
               <div className="block-search-cart__cart cart-header">
-                <button className="cart-header__btn btn-cart btn-icon"></button>{' '}
+                <div className="cart-header__icon">
+                  <span className="cart-header__cart-icon" onClick={handleCart}>
+                    <button className="cart-header__btn cart-btn"></button>{' '}
+                  </span>
+                  <span className="cart-header__quantity-goods">
+                    {fullQuantity}
+                  </span>
+                </div>
                 <select
                   onChange={handlerSelCurrency}
                   className="cart-header__currency">

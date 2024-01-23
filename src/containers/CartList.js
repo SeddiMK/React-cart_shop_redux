@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  fullQuantity,
   selectCostFlag,
   selectCurrensy,
   selectGoods,
 } from '../store/goodsSlice';
-
 import { selectCart, minus, del } from '../store/cartSlice';
-
 import Cart from '../components/cart/Cart';
 
 export default function CartList() {
+  // const fullQuantity = useSelector(fullQuantityGoods);
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
@@ -22,12 +22,12 @@ export default function CartList() {
     accum[item['articul']] = item;
     return accum;
   }, {});
-  console.log(goodsObj);
 
   let clickHandler = (e) => {
     e.preventDefault();
 
     let targ = e.target;
+
     if (targ.classList.contains('delete-one-position')) {
       dispath(minus(targ.getAttribute('data-key')));
 
@@ -55,9 +55,7 @@ export default function CartList() {
   // let fullQuantitySumm = Object.keys(cart).map(
   //   (el) => (fullQuantity += Number(cart[el]))
   // );
-  let fullQuantity = () => Object.values(cart).reduce((a, b) => a + b, 0);
-
-  console.log(fullQuantity()); // количество товаров всего, для ярлыка корзины
+  dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0))); // количество товаров всего, для ярлыка корзины
 
   return (
     <div className="main__goods-table goods-table" onClick={clickHandler}>
@@ -69,7 +67,9 @@ export default function CartList() {
           </li>
         ))}
       </ul>
-
+      <div className="cart__fullPrice">
+        Full price: {fullPrice} {currency}
+      </div>
       <div className="goods-table__cart cart">
         {Object.keys(cart).map((el) => (
           <Cart
@@ -94,9 +94,6 @@ export default function CartList() {
             key={el + goodsObj[el]['title']}
           />
         ))}
-        <div className="cart__fullPrice">
-          Full price: {fullPrice} {currency}
-        </div>
       </div>
     </div>
   );

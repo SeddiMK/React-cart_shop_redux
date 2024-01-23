@@ -1,0 +1,78 @@
+.goods-table {
+    display: none;
+}
+
+
+.goods-table.activ {
+    display: block;
+    position: absolute;
+    top: 121px;
+    left: 25%;
+    background-color: #fff;
+    border: 1px solid #fc8507;
+    border-radius: .2rem;
+    padding: clamp(3px, 1vw, 10px);
+}
+
+.goods-table__full-goods {
+    font-size: .9rem;
+
+}
+
+.goods-table__item {
+    margin-bottom: 0.6rem;
+}
+
+.cart__fullPrice {
+    margin-bottom: 0.6rem;
+}
+
+.cart {}
+
+.cart__one-product>table {
+    border-spacing: clamp(4px, 1vw, 15px);
+    border: 1px solid #fc8507;
+    margin-bottom: 0.6rem;
+
+}
+
+
+
+
+.cart__goods-list {}
+
+.cart__goods {}
+
+.cart__goods-name {}
+
+.cart__goods-title {}
+
+.cart__image-table-td {
+    max-width: 12rem;
+}
+
+.cart__goods-price-one {}
+
+.cart__goods-quantity {}
+
+.cart__goods-price-all {}
+
+
+
+.cart__btn-block {
+    margin-bottom: 0.6rem;
+}
+
+.cart__btn-block:not(:last-child) {}
+
+.cart__delete-one-position {
+    margin-right: 0.6rem;
+}
+
+.delete-one-position {}
+
+.btn {}
+
+.cart__delete-quantity {}
+
+.delete-quantity {}

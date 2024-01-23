@@ -3,6 +3,9 @@
     background: radial-gradient(80% 80% at 20% 20%, #e3f9c7 40%, rgba(227, 249, 199, 0) 100%), radial-gradient(60% 60% at 100% 100%, #ffe6e6 30%, rgba(255, 230, 230, 0) 100%), #fff1e5;
     background-repeat: no-repeat;
     overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .header__wrapper {
@@ -12,7 +15,6 @@
     color: white;
     width: 100%;
     padding: clamp(7px, 4vw, 15px);
-    margin-bottom: clamp(7px, 1vw, 30px);
 }
 
 
@@ -120,3 +122,68 @@
 }
 
 .list-right__link {}
+
+
+
+.search-header {
+    margin-bottom: 1rem;
+}
+
+.cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.cart-header::after {
+    content: '*курс USD/RUB: 95';
+    position: absolute;
+    color: #000000;
+    font-size: 0.6rem;
+    right: 42px;
+    bottom: -8px;
+
+}
+
+.cart-header__icon {
+    position: relative;
+    margin-right: 0.5rem;
+}
+
+.cart-header__btn {}
+
+.cart-icon {}
+
+.cart-header__currency {
+    background-color: transparent;
+    /* border: #000000 1px solid; */
+    border-radius: 0.3rem;
+    padding: clamp(3px, 1vw, 5px);
+}
+
+.cart-header__currency:active {
+    border: none;
+}
+
+.cart-header__quantity-goods {
+    padding: 1px 4px;
+    font-weight: 700;
+    box-shadow: 0 0 0 2px #fff;
+    top: -7px;
+    right: -3px;
+    background: linear-gradient(0deg, #fc8507 0%, #ffa218 100%);
+    border-radius: 50px;
+    align-items: center;
+    color: #fff;
+    display: inline-flex;
+    font-size: 10px;
+    height: 14px;
+    justify-content: center;
+    line-height: 13px;
+    min-width: 14px;
+    position: absolute;
+    text-align: center;
+
+
+}

@@ -1,3 +1,5 @@
+import './Cart.css';
+
 export default function Cart(props) {
   return (
     <>
@@ -12,7 +14,7 @@ export default function Cart(props) {
             </tr>
             <tr className="cart__goods">
               <td className="cart__goods-name">
-                {props.title}
+                <h2 className="cart__goods-title">{props.title}</h2>
                 <img
                   className="cart__image-table-td"
                   src={props.image}
@@ -27,16 +29,18 @@ export default function Cart(props) {
             </tr>
           </tbody>
         </table>
-        <button
-          className="cart__delete-one-position delete-one-position btn"
-          data-key={props.articul}>
-          Delete one position
-        </button>
-        <button
-          className="cart__delete-quantity delete-quantity btn"
-          data-key={props.articul}>
-          Delete quantity
-        </button>
+        <div className="cart__btn-block">
+          <button
+            className="cart__delete-one-position delete-one-position btn"
+            data-key={props.articul}>
+            Delete one position
+          </button>
+          <button
+            className="cart__delete-quantity delete-quantity btn"
+            data-key={props.articul}>
+            Delete quantity
+          </button>
+        </div>
       </div>
     </>
   );

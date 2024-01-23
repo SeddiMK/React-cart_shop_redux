@@ -49,36 +49,29 @@
 
 
 button.btn-search {
+    margin-right: 0.3rem;
     background: transparent no-repeat center url('../image/icon/icon-search.svg');
+    background-size: 1.4rem;
+    width: 1.4rem;
 }
 
-button.btn-cart {
+button.cart-btn {
     background: transparent no-repeat center url('../image/icon/shopping-cart.svg');
     height: 34px;
     padding: 0.6rem;
     border-radius: 5px;
-}
-
-button.btn-cart {
-    background: transparent no-repeat center url('../image/icon/shopping-cart.svg');
-    height: 34px;
-    padding: 0.6rem;
-    border-radius: 5px;
-}
-
-button.btn-icon {
     text-indent: -999px;
     overflow: hidden;
     width: 40px;
-    padding: 0;
-    margin: 0;
     background-size: clamp(0.4rem, 2vw, 1.5rem);
     cursor: pointer;
     opacity: 0.5;
     transition: opacity .3s ease-in-out;
 }
 
-button.btn-icon:hover {
+
+
+button.cart-btn:hover {
     opacity: 1;
 }
 

@@ -17,8 +17,8 @@ export const cartSlice = createSlice({
       state.cartVal[articul]++;
     },
     minus: (state, data) => {
-      // let priceVal = +data.payload;
       let articul = data.payload;
+
       // console.log('minus');
 
       if (state.cartVal[articul] === undefined) {
@@ -35,8 +35,6 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
         delete state.cartVal[articul];
       }
-      // const cartClass = document.querySelector('.goods-table');
-      // if (fullQuantity === 0) cartClass.classList.remove('activ');
     },
     del: (state, data) => {
       let articul = data.payload;

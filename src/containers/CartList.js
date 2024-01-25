@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fullQuantity,
   selectCostFlag,
   selectCurrensy,
   selectGoods,
+  fullQuantityGoods,
 } from '../store/goodsSlice';
 import { selectCart, minus, del } from '../store/cartSlice';
 import Cart from '../components/cart/Cart';
 
 export default function CartList() {
-  // const fullQuantity = useSelector(fullQuantityGoods);
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
+
+  const cartClass = document.querySelector('.goods-table');
+  let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
+  // const [fullQuantitySt, setFullQuantity] = useState(0);
+
   const dispath = useDispatch();
 
   // переидексирую массив товара
@@ -30,7 +35,6 @@ export default function CartList() {
 
     if (targ.classList.contains('delete-one-position')) {
       dispath(minus(targ.getAttribute('data-key')));
-
       // return true;
     }
     if (targ.classList.contains('delete-quantity')) {
@@ -41,13 +45,13 @@ export default function CartList() {
   };
 
   //full price
-  let fullPrice = 0;
-  Object.keys(cart).map((el) => {
-    fullPrice +=
+  const fullPrice = Object.keys(cart).map((el) => {
+    let fullPr = 0;
+    fullPr +=
       (!selCostFlag
         ? goodsObj[el]['cost']
         : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el];
-    return fullPrice;
+    return fullPr;
   });
 
   // full Quantity
@@ -55,7 +59,23 @@ export default function CartList() {
   // let fullQuantitySumm = Object.keys(cart).map(
   //   (el) => (fullQuantity += Number(cart[el]))
   // );
-  dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0))); // количество товаров всего, для ярлыка корзины
+  console.log(fullQuantityGoodsCart);
+  const fullQuantity = () => {
+    if (fullQuantityGoodsCart !== undefined) {
+      dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0)));
+    }
+  };
+
+  // setFullQuantity(fullQuantityGoodsCart);
+
+  // if (fullQuantitySt === 0 && cartClass.classList.contains('activ')) {
+  //   cartClass.classList.remove('activ');
+  // }
+  // useEffect(() => {
+  //   if (fullQuantitySt === 0 && cartClass.classList.contains('activ')) {
+  //     cartClass.classList.remove('activ');
+  //   }
+  // });
 
   return (
     <div className="main__goods-table goods-table" onClick={clickHandler}>

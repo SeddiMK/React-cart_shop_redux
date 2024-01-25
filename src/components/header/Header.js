@@ -18,9 +18,10 @@ export default function Header(props) {
     dispath(selCurrensy(e.target.value));
   };
 
+  console.log(fullQuantity === 0);
   const handleCart = () => {
-    console.log(fullQuantity === 0);
     if (cartClass && fullQuantity !== 0) cartClass.classList.toggle('activ');
+    // if (fullQuantity === 0) cartClass.classList.remove('activ'); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   };
   return (
     <header className="header">

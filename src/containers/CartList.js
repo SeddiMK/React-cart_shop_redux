@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fullQuantityGoods,
@@ -16,9 +16,9 @@ export default function CartList() {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
 
-  // let [quantityFull, setQuantityFull] = useState(0);
-  // const cartClass = document.querySelector('.goods-table');
-  const cartClass = document.getElementById('goodsTable');
+  const catCartRef = useRef(null);
+
+  const cartClass = document.querySelector('.goods-table');
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const dispath = useDispatch();
 
@@ -52,10 +52,6 @@ export default function CartList() {
     }
     return sum;
   };
-  // setQuantityFull(fullPrice());
-  console.log(fullPrice());
-
-  console.log(fullPriceArr);
 
   //=========================================================
   // full Quantity
@@ -70,6 +66,24 @@ export default function CartList() {
     }
   });
 
+  // setTimeout(() => {
+  //   const cartClass = document.querySelector('.goods-table');
+  //   console.log(cartClass, '9879878989789789988989');
+  //   if (fullQuantityGoodsCart === 0) cartClass.classList.remove('activ');
+  // }, 1);
+
+  useEffect(() => {
+    // const cartClassUef = document.querySelector('.goods-table');
+    // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
+    const cartClassUef = document.getElementsByClassName('goods-table')[0];
+    //===============================================================
+
+    if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ');
+    // console.log(document.addEventListener('click', ));
+
+    //====================================================================================
+  }, [fullQuantityGoodsCart]);
+
   let clickHandler = (e) => {
     e.preventDefault();
 
@@ -77,67 +91,84 @@ export default function CartList() {
     // if (!targ.classList.contains('goods-table')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
     if (targ.classList.contains('delete-one-position')) {
       dispath(minus(targ.getAttribute('data-key')));
-      if (fullQuantityGoodsCart <= 1) cartClass.classList.remove('activ');
+      // if (fullQuantityGoodsCart <= 1) cartClass.classList.remove('activ');
     }
     if (targ.classList.contains('delete-quantity')) {
       dispath(del(targ.getAttribute('data-key')));
-
-      // fullQuantityGoodsCart = 0;
-      console.log(fullQuantityGoodsCart, 'click handler');
-      console.log(fullPrice(), 'arrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-      // if (fullPriceArr === []) cartClass.classList.remove('activ');
     }
   };
-  console.log(fullQuantityGoodsCart, 'function');
-  // console.log(
-  //   cartClass.classList.contains('goods-table') == null,
-  //   '1111111111111111111111111111'
-  // );
+  // cart close in window ===========================================================================
+
+  const hadlerClose = (e) => {
+    if (cartClass && fullQuantityGoodsCart !== 0) {
+      // setOpenCartSt(false);
+      cartClass.classList.toggle('activ');
+    }
+  };
+
   useEffect(() => {
-    console.log(fullQuantityGoodsCart, 'use Effect');
-    console.log(fullPrice());
-    console.log(cartClass);
-    // if (fullQuantityGoodsCart === 0) cartClass.classList.remove('activ');
-  });
+    const cartClassUef = document.getElementsByClassName('goods-table')[0];
+    const onClick = (e) => {
+      console.log(catCartRef.current.contains(e.target));
+      if (!catCartRef.current.contains(e.target)) {
+        console.log('клик вне компонента');
+
+        // cartClassUef.classList.remove('activ');
+      }
+    };
+
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+  //================================================================================
 
   return (
-    <div className="main__goods-table" onClick={clickHandler}>
-      {/* fullGoods */}
-      <ul className="goods-table__full-goods">
-        {Object.keys(cart).map((el) => (
-          <li className="goods-table__item" key={el + goodsObj[el]['title']}>
-            {goodsObj[el]['title']} - {cart[el]}
-          </li>
-        ))}
-      </ul>
-      <div className="cart__full-price">
-        Full price: {fullPrice()} {currency}
+    <section className="main__goods-table-wrapper goods-table" ref={catCartRef}>
+      <div className="main__goods-table" onClick={clickHandler}>
+        {/* fullGoods */}
+        <div className="goods-table__full-goods-block">
+          <ul className="goods-table__full-goods">
+            {Object.keys(cart).map((el) => (
+              <li
+                className="goods-table__item"
+                key={el + goodsObj[el]['title']}>
+                {goodsObj[el]['title']} - {cart[el]}
+              </li>
+            ))}
+          </ul>
+          <div
+            className="goods-table__full-goods-close"
+            onClick={hadlerClose}></div>
+        </div>
+        <div className="cart__full-price">
+          Full price: {fullPrice()} {currency}
+        </div>
+        <div className="goods-table__cart cart">
+          {Object.keys(cart).map((el) => (
+            <Cart
+              title={goodsObj[el]['title']}
+              cost={
+                !selCostFlag
+                  ? goodsObj[el]['cost']
+                  : (goodsObj[el]['cost'] / 95).toFixed(0)
+              } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+              currency={currency}
+              quantity={cart[el]}
+              priceAllItem={
+                (!selCostFlag
+                  ? goodsObj[el]['cost']
+                  : (goodsObj[el]['cost'] / 95).toFixed(0)) *
+                  cart[el] +
+                ' ' +
+                currency
+              }
+              image={goodsObj[el]['image']}
+              articul={goodsObj[el]['articul']}
+              key={el + goodsObj[el]['title']}
+            />
+          ))}
+        </div>
       </div>
-      <div className="goods-table__cart cart">
-        {Object.keys(cart).map((el) => (
-          <Cart
-            title={goodsObj[el]['title']}
-            cost={
-              !selCostFlag
-                ? goodsObj[el]['cost']
-                : (goodsObj[el]['cost'] / 95).toFixed(0)
-            } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-            currency={currency}
-            quantity={cart[el]}
-            priceAllItem={
-              (!selCostFlag
-                ? goodsObj[el]['cost']
-                : (goodsObj[el]['cost'] / 95).toFixed(0)) *
-                cart[el] +
-              ' ' +
-              currency
-            }
-            image={goodsObj[el]['image']}
-            articul={goodsObj[el]['articul']}
-            key={el + goodsObj[el]['title']}
-          />
-        ))}
-      </div>
-    </div>
+    </section>
   );
 }

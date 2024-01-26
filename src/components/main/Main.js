@@ -8,9 +8,7 @@ export default function Main() {
     <main className="main">
       {/* Вывод данных из хранилища */}
       <GoodsList />
-      <div id="goodsTable" className="main__goods-table-wrapper goods-table">
-        <CartList />
-      </div>
+      <CartList />
     </main>
   );
 }

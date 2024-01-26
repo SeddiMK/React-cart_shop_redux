@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectCostFlag,
@@ -15,6 +15,7 @@ export default function GoodsList() {
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
+
   const dispath = useDispatch();
 
   let clickHandler = (e) => {

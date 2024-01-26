@@ -8,7 +8,7 @@ export const goodsSlice = createSlice({
     cost: goodsArr[0].cost,
     currency: goodsArr[0].currency,
     flagSelCurrency: false,
-    fullQuantGoods: 0,
+    fullQuantityGoodsSt: 0,
   },
   reducers: {
     selCurrensy: (state, data) => {
@@ -27,7 +27,7 @@ export const goodsSlice = createSlice({
     },
     fullQuantity: (state, data) => {
       if (data.payload !== undefined) {
-        state.fullQuantGoods = data.payload;
+        state.fullQuantityGoodsSt = data.payload;
       }
     },
   },
@@ -36,8 +36,8 @@ export const goodsSlice = createSlice({
 export const { selCurrensy, selCostFlag, fullQuantity } = goodsSlice.actions;
 
 export const fullQuantityGoods = (state) => {
-  // console.log(state.goodsVal.fullQuantGoods);
-  return state.goodsVal.fullQuantGoods;
+  // console.log(state.goodsVal.fullQuantityGoodsSt);
+  return state.goodsVal.fullQuantityGoodsSt;
 };
 
 export const selectCostFlag = (state) => {

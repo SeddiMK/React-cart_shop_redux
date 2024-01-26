@@ -1,6 +1,7 @@
 import './Header.css';
 import '../../app/Common.css';
 
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selCostFlag,
@@ -9,7 +10,7 @@ import {
 } from '../../store/goodsSlice';
 
 export default function Header(props) {
-  let fullQuantity = useSelector(fullQuantityGoods);
+  let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
   const dispath = useDispatch();
 
@@ -18,11 +19,12 @@ export default function Header(props) {
     dispath(selCurrensy(e.target.value));
   };
 
-  console.log(fullQuantity === 0);
   const handleCart = () => {
-    if (cartClass && fullQuantity !== 0) cartClass.classList.toggle('activ');
-    // if (fullQuantity === 0) cartClass.classList.remove('activ'); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (cartClass && fullQuantityGoodsCart !== 0) {
+      cartClass.classList.toggle('activ');
+    }
   };
+
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -58,10 +60,10 @@ export default function Header(props) {
               <div className="block-search-cart__cart cart-header">
                 <div className="cart-header__icon">
                   <span className="cart-header__cart-icon" onClick={handleCart}>
-                    <button className="cart-header__btn cart-btn"></button>{' '}
+                    <button className="cart-header__btn cart-btn"></button>
                   </span>
                   <span className="cart-header__quantity-goods">
-                    {fullQuantity}
+                    {fullQuantityGoodsCart}
                   </span>
                 </div>
                 <select

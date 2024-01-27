@@ -16,6 +16,7 @@ export default function CartList({ cartIconRef }) {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
 
+  const [openCart, setOpenCart] = useState(true);
   const catCartRef = useRef(null);
 
   const cartClass = document.querySelector('.goods-table');
@@ -167,6 +168,29 @@ export default function CartList({ cartIconRef }) {
   //   return () => document.removeEventListener('click', onClick);
   // }, []);
   //================================================================================
+  useEffect(() => {
+    console.log('cart Mount');
+    const cartClassUef = document.getElementsByClassName('goods-table')[0];
+    const cartIcon = document.getElementsByClassName('cart-btn')[0];
+
+    const handleClickOutside = (e) => {
+      if (
+        ![catCartRef.current, cartIcon].some((x) =>
+          e.composedPath().includes(x)
+        )
+      ) {
+        console.log('нажали на catCartRef');
+        setOpenCart(false);
+        cartClassUef.classList.remove('activ');
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр!
+  }, []);
+  console.log(openCart);
+  //  ===========================================================================
 
   return (
     <section className="main__goods-table-wrapper goods-table" ref={catCartRef}>

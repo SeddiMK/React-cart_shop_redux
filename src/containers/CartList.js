@@ -96,7 +96,7 @@ export default function CartList({ cartIconRef }) {
       dispath(del(targ.getAttribute('data-key')));
     }
   };
-  // cart close in window ===========================================================================
+  // cart close in btn-close ===========================================================================
 
   const hadlerClose = (e) => {
     if (cartClass && fullQuantityGoodsCart !== 0) {
@@ -104,69 +104,68 @@ export default function CartList({ cartIconRef }) {
       cartClass.classList.toggle('activ');
     }
   };
+  // cart close in window ===========================================================================
 
-  useEffect(() => {
-    const cartClassUef = document.getElementsByClassName('goods-table')[0];
-    const cartIcon = document.getElementsByClassName('cart-btn')[0];
-    const deleteOnePositionBtn = document.getElementsByClassName(
-      'delete-one-position'
-    );
-    const deleteQuantityBtn =
-      document.getElementsByClassName('delete-quantity')[0];
-    const goodsField = document.getElementsByClassName('goods-field')[0];
+  // useEffect(() => {
+  //   const cartClassUef = document.getElementsByClassName('goods-table')[0];
+  //   const cartIcon = document.getElementsByClassName('cart-btn')[0];
+  //   const deleteOnePositionBtn = document.getElementsByClassName(
+  //     'delete-one-position'
+  //   );
+  //   const deleteQuantityBtn =
+  //     document.getElementsByClassName('delete-quantity')[0];
+  //   const goodsField = document.getElementsByClassName('goods-field')[0];
 
-    const onClick = (e) => {
-      let classActiv = cartClassUef.classList.contains('activ');
+  //   const onClick = (e) => {
+  //     let classActiv = cartClassUef.classList.contains('activ');
 
-      console.log(classActiv, 'classActiv --------------------');
-      console.log(
-        !catCartRef.current.contains(e.target),
-        '!catCartRef.current.contains(e.target)'
-      );
-      console.log(!cartIcon.contains(e.target), 'cartIcon.contains(e.target)');
-      console.log(
-        deleteQuantityBtn !== e.target,
-        'deleteQuantityBtn !== e.target'
-      );
-      console.log(deleteQuantityBtn, 'deleteQuantityBtn');
-      console.log(
-        deleteOnePositionBtn !== e.target,
-        'deleteOnePositionBtn !== e.target'
-      );
-      console.log(e.target, 'e.target');
+  //     console.log(classActiv, 'classActiv --------------------');
+  //     console.log(
+  //       !catCartRef.current.contains(e.target),
+  //       '!catCartRef.current.contains(e.target)'
+  //     );
+  //     console.log(!cartIcon.contains(e.target), 'cartIcon.contains(e.target)');
+  //     console.log(
+  //       deleteQuantityBtn !== e.target,
+  //       'deleteQuantityBtn !== e.target'
+  //     );
+  //     console.log(deleteQuantityBtn, 'deleteQuantityBtn');
+  //     console.log(
+  //       deleteOnePositionBtn !== e.target,
+  //       'deleteOnePositionBtn !== e.target'
+  //     );
+  //     console.log(e.target, 'e.target');
 
-      console.log(
-        classActiv &&
-          !catCartRef.current.contains(e.target) &&
-          !cartIcon.contains(e.target) &&
-          deleteQuantityBtn !== e.target &&
-          deleteOnePositionBtn !== e.target
-      );
+  //     console.log(
+  //       classActiv &&
+  //         !catCartRef.current.contains(e.target) &&
+  //         !cartIcon.contains(e.target) &&
+  //         (deleteQuantityBtn !== e.target || deleteOnePositionBtn !== e.target)
+  //     );
 
-      // && deleteQuantityBtn === e.target && deleteOnePositionBtn === e.target
+  //     // && deleteQuantityBtn === e.target && deleteOnePositionBtn === e.target
 
-      console.log(deleteQuantityBtn, 'deleteQuantityBtn');
+  //     console.log(deleteQuantityBtn, 'deleteQuantityBtn');
 
-      if (
-        classActiv &&
-        !catCartRef.current.contains(e.target) &&
-        !cartIcon.contains(e.target) &&
-        deleteQuantityBtn !== e.target &&
-        deleteOnePositionBtn !== e.target
-      ) {
-        // console.log(classActiv && deleteQuantityBtn === e.target);
-        // if (classActiv && deleteQuantityBtn === e.target) {
-        //   console.log('click ------------------------------------ 2 if');
-        // }
+  //     if (
+  //       classActiv &&
+  //       !catCartRef.current.contains(e.target) &&
+  //       !cartIcon.contains(e.target) &&
+  //       (deleteQuantityBtn !== e.target || deleteOnePositionBtn !== e.target)
+  //     ) {
+  //       // console.log(classActiv && deleteQuantityBtn === e.target);
+  //       // if (classActiv && deleteQuantityBtn === e.target) {
+  //       //   console.log('click ------------------------------------ 2 if');
+  //       // }
 
-        console.log('клик вне компонента cart-icon and cart');
-        cartClassUef.classList.remove('activ');
-      }
-    };
+  //       console.log('клик вне компонента cart-icon and cart');
+  //       cartClassUef.classList.remove('activ');
+  //     }
+  //   };
 
-    document.addEventListener('click', onClick);
-    return () => document.removeEventListener('click', onClick);
-  }, []);
+  //   document.addEventListener('click', onClick);
+  //   return () => document.removeEventListener('click', onClick);
+  // }, []);
   //================================================================================
 
   return (

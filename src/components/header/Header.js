@@ -9,7 +9,7 @@ import {
   fullQuantityGoods,
 } from '../../store/goodsSlice';
 
-export default function Header(props) {
+export default function Header() {
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
   const dispath = useDispatch();

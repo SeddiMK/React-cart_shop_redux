@@ -10,7 +10,7 @@ import {
 import { selectCart, minus, del } from '../store/cartSlice';
 import Cart from '../components/cart/Cart';
 
-export default function CartList() {
+export default function CartList({ cartIconRef }) {
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
@@ -77,7 +77,6 @@ export default function CartList() {
     // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
     const cartClassUef = document.getElementsByClassName('goods-table')[0];
     //===============================================================
-
     if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ');
     // console.log(document.addEventListener('click', ));
 
@@ -108,12 +107,60 @@ export default function CartList() {
 
   useEffect(() => {
     const cartClassUef = document.getElementsByClassName('goods-table')[0];
-    const onClick = (e) => {
-      console.log(catCartRef.current.contains(e.target));
-      if (!catCartRef.current.contains(e.target)) {
-        console.log('клик вне компонента');
+    const cartIcon = document.getElementsByClassName('cart-btn')[0];
+    const deleteOnePositionBtn = document.getElementsByClassName(
+      'delete-one-position'
+    );
+    const deleteQuantityBtn =
+      document.getElementsByClassName('delete-quantity')[0];
+    const goodsField = document.getElementsByClassName('goods-field')[0];
 
-        // cartClassUef.classList.remove('activ');
+    const onClick = (e) => {
+      let classActiv = cartClassUef.classList.contains('activ');
+
+      console.log(classActiv, 'classActiv --------------------');
+      console.log(
+        !catCartRef.current.contains(e.target),
+        '!catCartRef.current.contains(e.target)'
+      );
+      console.log(!cartIcon.contains(e.target), 'cartIcon.contains(e.target)');
+      console.log(
+        deleteQuantityBtn !== e.target,
+        'deleteQuantityBtn !== e.target'
+      );
+      console.log(deleteQuantityBtn, 'deleteQuantityBtn');
+      console.log(
+        deleteOnePositionBtn !== e.target,
+        'deleteOnePositionBtn !== e.target'
+      );
+      console.log(e.target, 'e.target');
+
+      console.log(
+        classActiv &&
+          !catCartRef.current.contains(e.target) &&
+          !cartIcon.contains(e.target) &&
+          deleteQuantityBtn !== e.target &&
+          deleteOnePositionBtn !== e.target
+      );
+
+      // && deleteQuantityBtn === e.target && deleteOnePositionBtn === e.target
+
+      console.log(deleteQuantityBtn, 'deleteQuantityBtn');
+
+      if (
+        classActiv &&
+        !catCartRef.current.contains(e.target) &&
+        !cartIcon.contains(e.target) &&
+        deleteQuantityBtn !== e.target &&
+        deleteOnePositionBtn !== e.target
+      ) {
+        // console.log(classActiv && deleteQuantityBtn === e.target);
+        // if (classActiv && deleteQuantityBtn === e.target) {
+        //   console.log('click ------------------------------------ 2 if');
+        // }
+
+        console.log('клик вне компонента cart-icon and cart');
+        cartClassUef.classList.remove('activ');
       }
     };
 

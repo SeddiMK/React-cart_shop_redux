@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectCostFlag,
@@ -37,7 +37,7 @@ export default function GoodsList() {
             image={el.image}
             articul={el.articul}
             key={el.articul}
-            raiting={el.raiting}
+            rating={el.rating}
             description={el.description}
             currency={currency}
           />

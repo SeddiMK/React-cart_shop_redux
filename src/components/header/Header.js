@@ -11,9 +11,28 @@ import {
 } from '../../store/goodsSlice';
 
 export default function Header() {
-  // data-header-nav-link
-  const linkHeaderArr = ['Products', ' About us', 'Contacts'];
-  const linkHeaderAuthArr = ['Account', 'Logout'];
+  // data-header-nav-link --------------
+  const linkHeaderArr = [
+    'Products',
+    'Discount',
+    'HITs',
+    'About us',
+    'Contacts',
+    'Products',
+    'Discount',
+    'HITs',
+    'About us',
+    'Contacts',
+  ];
+  const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
+  const selectCategory = [
+    'All goods',
+    'Cartoon',
+    'Chair',
+    'Bed',
+    'Table',
+    'Drawer',
+  ];
   // end -----------------
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -49,33 +68,39 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-
-            <div className="header__search-cart block-search-cart">
-              <form className="block-search-cart__search search-header">
-                <input type="search" placeholder="Search..." />
-                <button
-                  type="search"
-                  className="menu__link btn-search btn-icon"></button>
-              </form>
-              <div className="block-search-cart__cart cart-header">
-                <div className="cart-header__icon">
-                  <span className="cart-header__cart-icon" onClick={handleCart}>
-                    <button className="cart-header__btn cart-btn"></button>
-                  </span>
-                  <span className="cart-header__quantity-goods">
-                    {fullQuantityGoodsCart}
-                  </span>
-                </div>
-                <select
-                  onChange={handlerSelCurrency}
-                  className="cart-header__currency">
-                  <option value="RUB">RUB</option>
-                  <option value="USD">USD</option>
-                </select>
-              </div>
-            </div>
           </ul>
 
+          <div className="header__search-cart block-search-cart">
+            <form className="block-search-cart__search search-header">
+              <input type="search" placeholder="Search..." />
+              <button
+                type="search"
+                className="menu__link btn-search btn-icon"></button>
+            </form>
+            <div className="block-search-cart__cart cart-header">
+              <div className="cart-header__icon">
+                <span className="cart-header__cart-icon" onClick={handleCart}>
+                  <button className="cart-header__btn cart-btn"></button>
+                </span>
+                <span className="cart-header__quantity-goods">
+                  {fullQuantityGoodsCart}
+                </span>
+              </div>
+              <select
+                onChange={handlerSelCurrency}
+                className="cart-header__currency">
+                <option value="RUB">RUB</option>
+                <option value="USD">USD</option>
+              </select>
+              <select
+                // onChange={handlerSelCategory}
+                className="cart-header__currency">
+                {selectCategory.map((el) => (
+                  <option value={el}>{el}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (
               <li className="menu__item" key={el + i}>

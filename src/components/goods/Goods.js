@@ -1,19 +1,29 @@
-export default function Goods(props) {
+import './Goods.css';
+
+export default function Goods({
+  image,
+  title,
+  cost,
+  currency,
+  articul,
+  rating,
+}) {
   return (
     <div className="goods-block">
       <div className="goods-block__imgage-wrap">
-        <img className="goods-block__img" src={props.image} alt={props.title} />
+        <img className="goods-block__img" src={image} alt={title} />
       </div>
 
       <div className="goods-block__title-coast">
-        <p>{props.title}</p>
+        <p>{title}</p>
 
-        <p>{props.cost + ' ' + props.currency}</p>
+        <p>{cost + ' ' + currency}</p>
       </div>
+      <div className="goods-block__rating">rating: {rating}</div>
 
       <button
         className="goods-block__add-to-cart  btn add-to-cart"
-        data-key={props.articul}>
+        data-key={articul}>
         Add to cart
       </button>
     </div>

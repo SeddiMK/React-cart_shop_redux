@@ -106,72 +106,11 @@ export default function CartList({ cartIconRef }) {
     }
   };
   // cart close in window ===========================================================================
-
-  // useEffect(() => {
-  //   const cartClassUef = document.getElementsByClassName('goods-table')[0];
-  //   const cartIcon = document.getElementsByClassName('cart-btn')[0];
-  //   const deleteOnePositionBtn = document.getElementsByClassName(
-  //     'delete-one-position'
-  //   );
-  //   const deleteQuantityBtn =
-  //     document.getElementsByClassName('delete-quantity')[0];
-  //   const goodsField = document.getElementsByClassName('goods-field')[0];
-
-  //   const onClick = (e) => {
-  //     let classActiv = cartClassUef.classList.contains('activ');
-
-  //     console.log(classActiv, 'classActiv --------------------');
-  //     console.log(
-  //       !catCartRef.current.contains(e.target),
-  //       '!catCartRef.current.contains(e.target)'
-  //     );
-  //     console.log(!cartIcon.contains(e.target), 'cartIcon.contains(e.target)');
-  //     console.log(
-  //       deleteQuantityBtn !== e.target,
-  //       'deleteQuantityBtn !== e.target'
-  //     );
-  //     console.log(deleteQuantityBtn, 'deleteQuantityBtn');
-  //     console.log(
-  //       deleteOnePositionBtn !== e.target,
-  //       'deleteOnePositionBtn !== e.target'
-  //     );
-  //     console.log(e.target, 'e.target');
-
-  //     console.log(
-  //       classActiv &&
-  //         !catCartRef.current.contains(e.target) &&
-  //         !cartIcon.contains(e.target) &&
-  //         (deleteQuantityBtn !== e.target || deleteOnePositionBtn !== e.target)
-  //     );
-
-  //     // && deleteQuantityBtn === e.target && deleteOnePositionBtn === e.target
-
-  //     console.log(deleteQuantityBtn, 'deleteQuantityBtn');
-
-  //     if (
-  //       classActiv &&
-  //       !catCartRef.current.contains(e.target) &&
-  //       !cartIcon.contains(e.target) &&
-  //       (deleteQuantityBtn !== e.target || deleteOnePositionBtn !== e.target)
-  //     ) {
-  //       // console.log(classActiv && deleteQuantityBtn === e.target);
-  //       // if (classActiv && deleteQuantityBtn === e.target) {
-  //       //   console.log('click ------------------------------------ 2 if');
-  //       // }
-
-  //       console.log('клик вне компонента cart-icon and cart');
-  //       cartClassUef.classList.remove('activ');
-  //     }
-  //   };
-
-  //   document.addEventListener('click', onClick);
-  //   return () => document.removeEventListener('click', onClick);
-  // }, []);
-  //================================================================================
   useEffect(() => {
     console.log('cart Mount');
-    const cartClassUef = document.getElementsByClassName('goods-table')[0];
     const cartIcon = document.getElementsByClassName('cart-btn')[0];
+
+    console.log(catCartRef.current, 'catCartRef.current');
 
     const handleClickOutside = (e) => {
       if (
@@ -181,7 +120,7 @@ export default function CartList({ cartIconRef }) {
       ) {
         console.log('нажали на catCartRef');
         setOpenCart(false);
-        cartClassUef.classList.remove('activ');
+        catCartRef.current.classList.remove('activ');
       }
     };
 

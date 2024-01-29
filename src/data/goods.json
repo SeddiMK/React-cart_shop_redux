@@ -4,7 +4,7 @@
     "title": "Armchair Cartoon",
     "cost": 7020,
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/342/uvkd72u0d21kn6m3z2im71e4yoilsmjt/480_300_1/BOSS_vento_birysa-_-8.jpg",
-    "raiting":0, 
+    "rating":0, 
     "description": "Description wait?",
     "currency": "RUB",
     "exchangeRate": 95
@@ -14,7 +14,7 @@
     "title": "Cuero Chair",
     "cost": 4523,
     "image": "https://mnogomebeli.com/upload/resize_cache/iblock/e19/ltsotlld7fxxj9xoaq85w7zfeqky7ucx/480_300_1/stul-TYRIN-_-9.jpg",
-    "raiting":0, 
+    "rating":0, 
     "description": "Description wait?", 
     "currency" : "RUB"
   },

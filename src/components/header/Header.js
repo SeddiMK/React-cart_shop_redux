@@ -2,6 +2,7 @@ import './Header.css';
 import '../../app/Common.css';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selCostFlag,
@@ -10,6 +11,11 @@ import {
 } from '../../store/goodsSlice';
 
 export default function Header() {
+  // data-header-nav-link
+  const linkHeaderArr = ['Products', ' About us', 'Contacts'];
+  const linkHeaderAuthArr = ['Account', 'Logout'];
+  // end -----------------
+
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
   const dispath = useDispatch();
@@ -24,7 +30,7 @@ export default function Header() {
       cartClass.classList.toggle('activ');
     }
   };
-
+  console.log(linkHeaderArr[1].toLowerCase().trim().split(' ')[0], 'aaaaaaa');
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -34,21 +40,15 @@ export default function Header() {
         </a>
         <nav className="header__nav menu">
           <ul className="menu__list-left">
-            <li className="menu__item">
-              <a href="/products" className="menu__link">
-                Products
-              </a>
-            </li>
-            <li className="menu__item">
-              <a href="/about" className="menu__link">
-                About us
-              </a>
-            </li>
-            <li className="menu__item">
-              <a href="/contacts" className="menu__link">
-                Contacts
-              </a>
-            </li>
+            {linkHeaderArr.map((el, i) => (
+              <li className="menu__item" key={el + i}>
+                <Link
+                  to={`/${el.toLowerCase().trim().split(' ')[0]}`}
+                  className="menu__link">
+                  {el}
+                </Link>
+              </li>
+            ))}
 
             <div className="header__search-cart block-search-cart">
               <form className="block-search-cart__search search-header">
@@ -77,16 +77,16 @@ export default function Header() {
           </ul>
 
           <ul className="menu__list-right list-right auth_block">
-            <li className="list-right__item menu__item">
-              <a href="/" className="list-right__link menu__link">
-                Account
-              </a>
-            </li>
-            <li className="list-right__item menu__item">
-              <a href="/" className="list-right__link menu__link">
-                Logout
-              </a>
-            </li>
+            {linkHeaderAuthArr.map((el, i) => (
+              <li className="menu__item" key={el + i}>
+                <Link
+                  to={`/${el.toLowerCase()}`}
+                  target="_blank"
+                  className="menu__link">
+                  {el}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

@@ -107,10 +107,7 @@ export default function CartList({ cartIconRef }) {
   };
   // cart close in window ===========================================================================
   useEffect(() => {
-    console.log('cart Mount');
     const cartIcon = document.getElementsByClassName('cart-btn')[0];
-
-    console.log(catCartRef.current, 'catCartRef.current');
 
     const handleClickOutside = (e) => {
       if (
@@ -118,7 +115,6 @@ export default function CartList({ cartIconRef }) {
           e.composedPath().includes(x)
         )
       ) {
-        console.log('нажали на catCartRef');
         setOpenCart(false);
         catCartRef.current.classList.remove('activ');
       }
@@ -128,7 +124,6 @@ export default function CartList({ cartIconRef }) {
 
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр!
   }, []);
-  console.log(openCart);
   //  ===========================================================================
 
   return (

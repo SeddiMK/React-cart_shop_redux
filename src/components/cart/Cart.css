@@ -16,7 +16,7 @@
 
 .goods-table__full-goods-block {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 }
 

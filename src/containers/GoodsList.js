@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectCostFlag,
@@ -7,6 +7,7 @@ import {
 } from '../store/goodsSlice';
 
 import Goods from '../components/goods/Goods';
+import Skeleton from '../components/goods/Skeleton';
 import { increment } from '../store/cartSlice';
 
 // get data from store
@@ -15,8 +16,21 @@ export default function GoodsList() {
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
-
   const dispath = useDispatch();
+
+  //берем данные с бэкенда-------------------------
+  // const [goodsItems, setGoodsItems] = useState([]); // изменить если данные берем с сервера
+  const [isLoading, setIsLoading] = useState(false); // изменить если данные берем с сервера
+
+  // useEffect(() => {
+  //   fetch('url')
+  //     .then((res) => res.json)
+  //     .then((data) => {
+  //       setGoodsItems(data);
+  //       if (data) setIsLoading(false);
+  //     });
+  // }, []);
+  // end -------------------------
 
   let clickHandler = (e) => {
     e.preventDefault();
@@ -30,18 +44,21 @@ export default function GoodsList() {
   return (
     <>
       <div className="main__goods-field goods-field" onClick={clickHandler}>
-        {goods.map((el) => (
-          <Goods
-            title={el.title}
-            cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-            image={el.image}
-            articul={el.articul}
-            key={el.articul}
-            rating={el.rating}
-            description={el.description}
-            currency={currency}
-          />
-        ))}
+        {/* если идет загрузка isLoading=true, то создаем массив и момещаем туда <Skeleton/>, если загрузки нет, то рендерь <Goods/>*/}
+        {isLoading
+          ? [...new Array(6)].map((_, i) => <Skeleton key={i} />) // _ -НЕТ ЭЛЕМЕНТОВт.к. ...new Array-это фековый массив с undefined.
+          : goods.map((el) => (
+              <Goods
+                title={el.title}
+                cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+                image={el.image}
+                articul={el.articul}
+                key={el.articul}
+                rating={el.rating}
+                description={el.description}
+                currency={currency}
+              />
+            ))}
       </div>
     </>
   );

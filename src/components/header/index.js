@@ -13,6 +13,7 @@ import {
 export default function Header() {
   // data-header-nav-link --------------
   const linkHeaderArr = [
+    'Home',
     'Products',
     'Discount',
     'HITs',
@@ -53,10 +54,10 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header__wrapper">
-        <a href="/" className="header__logo">
+        <Link to="/" className="header__logo">
           ME
           {/* <img src="#" alt="Image logo" /> */}
-        </a>
+        </Link>
         <nav className="header__nav menu">
           <ul className="menu__list-left">
             {linkHeaderArr.map((el, i) => (

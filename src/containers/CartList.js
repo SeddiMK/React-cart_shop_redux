@@ -74,7 +74,6 @@ export default function CartList({ cartIconRef }) {
   // }, 1);
 
   useEffect(() => {
-    // const cartClassUef = document.querySelector('.goods-table');
     // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
     const cartClassUef = document.getElementsByClassName('goods-table')[0];
     //===============================================================

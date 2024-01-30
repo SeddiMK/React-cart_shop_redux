@@ -44,5 +44,95 @@
     "rating":4.4, 
     "description": "Description wait?", 
     "currency" : "RUB"
+  },{
+    "articul": "28234s",
+    "title": "Armchair Cartoon",
+    "cost": 7020,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/342/uvkd72u0d21kn6m3z2im71e4yoilsmjt/480_300_1/BOSS_vento_birysa-_-8.jpg",
+    "rating":4, 
+    "description": "Description wait?",
+    "currency": "RUB",
+    "exchangeRate": 95
+  },
+  {
+    "articul": "7xxaq78d",
+    "title": "Cuero Chair",
+    "cost": 4523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/e19/ltsotlld7fxxj9xoaq85w7zfeqky7ucx/480_300_1/stul-TYRIN-_-9.jpg",
+    "rating":4.5, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "7xxa3333221q78d",
+    "title": "Bedroom Bed",
+    "cost": 5523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/760/480_300_1/nv0en3u804q5psmtan06avz8e7m0lqkv.jpg",
+    "rating":3.6, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "asd686da",
+    "title": "Outdoor Table",
+    "cost": 3243,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/ae0/480_300_1/wtco6eoatyanhe51wh2bi3t1im9wz8f5.jpg",
+    "rating":3.8, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "hwq78d",
+    "title": "Wooden Drawer",
+    "cost": 3523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/659/8sfaozl6qb6skh42drnxpajo8vmmd4ig/480_300_1/17a49d31668162b2cd3c0e5e0d8bf811.jpg",
+    "rating":4.4, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },{
+    "articul": "28234s",
+    "title": "Armchair Cartoon",
+    "cost": 7020,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/342/uvkd72u0d21kn6m3z2im71e4yoilsmjt/480_300_1/BOSS_vento_birysa-_-8.jpg",
+    "rating":4, 
+    "description": "Description wait?",
+    "currency": "RUB",
+    "exchangeRate": 95
+  },
+  {
+    "articul": "7xxaq78d",
+    "title": "Cuero Chair",
+    "cost": 4523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/e19/ltsotlld7fxxj9xoaq85w7zfeqky7ucx/480_300_1/stul-TYRIN-_-9.jpg",
+    "rating":4.5, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "7xxa3333221q78d",
+    "title": "Bedroom Bed",
+    "cost": 5523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/760/480_300_1/nv0en3u804q5psmtan06avz8e7m0lqkv.jpg",
+    "rating":3.6, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "asd686da",
+    "title": "Outdoor Table",
+    "cost": 3243,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/ae0/480_300_1/wtco6eoatyanhe51wh2bi3t1im9wz8f5.jpg",
+    "rating":3.8, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
+  },
+  {
+    "articul": "hwq78d",
+    "title": "Wooden Drawer",
+    "cost": 3523,
+    "image": "https://mnogomebeli.com/upload/resize_cache/iblock/659/8sfaozl6qb6skh42drnxpajo8vmmd4ig/480_300_1/17a49d31668162b2cd3c0e5e0d8bf811.jpg",
+    "rating":4.4, 
+    "description": "Description wait?", 
+    "currency" : "RUB"
   }
 ]

@@ -49,7 +49,7 @@ export default function Header() {
       cartClass.classList.toggle('activ');
     }
   };
-  console.log(linkHeaderArr[1].toLowerCase().trim().split(' ')[0], 'aaaaaaa');
+
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -87,14 +87,17 @@ export default function Header() {
                 </span>
               </div>
               <select
+                name="currency"
                 onChange={handlerSelCurrency}
                 className="cart-header__currency">
                 <option value="RUB">RUB</option>
                 <option value="USD">USD</option>
               </select>
+
               <select
+                name="category"
                 // onChange={handlerSelCategory}
-                className="cart-header__currency">
+                className="cart-header__category">
                 {selectCategory.map((el) => (
                   <option value={el}>{el}</option>
                 ))}

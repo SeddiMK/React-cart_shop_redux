@@ -18,13 +18,14 @@ export default function GoodsList() {
   const goods = useSelector(selectGoods);
   const dispath = useDispatch();
 
-  //берем данные с бэкенда-------------------------
-  // const [goodsItems, setGoodsItems] = useState([]); // изменить если данные берем с сервера
-  const [isLoading, setIsLoading] = useState(false); // изменить если данные берем с сервера
+  // data from backend-------------------------
+  // const [goodsItems, setGoodsItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
 
+  setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
   // useEffect(() => {
   //   fetch('url')
-  //     .then((res) => res.json)
+  //     .then((res) => res.json())
   //     .then((data) => {
   //       setGoodsItems(data);
   //       if (data) setIsLoading(false);

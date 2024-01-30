@@ -50,13 +50,13 @@
 
 button.btn-search {
     margin-right: 0.3rem;
-    background: transparent no-repeat center url('../image/icon/icon-search.svg');
+    background: transparent no-repeat center url('../assets/image/icon/icon-search.svg');
     background-size: 1.4rem;
     width: 1.4rem;
 }
 
 button.cart-btn {
-    background: transparent no-repeat center url('../image/icon/shopping-cart.svg');
+    background: transparent no-repeat center url('../assets/image/icon/shopping-cart.svg');
     height: 34px;
     padding: 0.6rem;
     border-radius: 5px;

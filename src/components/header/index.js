@@ -62,8 +62,14 @@ export default function Header() {
           <ul className="menu__list-left">
             {linkHeaderArr.map((el, i) => (
               <li className="menu__item" key={el + i}>
+                {/* автоматически добавляет название из массива linkHeaderArr в Link to(href) */}
                 <NavLink
-                  to={`/${el.toLowerCase().trim().split(' ')[0]}`}
+                  to={
+                    '/' +
+                    (el.toLowerCase().trim().split(' ')[0] === 'home'
+                      ? ''
+                      : el.toLowerCase().trim().split(' ')[0])
+                  }
                   className="menu__link">
                   {el}
                 </NavLink>
@@ -109,10 +115,7 @@ export default function Header() {
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (
               <li className="menu__item" key={el + i}>
-                <NavLink
-                  to={`/${el.toLowerCase()}`}
-                  target="_blank"
-                  className="menu__link">
+                <NavLink to={`/${el.toLowerCase()}`} className="menu__link">
                   {el}
                 </NavLink>
               </li>

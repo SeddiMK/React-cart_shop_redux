@@ -62,6 +62,12 @@
 }
 
 
+.menu__item {
+    margin-right: calc(1vw + 0.1em);
+    margin-bottom: clamp(7px, 0.5vw, 14px);
+
+}
+
 .menu__item:not(:last-child) {
     margin-right: calc(1vw + 0.1em);
 }
@@ -69,12 +75,15 @@
 
 .menu__link {
     position: relative;
-    padding: clamp(7px, 1vw, 10px);
     transition: color .3s ease-in-out;
     color: #000000;
 }
 
 .menu__link:hover {
+    color: #a9a5a5;
+}
+
+.menu__link.active {
     color: #a9a5a5;
 }
 

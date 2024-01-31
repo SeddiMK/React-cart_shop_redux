@@ -10,7 +10,7 @@ import NotFound from '../pages/NotFound';
 import About from '../pages/About';
 import { Route, Routes } from 'react-router-dom';
 
-function App() {
+export default function App() {
   return (
     <div className="container">
       <Header />
@@ -25,5 +25,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

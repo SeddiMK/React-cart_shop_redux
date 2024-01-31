@@ -2,7 +2,7 @@ import './Header.css';
 import '../../app/Common.css';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selCostFlag,
@@ -62,11 +62,11 @@ export default function Header() {
           <ul className="menu__list-left">
             {linkHeaderArr.map((el, i) => (
               <li className="menu__item" key={el + i}>
-                <Link
+                <NavLink
                   to={`/${el.toLowerCase().trim().split(' ')[0]}`}
                   className="menu__link">
                   {el}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -87,10 +87,11 @@ export default function Header() {
                   {fullQuantityGoodsCart}
                 </span>
               </div>
+
               <select
                 name="currency"
                 onChange={handlerSelCurrency}
-                className="cart-header__currency">
+                className="cart-header__currency select--header">
                 <option value="RUB">RUB</option>
                 <option value="USD">USD</option>
               </select>
@@ -98,7 +99,7 @@ export default function Header() {
               <select
                 name="category"
                 // onChange={handlerSelCategory}
-                className="cart-header__category">
+                className="cart-header__category select--header">
                 {selectCategory.map((el) => (
                   <option value={el}>{el}</option>
                 ))}
@@ -108,12 +109,12 @@ export default function Header() {
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (
               <li className="menu__item" key={el + i}>
-                <Link
+                <NavLink
                   to={`/${el.toLowerCase()}`}
                   target="_blank"
                   className="menu__link">
                   {el}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

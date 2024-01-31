@@ -99,16 +99,11 @@
 
 .menu__btn {}
 
-@media(max-width: 500px) {
-    .menu__list {
-        justify-content: center;
 
-    }
 
-    .menu__item {
-        margin-bottom: calc(1vw + 0.3rem);
-    }
-}
+
+
+
 
 
 
@@ -155,16 +150,23 @@
 
 .cart-icon {}
 
-.cart-header__currency {
+
+
+.select--header {
     background-color: transparent;
     /* border: #000000 1px solid; */
     border-radius: 0.3rem;
     padding: clamp(3px, 1vw, 5px);
 }
 
-.cart-header__currency:active {
+.select--header:active {
     border: none;
 }
+
+.cart-header__currency {}
+
+.cart-header__category {}
+
 
 .cart-header__quantity-goods {
     padding: 1px 4px;
@@ -186,4 +188,17 @@
     text-align: center;
 
 
+}
+
+
+
+@media(max-width: 500px) {
+    .menu__list {
+        justify-content: center;
+
+    }
+
+    .menu__item {
+        margin-bottom: calc(1vw + 0.3rem);
+    }
 }

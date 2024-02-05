@@ -232,9 +232,9 @@
         color: white;
         width: 100%;
         padding: clamp(7px, 4vw, 15px);
-        position: relative;
+        /* position: relative;
         top: 0;
-        left: 0;
+        left: 0; */
         padding-bottom: 20px;
     }
 
@@ -267,7 +267,7 @@
 
     .menu {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         flex-wrap: wrap;
         width: 100%;
@@ -293,7 +293,7 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         max-width: 18rem;
-        background-color: #db5e5e;
+        background-color: var(--form-border-color);
         border-radius: .3rem;
         margin-bottom: 1.4rem;
     }
@@ -301,5 +301,21 @@
     .menu__list-right {
         display: flex;
         gap: 1.3rem;
+    }
+}
+
+@media (min-width:603px) {
+    .menu__list-left.activ-nav {
+        margin-right: 1rem;
+    }
+}
+
+@media (min-width:1000px) {
+    #hamburger {
+        display: none;
+    }
+
+    .menu__list-left {
+        display: flex;
     }
 }

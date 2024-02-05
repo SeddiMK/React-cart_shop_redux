@@ -2,5 +2,6 @@
     /* background-color: #716969; */
     background: radial-gradient(80% 80% at 20% 20%, #e3f9c7 40%, rgba(227, 249, 199, 0) 100%), radial-gradient(60% 60% at 100% 100%, #ffe6e6 30%, rgba(255, 230, 230, 0) 100%), #fff1e5;
 
+    width: 100%;
     padding: 50px 10px;
 }

@@ -1,5 +1,22 @@
-.goods-field {}
+.goods-field {
 
+    grid-template-columns: 1fr 1fr 1fr;
+
+
+}
+
+@media (min-width:420px) {
+    .goods-field {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        align-items: end;
+        justify-content: center;
+        justify-items: stretch;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+}
 
 .goods-block {
     display: flex;

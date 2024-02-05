@@ -6,7 +6,7 @@
     --base-font: 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
     /* --font-size: calc(1vw + 0.6em); */
-    --font-size: clamp(18px, 1vw, 40px);
+    --font-size: clamp(16px, 1vw, 22px);
     --max-width: 1100px;
     --main-color: #9BC53D;
     --bg-color-header: #ffd586;
@@ -14,16 +14,18 @@
     --btn-send-com: #cdde9d;
     --form-inp-email: #ffffff;
     --form-border-color: #727272;
+
 }
 
 .container {
+
     display: flex;
     flex-direction: column;
     overflow: hidden;
     min-height: 100%;
-    width: var(--max-width);
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 .6rem;
 }
 
 .btn {
@@ -63,7 +65,7 @@ button.cart-btn {
     text-indent: -999px;
     overflow: hidden;
     width: 40px;
-    background-size: clamp(0.4rem, 2vw, 1.5rem);
+    background-size: 1.5rem;
     cursor: pointer;
     opacity: 0.5;
     transition: opacity .3s ease-in-out;
@@ -112,17 +114,7 @@ input[type="search"]:focus {
 }
 
 
-.cart-header {
-    text-align: center;
-
-}
-
-
 @media (max-width:768px) {
-    :root {
-        --font-size: clamp(22px, 1vw, 40px);
-    }
-
     .search-header {
         margin-bottom: 0.5rem;
     }
@@ -132,11 +124,5 @@ input[type="search"]:focus {
         width: 40px;
         background-size: clamp(1.2rem, 2vw, 2.5rem);
 
-    }
-}
-
-@media (max-width:480px) {
-    :root {
-        --font-size: clamp(26px, 1vw, 40px);
     }
 }

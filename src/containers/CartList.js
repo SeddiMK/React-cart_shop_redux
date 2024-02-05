@@ -100,7 +100,6 @@ export default function CartList({ cartIconRef }) {
 
   const hadlerClose = (e) => {
     if (cartClass && fullQuantityGoodsCart !== 0) {
-      // setOpenCartSt(false);
       cartClass.classList.toggle('activ');
     }
   };

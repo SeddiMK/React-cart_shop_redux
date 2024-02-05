@@ -1,7 +1,9 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import React from 'react';
+import Burger from '../Burger';
+
+import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -19,11 +21,6 @@ export default function Header() {
     'HITs',
     'About us',
     'Contacts',
-    'Products',
-    'Discount',
-    'HITs',
-    'About us',
-    'Contacts',
   ];
   const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
   const selectCategory = [
@@ -35,6 +32,7 @@ export default function Header() {
     'Drawer',
   ];
   // end -----------------
+  const [burgerClick, setBurgerClick] = useState(false);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
@@ -51,15 +49,29 @@ export default function Header() {
     }
   };
 
+  // useEffect(() => {
+  //   const navHeaderLeft = document.getElementsByClassName('menu__list-left');
+  //   console.log(navHeaderLeft);
+  //   console.log(burgerClick, 'burgerClick');
+  //   // if (burgerClick) console.log(navHeaderLeft.classList.contains('is-open'));
+  // }, [burgerClick]);
+
   return (
     <header className="header">
       <div className="header__wrapper">
-        <Link to="/" className="header__logo">
-          ME
-          {/* <img src="#" alt="Image logo" /> */}
-        </Link>
+        <div className="header__logo-burger">
+          <Link to="/" className="header__logo">
+            ME
+            {/* <img src="#" alt="Image logo" /> */}
+          </Link>
+          {/* Menu Burger */}
+          <div onClick={() => setBurgerClick(!burgerClick)}>
+            <Burger />
+          </div>
+        </div>
         <nav className="header__nav menu">
-          <ul className="menu__list-left">
+          {/* {'menu__list-left' + (burgerClick ? ' activ-nav' : '')}  */}
+          <ul className={'menu__list-left' + (burgerClick ? ' activ-nav' : '')}>
             {linkHeaderArr.map((el, i) => (
               <li className="menu__item" key={el + i}>
                 {/* автоматически добавляет название из массива linkHeaderArr в Link to(href) */}

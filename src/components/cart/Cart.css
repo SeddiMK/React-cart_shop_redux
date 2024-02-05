@@ -4,15 +4,17 @@
 
 
 .goods-table.activ {
-    display: block;
+    /* display: block;
     position: absolute;
     top: 121px;
     left: 25%;
     background-color: #fff;
     border: 1px solid #fc8507;
-    border-radius: .2rem;
-    padding: clamp(3px, 1vw, 10px);
+    border-radius: .3rem;
+    padding: clamp(3px, 1vw, 10px); */
 }
+
+
 
 .goods-table__full-goods-block {
     display: flex;
@@ -45,10 +47,30 @@
 
 .cart {}
 
+
+.cart-header {
+    text-align: center;
+
+}
+
 .cart__one-product>table {
     border-spacing: clamp(4px, 1vw, 15px);
     border: 1px solid #fc8507;
     margin-bottom: 0.6rem;
+    border-radius: 0.3rem;
+
+}
+
+
+
+.cart__one-product>table>tbody>tr>td {
+    padding: 0 .7rem;
+
+}
+
+
+.cart__one-product>table>tbody>tr>td:not(:last-child) {
+    border-right: 1px solid #fc8507;
 
 }
 
@@ -92,3 +114,5 @@
 .cart__delete-quantity {}
 
 .delete-quantity {}
+
+@media (min-width:320px) {}

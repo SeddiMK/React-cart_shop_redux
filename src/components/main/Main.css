@@ -6,14 +6,3 @@
 .main__btn-send-comment {
     margin-bottom: 1.5rem;
 }
-
-.main__goods-field {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-
-    align-items: end;
-    justify-content: center;
-    justify-items: stretch;
-    gap: 1rem;
-    flex-wrap: wrap;
-}

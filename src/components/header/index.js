@@ -1,7 +1,8 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import Burger from '../Burger';
+import Burger from '../burger';
+import Search from '../search';
 
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
@@ -90,12 +91,8 @@ export default function Header() {
           </ul>
 
           <div className="header__search-cart block-search-cart">
-            <form className="block-search-cart__search search-header">
-              <input type="search" placeholder="Search..." />
-              <button
-                type="search"
-                className="menu__link btn-search btn-icon"></button>
-            </form>
+            <Search />
+
             <div className="block-search-cart__cart cart-header">
               <div className="cart-header__icon">
                 <span className="cart-header__cart-icon" onClick={handleCart}>

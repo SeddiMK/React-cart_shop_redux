@@ -30,7 +30,7 @@
 
 .goods-block__title-coast>p {
     margin-bottom: clamp(10px, 1vw, 12px);
-
+    text-align: center;
 }
 
 .goods-block__add-to-cart {}

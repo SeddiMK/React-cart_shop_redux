@@ -209,7 +209,7 @@
         text-align: center;
     }
 
-    .goods-block:not(:last-child) {
+    .goods-block {
         border-bottom: 1px solid #fc8507;
         padding-bottom: 1rem;
         margin-bottom: 1rem;

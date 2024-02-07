@@ -115,8 +115,10 @@ export default function Header() {
                 name="category"
                 // onChange={handlerSelCategory}
                 className="cart-header__category select--header">
-                {selectCategory.map((el) => (
-                  <option value={el}>{el}</option>
+                {selectCategory.map((el, i) => (
+                  <option value={el} key={el + i}>
+                    {el}
+                  </option>
                 ))}
               </select>
             </div>

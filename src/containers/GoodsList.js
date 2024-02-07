@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+
 import {
   selectCostFlag,
   selectCurrensy,
@@ -9,6 +11,7 @@ import {
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/goods/Skeleton';
 import { increment } from '../store/cartSlice';
+import Error from '../components/error';
 
 // get data from store
 // list data
@@ -21,15 +24,28 @@ export default function GoodsList() {
   // data from backend-------------------------
   // const [goodsItems, setGoodsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
+  // const URL = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture`; // можно вынести в отдельный файл
 
   setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
   // useEffect(() => {
-  //   fetch('url')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setGoodsItems(data);
-  //       if (data) setIsLoading(false);
-  //     });
+  //   setIsLoading(true);
+
+  //   // fetch('url')
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => {
+  //   //     setGoodsItems(data);
+  //   //     if (data) setIsLoading(false);
+  //   //   });
+
+  //   const data = axios.get(URL).then((res) => {
+  //     setGoodsItems(res.data);
+  //     if (res.data) setIsLoading(false);
+  //   }).catch((error) =>{
+  //   console.log(error);
+  // <Error/>
+  // };
+
+  //   console.log(data);
   // }, []);
   // end -------------------------
 

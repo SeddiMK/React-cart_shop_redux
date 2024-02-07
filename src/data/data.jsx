@@ -1,0 +1,1 @@
+export const URL = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture`;

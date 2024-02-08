@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// import goodsArr from '../data/goods.json';
+import goodsArr from '../data/goods.json';
 
 // import {goodsArr2} from '../data/Goods';
 

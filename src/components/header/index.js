@@ -1,17 +1,20 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import Burger from '../burger';
-import Search from '../search';
-
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+import Burger from '../burger';
+import Search from '../search';
+import Categories from '../categories';
+
 import {
   selCostFlag,
   selCurrensy,
   fullQuantityGoods,
 } from '../../store/goodsSlice';
+import { setCategoryId } from '../../store/filterSlice';
 
 export default function Header() {
   // data-header-nav-link --------------
@@ -24,20 +27,22 @@ export default function Header() {
     'Contacts',
   ];
   const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
-  const selectCategory = [
-    'All goods',
-    'Cartoon',
-    'Chair',
-    'Bed',
-    'Table',
-    'Drawer',
-  ];
+
   // end -----------------
   const [burgerClick, setBurgerClick] = useState(false);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
+
   const dispath = useDispatch();
+  const categoryId = useSelector((state) => state.filter.categoryId);
+
+  // filter select category
+  const handlerSelCategory = (e) => {
+    console.log(e, 'click select category');
+    dispath(setCategoryId(e));
+  };
+  // end
 
   const handlerSelCurrency = (e) => {
     dispath(selCostFlag(e.target.value !== 'RUB'));
@@ -111,16 +116,7 @@ export default function Header() {
                 <option value="USD">USD</option>
               </select>
 
-              <select
-                name="category"
-                // onChange={handlerSelCategory}
-                className="cart-header__category select--header">
-                {selectCategory.map((el, i) => (
-                  <option value={el} key={el + i}>
-                    {el}
-                  </option>
-                ))}
-              </select>
+              <Categories onChangeCategories={handlerSelCategory} />
             </div>
           </div>
           <ul className="menu__list-right list-right auth_block">

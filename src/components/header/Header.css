@@ -170,6 +170,12 @@
 
 
 
+
+
+.cart-header__currency {}
+
+.cart-header__category {}
+
 .select--header {
     background-color: transparent;
     /* border: #000000 1px solid; */
@@ -180,11 +186,6 @@
 .select--header:active {
     border: none;
 }
-
-.cart-header__currency {}
-
-.cart-header__category {}
-
 
 .cart-header__quantity-goods {
     padding: 1px 4px;

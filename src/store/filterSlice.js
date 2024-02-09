@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    categoryId: 0,
+    categoryName: 'All goods',
+    searchInpVal:'',
     currentPage: 1,
     sort: {
       title: 'All goods',
@@ -11,12 +12,8 @@ export const filterSlice = createSlice({
     },
   },
   reducers: {
-    setCategoryId(state, action) {
-      console.log(
-        action.payload,
-        'action.payload categoryID-------------------------'
-      );
-      state.categoryId = action.payload;
+    setCategoryName(state, action) {
+         state.categoryName = action.payload;
     },
     setSort(state, action) {
       console.log(
@@ -26,16 +23,15 @@ export const filterSlice = createSlice({
       state.sort = action.payload;
     },
     setCurrentPage(state, action) {
-      console.log(
-        action.payload,
-        'action.payload setCurrentPage-------------------------'
-      );
-      state.currentPage = action.payload;
+        state.currentPage = action.payload;
+    },
+    searchInpHeader(state, action) {
+        state.searchInpVal = action.payload;
     },
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage } = filterSlice.actions;
+export const { setCategoryName, setSort, setCurrentPage,searchInpHeader } = filterSlice.actions;
 
 // export const fullQuantityGoods = (state) => {
 //   // console.log(state.goodsVal.fullQuantityGoodsSt);

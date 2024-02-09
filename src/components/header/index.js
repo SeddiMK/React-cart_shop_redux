@@ -14,9 +14,10 @@ import {
   selCurrensy,
   fullQuantityGoods,
 } from '../../store/goodsSlice';
-import { setCategoryId } from '../../store/filterSlice';
+import { setCategoryName } from '../../store/filterSlice';
 
 export default function Header() {
+  const dispath = useDispatch();
   // data-header-nav-link --------------
   const linkHeaderArr = [
     'Home',
@@ -27,19 +28,16 @@ export default function Header() {
     'Contacts',
   ];
   const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
-
   // end -----------------
+
   const [burgerClick, setBurgerClick] = useState(false);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const cartClass = document.querySelector('.goods-table');
 
-  const dispath = useDispatch();
-
   // filter select category
   const handlerSelCategory = (e) => {
-    console.log(e, 'click select category');
-    dispath(setCategoryId(e));
+    dispath(setCategoryName(e));
   };
   // end
 
@@ -95,7 +93,6 @@ export default function Header() {
           </ul>
 
           <div className="header__search-cart block-search-cart">
-
             <Search />
 
             <div className="block-search-cart__cart cart-header">
@@ -117,7 +114,6 @@ export default function Header() {
               </select>
 
               <Categories onChangeCategories={handlerSelCategory} />
-              
             </div>
           </div>
           <ul className="menu__list-right list-right auth_block">

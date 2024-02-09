@@ -6,36 +6,55 @@ import {
   selectCostFlag,
   selectCurrensy,
   selectGoods,
+  selGoodsValArr,
 } from '../store/goodsSlice';
+import { increment } from '../store/cartSlice';
+import { searchInpVal } from '../store/filterSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
-import { increment } from '../store/cartSlice';
 import Error from '../components/error';
 
 // get data from store
 // list data
 export default function GoodsList() {
+  const dispath = useDispatch();
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
-  const dispath = useDispatch();
+
+  let categoryName = useSelector((state) => state.filter.categoryName);
 
   // data from backend-------------------------
   // const [goodsItems, setGoodsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
-  
+
   useEffect(() => {
     setIsLoading(true);
-    const URL = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?sortBy=cost&order=asc&search=Bed`; // можно вынести в отдельный файл
+
+    // console.log(searchInpVal);!!!!!!!!!!!!!!!!
+
+    const categotySelFilterSearch = () => {
+      if (categoryName !== 'All goods') {
+        // return `search=${categoryName}`;
+        return `filter=${categoryName}`;
+      } else {
+        return ``;
+      }
+    };
+
+    const url = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?${categotySelFilterSearch()}`; //sortBy=cost&order=asc можно вынести в отдельный файл
+    console.log(url, 'categotySel in  goodList');
+    // URL.searchParams.append("title", categoryName);
 
     // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-    axios.get(URL).then((res) => {
+    axios.get(url).then((res) => {
       console.log(res.data, 'axiosssss');
       if (res.data) setIsLoading(false);
+      dispath(selGoodsValArr(res.data));
       // return res.data;
     });
-  }, []);
+  }, [categoryName, dispath]);
 
   // useEffect(() => {
   //   setIsLoading(true);
@@ -58,9 +77,6 @@ export default function GoodsList() {
   //   console.log(data);
   // }, []);
   // end -------------------------
-
-
-
 
   let clickHandler = (e) => {
     e.preventDefault();

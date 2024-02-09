@@ -47,10 +47,15 @@ export const goodsSlice = createSlice({
         state.fullQuantityGoodsSt = data.payload;
       }
     },
+    selGoodsValArr(state, data) {
+      if (state.goodsValArr !== undefined) {
+        state.goodsValArr = data.payload;
+      }
+    },
   },
 });
 
-export const { selCurrensy, selCostFlag, fullQuantity } = goodsSlice.actions;
+export const { selCurrensy, selCostFlag, fullQuantity,selGoodsValArr } = goodsSlice.actions;
 
 export const fullQuantityGoods = (state) => {
   // console.log(state.goodsVal.fullQuantityGoodsSt);

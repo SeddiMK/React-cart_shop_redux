@@ -1,9 +1,14 @@
-import React,{useCallback, useRef, useState} from 'react';
-import debounce from 'lodash.debounce';
-
 import styles from './search.module.css'
 
+import React, { useCallback, useRef, useState } from 'react';
+import debounce from 'lodash.debounce';
+import { useDispatch } from 'react-redux';
+
+
+import { searchInpHeader } from '../../store/filterSlice';
+
 export default function Search() {
+    const dispatch = useDispatch();
     const [value, setValue] = useState('');
     const [searchValue, setSearchValue] = useState('');
     const inputRef = useRef();
@@ -32,7 +37,7 @@ export default function Search() {
     const handlerSearchBtn = (e) => {
         e.preventDefault();
         // отправить данные в store для поиска
-        // dipatch(searchInpHeader(searchValue))
+        dispatch(searchInpHeader(searchValue))
     }
 
     return (

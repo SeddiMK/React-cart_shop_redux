@@ -11,15 +11,13 @@ export default function Categories({onChangeCategories}) {
         'Table',
         'Drawer',
       ];
-    //   onChange={(e)=>onChangeCategories(e.target.value)}
+
     return (
         <select name="category" 
-            className={"cart-header__category select--header " + styles.root }>
+            className={"cart-header__category select--header " + styles.root}
+            onChange={(e)=>onChangeCategories(e.target.value)}>
             {selectCategory.map((categoryName, i) => (
-                <option onClick={() => {
-                    console.log('kllklklkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-                    onChangeCategories(i);
-                }} value={categoryName} key={categoryName + i}>{categoryName}</option>
+                <option value={categoryName} key={categoryName + i}>{categoryName}</option>
             ))}
         </select>
 )

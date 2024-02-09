@@ -8,12 +8,12 @@ import GoodsList from '../../containers/GoodsList';
 import CartList from '../../containers/CartList';
 import Pagination from '../pagination';
 
-import {setSort, setCurrentPage,setCategoryId } from '../../store/filterSlice';
+import {setSort, setCurrentPage,setCategoryName } from '../../store/filterSlice';
 
 export default function Main() {
   const dispath = useDispatch();
   // const { categoryId, sort, currentPage } = useSelector(selectFilter); 
-  // const categoryId = useSelector((state) => state.filter.categoryId);
+  // const categoryId = useSelector((state) => state.filter.categoryName);
   // const currentPage = useSelector((state) => state.filter.currentPage);
   // const sort= useSelector((state) => state.filter.sort);
 

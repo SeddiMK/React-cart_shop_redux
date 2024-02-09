@@ -35,7 +35,6 @@ export default function Header() {
   const cartClass = document.querySelector('.goods-table');
 
   const dispath = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
 
   // filter select category
   const handlerSelCategory = (e) => {
@@ -96,6 +95,7 @@ export default function Header() {
           </ul>
 
           <div className="header__search-cart block-search-cart">
+
             <Search />
 
             <div className="block-search-cart__cart cart-header">
@@ -117,6 +117,7 @@ export default function Header() {
               </select>
 
               <Categories onChangeCategories={handlerSelCategory} />
+              
             </div>
           </div>
           <ul className="menu__list-right list-right auth_block">

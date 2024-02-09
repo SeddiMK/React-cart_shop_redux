@@ -9,7 +9,7 @@ import {
 } from '../store/goodsSlice';
 
 import Goods from '../components/goods/Goods';
-import Skeleton from '../components/goods/Skeleton';
+import Skeleton from '../components/sceleton/Skeleton';
 import { increment } from '../store/cartSlice';
 import Error from '../components/error';
 
@@ -24,9 +24,19 @@ export default function GoodsList() {
   // data from backend-------------------------
   // const [goodsItems, setGoodsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
-  // const URL = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture`; // можно вынести в отдельный файл
+  
+  useEffect(() => {
+    setIsLoading(true);
+    const URL = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?sortBy=cost&order=asc&search=Bed`; // можно вынести в отдельный файл
 
-  setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
+    // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
+    axios.get(URL).then((res) => {
+      console.log(res.data, 'axiosssss');
+      if (res.data) setIsLoading(false);
+      // return res.data;
+    });
+  }, []);
+
   // useEffect(() => {
   //   setIsLoading(true);
 
@@ -48,6 +58,9 @@ export default function GoodsList() {
   //   console.log(data);
   // }, []);
   // end -------------------------
+
+
+
 
   let clickHandler = (e) => {
     e.preventDefault();

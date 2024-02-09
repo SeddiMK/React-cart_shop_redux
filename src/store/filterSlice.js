@@ -28,7 +28,7 @@ export const filterSlice = createSlice({
     setCurrentPage(state, action) {
       console.log(
         action.payload,
-        'action.payload PageCount-------------------------'
+        'action.payload setCurrentPage-------------------------'
       );
       state.currentPage = action.payload;
     },

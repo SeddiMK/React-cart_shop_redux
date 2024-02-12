@@ -43,12 +43,19 @@ export default function GoodsList() {
     setIsLoading(true); // обновляем set загрузки
 
     const categotySelFilterSearch = () => {
-      if (categoryName !== 'allgoods') {
+      if (categoryName !== 'allgoods' && categoryName !== 'All goods') {
         return `&filter=${categoryName}`;
       } else {
         return ``;
       }
     };
+    // const sortSelFilterSearch = () => {
+    //   if (sortName !== 'allgoods' && sortName !== 'All goods') {
+    //     return `&sortBy=cost&order=asc=${sortName}`;
+    //   } else {
+    //     return ``;
+    //   }
+    // };
     console.log(categotySelFilterSearch(), 'categotySelFilterSearch');
     // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
     axios
@@ -87,7 +94,7 @@ export default function GoodsList() {
 
   //проверяем URL-параметры и сохо в redux
   useEffect(() => {
-    console.log(window.location.search, 'window.location.search');
+    console.log(Boolean(window.location.search), 'window.location.search');
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 

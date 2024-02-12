@@ -7,7 +7,6 @@ export const filterSlice = createSlice({
     searchInpVal: '',
     currentPage: 1,
     sort: {
-      title: 'All goods',
       sortProperty: 'rating',
     },
   },
@@ -17,6 +16,7 @@ export const filterSlice = createSlice({
     },
     setSort(state, action) {
       console.log(state.sort, 'state.sort sort-------------------------');
+      console.log(action.payload, 'action.payload-------------------------');
       state.sort = action.payload;
     },
     setCurrentPage(state, action) {

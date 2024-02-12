@@ -7,15 +7,15 @@ import GoodsList from '../../containers/GoodsList';
 import CartList from '../../containers/CartList';
 import Pagination from '../pagination';
 
-import { setCurrentPage } from '../../store/filterSlice';
+import { setCurrentPage, setFilters } from '../../store/filterSlice';
 
 export default function Main() {
   const dispath = useDispatch();
 
-  // const { categoryName, sort, currentPage } = useSelector(selectFilter);
-  const categoryName = useSelector((state) => state.filter.categoryName);
+  // const { categoryName, sort, currentPage } = useSelector(setFilters);
+  // const categoryName = useSelector((state) => state.filter.categoryName);
   let currentPage = useSelector((state) => state.filter.currentPage);
-  const sort = useSelector((state) => state.filter.sort);
+  // const sort = useSelector((state) => state.filter.sort);
   // console.log(useSelector((state) => state.filter.currentPage));
 
   const onChangePage = (number) => {

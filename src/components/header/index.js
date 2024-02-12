@@ -8,16 +8,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import Burger from '../burger';
 import Search from '../search';
 import Categories from '../categories';
+import Sort from '../sort';
 
 import {
   selCostFlag,
   selCurrensy,
   fullQuantityGoods,
 } from '../../store/goodsSlice';
-import { setCategoryName, setCurrentPage } from '../../store/filterSlice';
+import {
+  setCategoryName,
+  setCurrentPage,
+  setSort,
+} from '../../store/filterSlice';
 
 export default function Header() {
   const dispath = useDispatch();
+  const [sortValue, setSortValue] = useState(0);
   // data-header-nav-link --------------
   const linkHeaderArr = [
     'Home',
@@ -38,6 +44,12 @@ export default function Header() {
   // filter select category
   const handlerSelCategory = (e) => {
     dispath(setCategoryName(e));
+    dispath(setCurrentPage(1));
+  };
+  // end
+  // filter select sort
+  const handlerSelSort = (e) => {
+    dispath(setSort(e));
     dispath(setCurrentPage(1));
   };
   // end
@@ -115,6 +127,7 @@ export default function Header() {
               </select>
 
               <Categories onChangeCategories={handlerSelCategory} />
+              <Sort value={sortValue} onChangeSort={handlerSelSort} />
             </div>
           </div>
           <ul className="menu__list-right list-right auth_block">

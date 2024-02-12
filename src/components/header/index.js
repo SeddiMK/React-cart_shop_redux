@@ -43,7 +43,7 @@ export default function Header() {
 
   // filter select category
   const handlerSelCategory = (e) => {
-    dispath(setCategoryName(e));
+    dispath(setCategoryName(e.toLowerCase().replace(' ', '')));
     dispath(setCurrentPage(1));
   };
   // end
@@ -127,8 +127,8 @@ export default function Header() {
               </select>
 
               <Categories onChangeCategories={handlerSelCategory} />
-              <Sort value={sortValue} onChangeSort={handlerSelSort} />
             </div>
+            <Sort value={sortValue} onChangeSort={handlerSelSort} />
           </div>
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (

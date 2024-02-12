@@ -1,39 +1,55 @@
-import styles from './sort.module.css';
+import styles from './sort.module.scss';
 
 import React, { useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { searchInpHeader, setCurrentPage } from '../../store/filterSlice';
+export const listSort = [
+  {
+    name: 'возрастанию популярности',
+    sortProperty: 'rating',
+  },
+  {
+    name: 'убыванию популярности',
+    sortProperty: '-rating',
+  },
+  {
+    name: 'возрастанию цены',
+    sortProperty: 'cost',
+  },
+  {
+    name: 'убыванию цены',
+    sortProperty: '-cost',
+  },
+];
 
 export default function Sort({ value, onChangeSort }) {
   const [open, setOpen] = useState(false);
-  const listSort = {
-    rating: 'По популярности',
-    costAsk: 'Цена - по возрастанию',
-    costDesk: 'Цена - по убыванию',
-  };
-  const sortName = listSort[value];
+  const nameSort = useSelector((state) => state.filter.sort);
 
   const onClickListItem = (i) => {
     onChangeSort(i);
     setOpen(false);
   };
+
   return (
-    <div className="sort">
-      <div className="sort__label">Сортировка по:</div>
+    <div className={'sort ' + styles.root}>
+      <p className={'sort__label ' + styles.root}>
+        <span>Сортировка по:</span>
+        <span onClick={() => setOpen(!open)}>{nameSort.name}</span>
+      </p>
       {open && (
         <div className={'sort__popup ' + styles.root}>
-          <ul
-            name="sort"
-            className={'cart-header__sort select--header ' + styles.root}
-            onChange={(e) => onChangeSort(e.target.value)}>
-            {Object.values(listSort).map((sortName, i) => (
+          <ul name="sort">
+            {listSort.map((obj, i) => (
               <li
-                onClick={() => onClickListItem(i)}
-                key={sortName + i}
-                className={value === i ? 'active' : ''}>
-                {sortName}
+                onClick={() => onClickListItem(obj)}
+                key={obj + i}
+                value={i}
+                className={
+                  value.sortProperty === obj.sortProperty ? 'active' : ''
+                }>
+                {obj.name}
               </li>
             ))}
           </ul>

@@ -1,0 +1,32 @@
+.root {
+  position: relative;
+  color: #000000;
+  display: flex;
+  padding: 2px;
+  border-radius: 5px;
+  padding-bottom: 2rem;
+
+  p {
+    span:first-child {
+      padding-bottom: 2.2rem;
+      margin-right: 0.5rem;
+    }
+    span:last-child {
+      max-width: 6.5rem;
+      cursor: pointer;
+    }
+  }
+  div {
+    position: absolute;
+    top: 2.2rem;
+    right: -5.4rem;
+    color: #dd4949;
+
+    li {
+      cursor: pointer;
+    }
+    li:not(:last-child) {
+      margin-bottom: 0.6rem;
+    }
+  }
+}

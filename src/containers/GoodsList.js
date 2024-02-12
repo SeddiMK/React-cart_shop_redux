@@ -12,10 +12,16 @@ import {
   selGoodsValArr,
 } from '../store/goodsSlice';
 import { increment } from '../store/cartSlice';
-import { setCurrentPage, setFilters } from '../store/filterSlice';
+import {
+  setCurrentPage,
+  setFilters,
+  setSort,
+  categoryName,
+} from '../store/filterSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
+import { listSort } from '../components/sort';
 import Error from '../components/error';
 
 // get data from store
@@ -29,6 +35,7 @@ export default function GoodsList() {
   let searchInpVal = useSelector((state) => state.filter.searchInpVal);
   let categoryName = useSelector((state) => state.filter.categoryName);
   let currentPage = useSelector((state) => state.filter.currentPage);
+  let sortType = useSelector((state) => state.filter.sort);
 
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
@@ -42,25 +49,23 @@ export default function GoodsList() {
   const axiosGoods = () => {
     setIsLoading(true); // обновляем set загрузки
 
-    const categotySelFilterSearch = () => {
-      if (categoryName !== 'allgoods' && categoryName !== 'All goods') {
-        return `&filter=${categoryName}`;
-      } else {
-        return ``;
-      }
-    };
-    // const sortSelFilterSearch = () => {
-    //   if (sortName !== 'allgoods' && sortName !== 'All goods') {
-    //     return `&sortBy=cost&order=asc=${sortName}`;
-    //   } else {
-    //     return ``;
-    //   }
-    // };
-    console.log(categotySelFilterSearch(), 'categotySelFilterSearch');
     // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
+    const sortBy = sortType.sortProperty.replace('-', '');
+    const order = sortType.sortProperty.includes('-') ? 'desc' : 'asc'; // убыванию или возрастанию с помощью тернарного оператора
+
+    const searchCategoryFilter =
+      categoryName !== 'allgoods' ? `${categoryName}` : '';
+    console.log(searchInpVal, 'searchInpVal');
+
+    const searchInpValData = searchInpVal ? searchInpVal : '';
+    // const searchInpValCategory = () => {
+    //   if (searchInpVal) return searchInpVal;
+    //   else return searchCategoryFilter;
+    // };
+
     axios
       .get(
-        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=5&search=${searchInpVal}${categotySelFilterSearch()}` //limit=должен давать бэкенд(mockapi.io- не дает всех страниц)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
+        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=5&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}` //limit=должен давать бэкенд(mockapi.io- не дает всех страниц)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл ${searchCategoryFilter}${searchInpVal}
       )
       .then((res) => {
         console.log(res.data, 'axiosssss');
@@ -75,12 +80,12 @@ export default function GoodsList() {
   };
 
   // qs строка параметров в URL -------------------------
-  // categoryName = categoryName.split(' ').join(''); // убираем пробелы из ссылки
+
   useEffect(() => {
     // проверяем произошел ли первый рендер
     if (isMounted.current) {
       const queryString = qs.stringify({
-        // sortProperty: sort.sortProperty,
+        sortProperty: sortType.sortProperty,
         categoryName,
         currentPage,
       });
@@ -90,7 +95,7 @@ export default function GoodsList() {
       navigate(`?${queryString}`);
     }
     isMounted.current = true; // произoшeл первый рендер
-  }, [categoryName, currentPage, navigate]);
+  }, [categoryName, currentPage, sortType.sortProperty, navigate]);
 
   //проверяем URL-параметры и сохо в redux
   useEffect(() => {
@@ -98,9 +103,11 @@ export default function GoodsList() {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 
-      console.log(params.categoryName, 'params.categoryName');
-      // const sort = sortList.find((obj)=> obj.sortProperty === params.sortProperty)
-      // dispath(setFilters({ ...params }));
+      const sort = listSort.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+
+      dispath(setFilters({ ...params, sort }));
       isSearch.current = true;
     }
   }, []);
@@ -116,10 +123,16 @@ export default function GoodsList() {
       axiosGoods();
     }
     isSearch.current = false;
-  }, [currentPage, categoryName, searchInpVal, dispath]);
+  }, [
+    currentPage,
+    sortType.sortProperty,
+    categoryName,
+    searchInpVal,
+    sortType,
+    dispath,
+  ]);
 
   // end -------------------------
-
   let clickHandler = (e) => {
     e.preventDefault();
     let targ = e.target;

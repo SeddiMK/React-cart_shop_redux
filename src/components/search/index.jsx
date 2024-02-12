@@ -18,17 +18,19 @@ export default function Search() {
   //     setValue('');
   // }
 
-  const updateInpSearchValue = useCallback(() => {
+  const updateInpSearchValue = useCallback(
     debounce((inp) => {
       console.log(inp, 'debounce in debounceInpSearch');
+
       setSearchValue(inp);
       dispatch(searchInpHeader(inp));
-    }, 1250);
-  }, []);
+    }, 250),
+    []
+  );
 
   const onChangeInput = (e) => {
-    setValue(e.target.value);
     updateInpSearchValue(e.target.value);
+    setValue(e.target.value);
     dispatch(setCurrentPage(1));
   };
 

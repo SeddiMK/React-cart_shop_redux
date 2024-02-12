@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import qs from 'qs';
 import axios from 'axios';
 
 import {
@@ -9,7 +12,7 @@ import {
   selGoodsValArr,
 } from '../store/goodsSlice';
 import { increment } from '../store/cartSlice';
-import { searchInpVal } from '../store/filterSlice';
+import { setCurrentPage, setFilters } from '../store/filterSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
@@ -19,63 +22,95 @@ import Error from '../components/error';
 // list data
 export default function GoodsList() {
   const dispath = useDispatch();
+  const navigate = useNavigate();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false); // если мы делали что нибудь на стр, то первый рендер был
+
+  let searchInpVal = useSelector((state) => state.filter.searchInpVal);
+  let categoryName = useSelector((state) => state.filter.categoryName);
+  let currentPage = useSelector((state) => state.filter.currentPage);
+
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
 
-  let categoryName = useSelector((state) => state.filter.categoryName);
-
   // data from backend-------------------------
+
   // const [goodsItems, setGoodsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    // console.log(searchInpVal);!!!!!!!!!!!!!!!!
+  const axiosGoods = () => {
+    setIsLoading(true); // обновляем set загрузки
 
     const categotySelFilterSearch = () => {
-      if (categoryName !== 'All goods') {
-        // return `search=${categoryName}`;
-        return `filter=${categoryName}`;
+      if (categoryName !== 'allgoods') {
+        return `&filter=${categoryName}`;
       } else {
         return ``;
       }
     };
-
-    const url = `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?${categotySelFilterSearch()}`; //sortBy=cost&order=asc можно вынести в отдельный файл
-    console.log(url, 'categotySel in  goodList');
-    // URL.searchParams.append("title", categoryName);
-
+    console.log(categotySelFilterSearch(), 'categotySelFilterSearch');
     // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-    axios.get(url).then((res) => {
-      console.log(res.data, 'axiosssss');
-      if (res.data) setIsLoading(false);
-      dispath(selGoodsValArr(res.data));
-      // return res.data;
-    });
-  }, [categoryName, dispath]);
+    axios
+      .get(
+        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=5&search=${searchInpVal}${categotySelFilterSearch()}` //limit=должен давать бэкенд(mockapi.io- не дает всех страниц)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
+      )
+      .then((res) => {
+        console.log(res.data, 'axiosssss');
+        if (res.data) setIsLoading(false);
+        dispath(selGoodsValArr(res.data));
+        // return res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+        // return <Error />;
+      });
+  };
 
-  // useEffect(() => {
-  //   setIsLoading(true);
+  // qs строка параметров в URL -------------------------
+  // categoryName = categoryName.split(' ').join(''); // убираем пробелы из ссылки
+  useEffect(() => {
+    // проверяем произошел ли первый рендер
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        // sortProperty: sort.sortProperty,
+        categoryName,
+        currentPage,
+      });
 
-  //   // fetch('url')
-  //   //   .then((res) => res.json())
-  //   //   .then((data) => {
-  //   //     setGoodsItems(data);
-  //   //     if (data) setIsLoading(false);
-  //   //   });
+      console.log(queryString);
 
-  //   const data = axios.get(URL).then((res) => {
-  //     setGoodsItems(res.data);
-  //     if (res.data) setIsLoading(false);
-  //   }).catch((error) =>{
-  //   console.log(error);
-  // <Error/>
-  // };
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true; // произoшeл первый рендер
+  }, [categoryName, currentPage, navigate]);
 
-  //   console.log(data);
-  // }, []);
+  //проверяем URL-параметры и сохо в redux
+  useEffect(() => {
+    console.log(window.location.search, 'window.location.search');
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      console.log(params.categoryName, 'params.categoryName');
+      // const sort = sortList.find((obj)=> obj.sortProperty === params.sortProperty)
+      // dispath(setFilters({ ...params }));
+      isSearch.current = true;
+    }
+  }, []);
+
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
+  useEffect(() => {
+    window.scrollTo(0, 0); // при перерисовке скорит на верх стр
+
+    console.log(!isSearch.current, '!isSearch.current------------');
+
+    if (!isSearch.current) {
+      axiosGoods();
+    }
+    isSearch.current = false;
+  }, [currentPage, categoryName, searchInpVal, dispath]);
+
   // end -------------------------
 
   let clickHandler = (e) => {

@@ -14,7 +14,7 @@ import {
   selCurrensy,
   fullQuantityGoods,
 } from '../../store/goodsSlice';
-import { setCategoryName } from '../../store/filterSlice';
+import { setCategoryName, setCurrentPage } from '../../store/filterSlice';
 
 export default function Header() {
   const dispath = useDispatch();
@@ -38,6 +38,7 @@ export default function Header() {
   // filter select category
   const handlerSelCategory = (e) => {
     dispath(setCategoryName(e));
+    dispath(setCurrentPage(1));
   };
   // end
 

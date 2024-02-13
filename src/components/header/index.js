@@ -24,7 +24,7 @@ import {
 export default function Header() {
   const dispath = useDispatch();
   const [sortValue, setSortValue] = useState(0);
-  // data-header-nav-link --------------
+  // data-header-nav-link --// можно вынести в отдельный файл------------
   const linkHeaderArr = [
     'Home',
     'Products',
@@ -33,7 +33,9 @@ export default function Header() {
     'About us',
     'Contacts',
   ];
+
   const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
+
   // end -----------------
 
   const [burgerClick, setBurgerClick] = useState(false);

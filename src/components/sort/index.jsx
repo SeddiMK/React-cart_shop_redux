@@ -1,8 +1,7 @@
 import styles from './sort.module.scss';
 
-import React, { useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export const listSort = [
   {
@@ -21,7 +20,7 @@ export const listSort = [
     name: 'decreasing prices',
     sortProperty: '-cost',
   },
-];
+]; // можно вынести в отдельный файл
 
 export default function Sort({ value, onChangeSort }) {
   const [open, setOpen] = useState(false);

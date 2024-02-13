@@ -7,7 +7,7 @@ export const filterSlice = createSlice({
     searchInpVal: '',
     currentPage: 1,
     sort: {
-      name: 'популярности',
+      name: 'popularity',
       sortProperty: 'rating',
     },
   },

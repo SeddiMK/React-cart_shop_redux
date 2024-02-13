@@ -55,18 +55,13 @@ export default function GoodsList() {
 
     const searchCategoryFilter =
       categoryName !== 'allgoods' ? `${categoryName}` : '';
-    console.log(searchInpVal, 'searchInpVal');
 
     const searchInpValData = searchInpVal ? searchInpVal : '';
-    // const searchInpValCategory = () => {
-    //   if (searchInpVal) return searchInpVal;
-    //   else return searchCategoryFilter;
-    // };
 
     axios
       .get(
-        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=5&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}` //limit=должен давать бэкенд(mockapi.io- не дает всех страниц)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл ${searchCategoryFilter}${searchInpVal}
-      )
+        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=6&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
+      ) //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
       .then((res) => {
         console.log(res.data, 'axiosssss');
         if (res.data) setIsLoading(false);
@@ -99,7 +94,6 @@ export default function GoodsList() {
 
   //проверяем URL-параметры и сохо в redux
   useEffect(() => {
-    console.log(Boolean(window.location.search), 'window.location.search');
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 

@@ -13,7 +13,6 @@ export default function Pagination({ currentPage, onChangePage }) {
         previousLabel="<"
         onPageChange={(e) => {
           onChangePage(e.selected + 1);
-          console.log(e.selected, '+++++++++++++++++++++++++++++++++++++++++');
         }}
         pageRangeDisplayed={4}
         pageCount={5}

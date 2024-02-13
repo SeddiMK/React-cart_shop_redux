@@ -1,5 +1,5 @@
 .header {
-    background: radial-gradient(80% 80% at 20% 20%, #e3f9c7 40%, rgba(227, 249, 199, 0) 100%), radial-gradient(60% 60% at 100% 100%, #ffe6e6 30%, rgba(255, 230, 230, 0) 100%), #fff1e5;
+    background: linear-gradient(0deg, hsla(36, 100%, 55%, 1) 0%, hsla(196, 83%, 84%, 1) 2%);
     overflow: hidden;
     position: relative;
     top: 0;

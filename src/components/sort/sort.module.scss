@@ -2,6 +2,7 @@
   position: relative;
   color: #000000;
   display: flex;
+  justify-content: center;
   padding: 2px;
   border-radius: 5px;
   padding-bottom: 2rem;
@@ -12,21 +13,24 @@
       margin-right: 0.5rem;
     }
     span:last-child {
-      max-width: 6.5rem;
+      max-width: 10rem;
       cursor: pointer;
     }
   }
   div {
     position: absolute;
-    top: 2.2rem;
-    right: -5.4rem;
-    color: #dd4949;
+    top: 1.6rem;
+    right: 0.75rem;
 
     li {
       cursor: pointer;
     }
     li:not(:last-child) {
       margin-bottom: 0.6rem;
+    }
+    li:hover {
+      color: #dd4949;
+      cursor: pointer;
     }
   }
 }

@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const listSort = [
   {
-    name: 'возрастанию популярности',
+    name: 'increasing popularity',
     sortProperty: 'rating',
   },
   {
-    name: 'убыванию популярности',
+    name: 'decreasing popularity',
     sortProperty: '-rating',
   },
   {
-    name: 'возрастанию цены',
+    name: 'price increase',
     sortProperty: 'cost',
   },
   {
-    name: 'убыванию цены',
+    name: 'decreasing prices',
     sortProperty: '-cost',
   },
 ];
@@ -35,7 +35,7 @@ export default function Sort({ value, onChangeSort }) {
   return (
     <div className={'sort ' + styles.root}>
       <p className={'sort__label ' + styles.root}>
-        <span>Сортировка по:</span>
+        <span>Sort by:</span>
         <span onClick={() => setOpen(!open)}>{nameSort.name}</span>
       </p>
       {open && (

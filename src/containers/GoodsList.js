@@ -11,7 +11,7 @@ import {
   selectGoods,
   selGoodsValArr,
 } from '../store/goodsSlice';
-import { increment } from '../store/cartSlice';
+import { increment, selectCart } from '../store/cartSlice';
 import {
   setCurrentPage,
   setFilters,
@@ -40,6 +40,7 @@ export default function GoodsList() {
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
+  const cart = useSelector(selectCart);
 
   // data from backend-------------------------
 
@@ -77,22 +78,27 @@ export default function GoodsList() {
   // qs строка параметров в URL -------------------------
 
   useEffect(() => {
-    // проверяем произошел ли первый рендер
+    // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
       const queryString = qs.stringify({
         sortProperty: sortType.sortProperty,
         categoryName,
         currentPage,
+        searchInpVal,
       });
-
-      console.log(queryString);
 
       navigate(`?${queryString}`);
     }
     isMounted.current = true; // произoшeл первый рендер
-  }, [categoryName, currentPage, sortType.sortProperty, navigate]);
+  }, [
+    categoryName,
+    currentPage,
+    sortType.sortProperty,
+    searchInpVal,
+    navigate,
+  ]);
 
-  //проверяем URL-параметры и сохо в redux
+  //проверяем URL-параметры и сохраняем в redux
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -102,7 +108,8 @@ export default function GoodsList() {
       );
 
       dispath(setFilters({ ...params, sort }));
-      isSearch.current = true;
+      console.log('-----------------был первый рендер--------------------');
+      isSearch.current = true; //флаг первого рендера
     }
   }, []);
 
@@ -110,21 +117,14 @@ export default function GoodsList() {
   // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   useEffect(() => {
     window.scrollTo(0, 0); // при перерисовке скорит на верх стр
-
-    console.log(!isSearch.current, '!isSearch.current------------');
-
+    console.log(!isSearch.current, '!isSearch.current--- для запроса!!!');
+    isSearch.current = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //если был первый рендер, то запрашиваем данные
     if (!isSearch.current) {
       axiosGoods();
     }
     isSearch.current = false;
-  }, [
-    currentPage,
-    sortType.sortProperty,
-    categoryName,
-    searchInpVal,
-    sortType,
-    dispath,
-  ]);
+  }, [currentPage, sortType.sortProperty, categoryName, searchInpVal]);
 
   // end -------------------------
   let clickHandler = (e) => {
@@ -135,7 +135,6 @@ export default function GoodsList() {
 
     dispath(increment(targ.getAttribute('data-key')));
   };
-
   return (
     <>
       <div className="main__goods-field goods-field" onClick={clickHandler}>
@@ -144,6 +143,7 @@ export default function GoodsList() {
           ? [...new Array(6)].map((_, i) => <Skeleton key={i} />) // _ -НЕТ ЭЛЕМЕНТОВт.к. ...new Array-это фековый массив с undefined.
           : goods.map((el) => (
               <Goods
+                quantityOneGoods={cart[el.articul]}
                 title={el.title}
                 cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
                 image={el.image}

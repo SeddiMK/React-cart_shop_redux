@@ -4,7 +4,7 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
     categoryName: 'allgoods',
-    searchInpVal: '',
+    searchInpVal: undefined,
     currentPage: 1,
     sort: {
       name: 'popularity',

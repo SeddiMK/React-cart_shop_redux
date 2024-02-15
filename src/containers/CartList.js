@@ -11,7 +11,7 @@ import {
 import { selectCart, minus, del } from '../store/cartSlice';
 import Cart from '../components/cart/Cart';
 
-export default function CartList({ cartIconRef }) {
+export default function CartList() {
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
@@ -20,7 +20,6 @@ export default function CartList({ cartIconRef }) {
   const [openCart, setOpenCart] = useState(true);
   const catCartRef = useRef(null);
 
-  const cartClass = document.querySelector('.goods-table');
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const dispath = useDispatch();
 
@@ -100,8 +99,8 @@ export default function CartList({ cartIconRef }) {
   // cart close in btn-close ===========================================================================
 
   const hadlerClose = (e) => {
-    if (cartClass && fullQuantityGoodsCart !== 0) {
-      cartClass.classList.toggle('activ');
+    if (catCartRef.current && fullQuantityGoodsCart !== 0) {
+      catCartRef.current.classList.toggle('activ');
     }
   };
   // cart close in window ===========================================================================
@@ -115,16 +114,15 @@ export default function CartList({ cartIconRef }) {
         )
       ) {
         setOpenCart(false);
-        catCartRef.current.classList.remove('activ');
+        catCartRef.current.classList.remove('activ'); // !!!!!!!!!!!!!!!!!!!!!переделать на openCart
       }
     };
 
     document.body.addEventListener('click', handleClickOutside);
 
-    return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр!
+    return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
   //  ===========================================================================
-
   return (
     <section className="main__goods-table-wrapper goods-table" ref={catCartRef}>
       <div className="main__goods-table" onClick={clickHandler}>

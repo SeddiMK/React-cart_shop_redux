@@ -1,6 +1,6 @@
 import './Main.css';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import GoodsList from '../../containers/GoodsList';
@@ -11,7 +11,11 @@ import { setCurrentPage, setFilters } from '../../store/filterSlice';
 
 export default function Main() {
   const dispath = useDispatch();
-
+  // const [quantityOneGoods, setQuantityOneGoods] = useState(0);
+  // console.log(
+  //   quantityOneGoods,
+  //   'quantityOneGoods ------ !!!!!!!!!!!!!!!!! in main'
+  // );
   // const { categoryName, sort, currentPage } = useSelector(setFilters);
   // const categoryName = useSelector((state) => state.filter.categoryName);
   let currentPage = useSelector((state) => state.filter.currentPage);

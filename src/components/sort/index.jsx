@@ -1,6 +1,6 @@
 import styles from './sort.module.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const listSort = [
@@ -25,14 +25,28 @@ export const listSort = [
 export default function Sort({ value, onChangeSort }) {
   const [open, setOpen] = useState(false);
   const nameSort = useSelector((state) => state.filter.sort);
+  const sortRef = useRef();
 
   const onClickListItem = (i) => {
     onChangeSort(i);
     setOpen(false);
   };
 
+  // закрываем окно вне области клика Sort by
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside); //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
+  }, []);
+
   return (
-    <div className={'sort ' + styles.root}>
+    <div ref={sortRef} className={'sort ' + styles.root}>
       <p className={'sort__label ' + styles.root}>
         <span>Sort by:</span>
         <span onClick={() => setOpen(!open)}>{nameSort.name}</span>

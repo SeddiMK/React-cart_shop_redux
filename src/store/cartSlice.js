@@ -5,6 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     //начальное состояние хранилища
     cartVal: {},
+    articul: 'articul',
   },
   reducers: {
     increment: (state, data) => {
@@ -15,6 +16,7 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
       }
       state.cartVal[articul]++;
+      state.articul = articul;
     },
     minus: (state, data) => {
       let articul = data.payload;
@@ -49,8 +51,9 @@ export const cartSlice = createSlice({
 });
 
 export const { increment, minus, del } = cartSlice.actions;
+
 export const selectCart = (state) => {
-  // console.log(state);
+  // console.log(state.cartVal.cartVal, 'state.cartVal.cartVal');
   return state.cartVal.cartVal;
 };
 

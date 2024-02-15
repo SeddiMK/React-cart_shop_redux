@@ -7,6 +7,7 @@ export default function Goods({
   currency,
   articul,
   rating,
+  quantityOneGoods,
 }) {
   return (
     <div className="goods-block">
@@ -24,7 +25,7 @@ export default function Goods({
       <button
         className="goods-block__add-to-cart  btn add-to-cart"
         data-key={articul}>
-        Add to cart
+        Add to cart <span>{quantityOneGoods}</span>
       </button>
     </div>
   );

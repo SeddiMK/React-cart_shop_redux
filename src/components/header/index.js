@@ -26,7 +26,7 @@ export default function Header() {
   const dispath = useDispatch();
   let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
 
-  // const [sortValue, setSortValue] = useState(0);
+  const [sortValue, setSortValue] = useState(0);
   // data-header-nav-link --// можно вынести в отдельный файл------------
   const linkHeaderArr = [
     'Home',
@@ -135,7 +135,7 @@ export default function Header() {
 
               <Categories onChangeCategories={handlerSelCategory} />
             </div>
-            <Sort onChangeSort={handlerSelSort} />
+            <Sort value={sortValue} onChangeSort={handlerSelSort} />
           </div>
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (

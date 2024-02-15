@@ -17,7 +17,8 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
       }
       state.cartVal[articul]++;
-      state.articul = articul;
+
+      // state.cartVal.push(data.payload); //----------------------
     },
     minus: (state, data) => {
       let articul = data.payload;
@@ -33,6 +34,9 @@ export const cartSlice = createSlice({
       if (state.cartVal[articul] > 0) {
         state.cartVal[articul]--;
       }
+
+      // state.cartVal = state.cartVal.filter(obj => obj[articul] === data.payload); //----------------------
+
       // // delete to cart
       if (state.cartVal[articul] === 0) {
         state.cartVal[articul] = 0;
@@ -47,6 +51,8 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
         delete state.cartVal[articul];
       }
+
+      // state.cartVal = []; //---------------------------
     },
     cartOpen: (state, data) => {
       state.cartOpen = data.payload;
@@ -57,7 +63,7 @@ export const cartSlice = createSlice({
 export const { increment, minus, del, cartOpen } = cartSlice.actions;
 
 export const selectCart = (state) => {
-  // console.log(state.cartVal.cartVal, 'state.cartVal.cartVal');
+  console.log(state.cartVal.cartVal, 'state.cartVal.cartVal');
   return state.cartVal.cartVal;
 };
 

@@ -55,7 +55,8 @@ export const goodsSlice = createSlice({
   },
 });
 
-export const { selCurrensy, selCostFlag, fullQuantity,selGoodsValArr } = goodsSlice.actions;
+export const { selCurrensy, selCostFlag, fullQuantity, selGoodsValArr } =
+  goodsSlice.actions;
 
 export const fullQuantityGoods = (state) => {
   // console.log(state.goodsVal.fullQuantityGoodsSt);
@@ -72,7 +73,7 @@ export const selectCurrensy = (state) => {
 };
 
 export const selectGoods = (state) => {
-  // console.log(state);
+  console.log(state.goodsVal.goodsValArr, 'state.goodsVal.goodsValArr');
   return state.goodsVal.goodsValArr;
 };
 

@@ -61,12 +61,13 @@ export default function GoodsList() {
 
     axios
       .get(
-        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&limit=6&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
+        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?limit=2&page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
       ) //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
       .then((res) => {
         console.log(res.data, 'axiosssss');
         if (res.data) setIsLoading(false);
         dispath(selGoodsValArr(res.data));
+        // dispath(goods(res.data));
         // return res.data;
       })
       .catch((error) => {

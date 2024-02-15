@@ -1,9 +1,9 @@
 .goods-table {
-    display: none;
+    /* display: none; */
 }
 
 
-.goods-table.activ {
+.goods-table {
     /* display: block;
     position: absolute;
     top: 121px;
@@ -115,10 +115,10 @@
 .delete-quantity {}
 
 @media (min-width:320px) {
-    .goods-table.activ {
+    .goods-table {
         display: block;
         position: absolute;
-        top: 121px;
+        top: 183px;
         left: 3%;
         width: 94%;
         background-color: #fff;
@@ -217,7 +217,7 @@
 }
 
 @media (min-width:420px) {
-    .goods-table.activ {
+    .goods-table {
         left: 5%;
         width: 90%;
 
@@ -230,7 +230,7 @@
 }
 
 @media (min-width:490px) {
-    .goods-table.activ {
+    .goods-table {
         left: 8%;
         width: 85%;
 
@@ -239,7 +239,7 @@
 }
 
 @media (min-width:550px) {
-    .goods-table.activ {
+    .goods-table {
         left: 10%;
         width: 80%;
 
@@ -248,7 +248,7 @@
 }
 
 @media (min-width:600px) {
-    .goods-table.activ {
+    .goods-table {
         left: 13%;
         width: 75%;
 
@@ -257,7 +257,7 @@
 }
 
 @media (min-width:769px) {
-    .goods-table.activ {
+    .goods-table {
         left: 20%;
         width: 60%;
 
@@ -266,7 +266,7 @@
 }
 
 @media (min-width:1000px) {
-    .goods-table.activ {
+    .goods-table {
         left: 25%;
         width: 50%;
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import {
   fullQuantityGoods,
@@ -24,12 +25,52 @@ export default function CartList() {
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
-  // переидексирую массив товара
+  console.log(Object.keys(cart), 'Object.keys(cart)');
+  // делаем запрос корзины у бэкенда по articul через get filter=  -------------------------------
+  // const axiosCart = () => {
+  //   // setIsLoading(true); // обновляем set загрузки
+
+  //   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
+  //   const articulCart = Object.key(cart);
+  //   console.log(articulCart, 'articulCart');
+  //   // const searchCategoryFilter =
+  //   //   categoryName !== 'allgoods' ? `${categoryName}` : '';
+
+  //   axios
+  //     .get(
+  //       `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?filter=`
+  //     ) //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
+  //     .then((res) => {
+  //       console.log(res.data, 'axiosssss');
+  //       // if (res.data) setIsLoading(false);
+  //       // dispath(selGoodsValArr(res.data));
+  //       // dispath(goods(res.data));
+  //       // return res.data;
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       // return <Error />;
+  //     });
+  // };
+
+  // переидексирую массив товара -----------------------------------------!!!!!!!!!!!!
   const goodsObj = goods.reduce((accum, item) => {
     accum[item['articul']] = item;
     return accum;
   }, {});
 
+  console.log(goodsObj, 'goodsObj');
+
+  const goodsObjCart = () => {
+    if (Object.entries(cart).length !== 0) {
+      cart.reduce((accum, item) => {
+        accum[item['articul']] = item;
+        return accum;
+      }, {});
+    }
+  };
+  console.log(goodsObjCart, 'goodsObjCart');
+  // fullPrice---------------------------------------------------------------
   //full price
   // let fullPrice = 0;
   // Object.keys(cart).map((el) => {
@@ -143,21 +184,23 @@ export default function CartList() {
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
   //  ===========================================================================
-
+  console.log(cart, 'cart');
+  console.log(goodsObj, 'goodsObj');
+  console.log(goods, 'goods');
   return (
     <>
       {cartOpenSt && (
         <section
-          className="main__goods-table-wrapper goods-table activ"
+          className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>
           <div className="main__goods-table" onClick={clickHandler}>
             {/* fullGoods */}
             <div className="goods-table__full-goods-block">
               <ul className="goods-table__full-goods">
-                {Object.keys(cart).map((el) => (
+                {Object.keys(cart).map((el, i) => (
                   <li
                     className="goods-table__item"
-                    key={el + goodsObj[el].title}>
+                    key={goodsObj[el].title + i}>
                     {goodsObj[el].title} - {cart[el]}
                   </li>
                 ))}
@@ -170,27 +213,27 @@ export default function CartList() {
               Full price: {fullPrice()} {currency}
             </div>
             <div className="goods-table__cart cart">
-              {Object.keys(cart).map((el) => (
+              {Object.keys(cart).map((el, i) => (
                 <Cart
-                  title={goodsObj[el].title}
+                  key={goodsObjCart[el].title + i}
+                  title={goodsObjCart[el].title}
                   cost={
                     !selCostFlag
-                      ? goodsObj[el].cost
-                      : (goodsObj[el].cost / 95).toFixed(0)
+                      ? goodsObjCart[el].cost
+                      : (goodsObjCart[el].cost / 95).toFixed(0)
                   } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
                   currency={currency}
                   quantity={cart[el]}
                   priceAllItem={
                     (!selCostFlag
-                      ? goodsObj[el].cost
-                      : (goodsObj[el].cost / 95).toFixed(0)) *
+                      ? goodsObjCart[el].cost
+                      : (goodsObjCart[el].cost / 95).toFixed(0)) *
                       cart[el] +
                     ' ' +
                     currency
                   }
-                  image={goodsObj[el]['image']}
-                  articul={goodsObj[el]['articul']}
-                  key={el + goodsObj[el]['title']}
+                  image={goodsObjCart[el]['image']}
+                  articul={goodsObjCart[el]['articul']}
                 />
               ))}
             </div>

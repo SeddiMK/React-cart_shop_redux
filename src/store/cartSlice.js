@@ -6,6 +6,7 @@ export const cartSlice = createSlice({
     //начальное состояние хранилища
     cartVal: {},
     articul: 'articul',
+    cartOpen: 'false',
   },
   reducers: {
     increment: (state, data) => {
@@ -47,10 +48,13 @@ export const cartSlice = createSlice({
         delete state.cartVal[articul];
       }
     },
+    cartOpen: (state, data) => {
+      state.cartOpen = data.payload;
+    },
   },
 });
 
-export const { increment, minus, del } = cartSlice.actions;
+export const { increment, minus, del, cartOpen } = cartSlice.actions;
 
 export const selectCart = (state) => {
   // console.log(state.cartVal.cartVal, 'state.cartVal.cartVal');

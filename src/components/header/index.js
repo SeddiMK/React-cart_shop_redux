@@ -20,10 +20,13 @@ import {
   setCurrentPage,
   setSort,
 } from '../../store/filterSlice';
+import { cartOpen } from '../../store/cartSlice';
 
 export default function Header() {
   const dispath = useDispatch();
-  const [sortValue, setSortValue] = useState(0);
+  let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
+
+  // const [sortValue, setSortValue] = useState(0);
   // data-header-nav-link --// можно вынести в отдельный файл------------
   const linkHeaderArr = [
     'Home',
@@ -41,7 +44,7 @@ export default function Header() {
   const [burgerClick, setBurgerClick] = useState(false);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
-  const cartClass = document.querySelector('.goods-table');
+  // const cartClass = document.querySelector('.goods-table');------------------------
 
   // filter select category
   const handlerSelCategory = (e) => {
@@ -62,8 +65,10 @@ export default function Header() {
   };
 
   const handleCart = () => {
-    if (cartClass && fullQuantityGoodsCart !== 0) {
-      cartClass.classList.toggle('activ');
+    if (fullQuantityGoodsCart !== 0) {
+      // if (cartClass && fullQuantityGoodsCart !== 0)
+      // cartClass.classList.toggle('activ');
+      dispath(cartOpen(!cartOpenSt));
     }
   };
 
@@ -130,7 +135,7 @@ export default function Header() {
 
               <Categories onChangeCategories={handlerSelCategory} />
             </div>
-            <Sort value={sortValue} onChangeSort={handlerSelSort} />
+            <Sort onChangeSort={handlerSelSort} />
           </div>
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (

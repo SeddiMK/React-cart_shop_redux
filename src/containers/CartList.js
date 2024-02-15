@@ -8,20 +8,21 @@ import {
   selectCurrensy,
   selectGoods,
 } from '../store/goodsSlice';
-import { selectCart, minus, del } from '../store/cartSlice';
+import { selectCart, minus, del, cartOpen } from '../store/cartSlice';
 import Cart from '../components/cart/Cart';
 
 export default function CartList() {
+  const dispath = useDispatch();
+  const cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
 
-  const [openCart, setOpenCart] = useState(true);
+  // const [openCart, setOpenCart] = useState(true);
   const catCartRef = useRef(null);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
-  const dispath = useDispatch();
 
   // переидексирую массив товара
   const goodsObj = goods.reduce((accum, item) => {
@@ -38,19 +39,36 @@ export default function CartList() {
   //       : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el]);
   // });
 
-  const fullPriceArr = Object.keys(cart).map((el) => {
-    let price = 0;
-    return (price +=
-      (!selCostFlag
-        ? goodsObj[el]['cost']
-        : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el]);
-  });
+  // const fullPriceArr = Object.keys(cart).map((el) => {
+  //   let price = 0;
+  //   return (price +=
+  //     (!selCostFlag
+  //       ? goodsObj[el]['cost']
+  //       : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el]);
+  // });
 
+  // const fullPrice = () => {
+  //   let sum = 0;
+  //   for (let i = 0; i < fullPriceArr.length; i++) {
+  //     sum += fullPriceArr[i];
+  //   }
+  //   return sum;
+  // };
   const fullPrice = () => {
+    const fullPriceArr = Object.keys(cart).map((el) => {
+      let price = 0;
+
+      return (price +=
+        (!selCostFlag
+          ? goodsObj[el].cost
+          : (goodsObj[el].cost / 95).toFixed(0)) * cart[el]);
+    });
+
     let sum = 0;
     for (let i = 0; i < fullPriceArr.length; i++) {
       sum += fullPriceArr[i];
     }
+
     return sum;
   };
 
@@ -75,10 +93,10 @@ export default function CartList() {
 
   useEffect(() => {
     // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
-    const cartClassUef = document.getElementsByClassName('goods-table')[0];
+    // const cartClassUef = document.getElementsByClassName('goods-table')[0];
     //===============================================================
-    if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ');
-    // console.log(document.addEventListener('click', ));
+    // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
+    if (fullQuantityGoodsCart === 0) dispath(cartOpen(false));
 
     //====================================================================================
   }, [fullQuantityGoodsCart]);
@@ -100,7 +118,8 @@ export default function CartList() {
 
   const hadlerClose = (e) => {
     if (catCartRef.current && fullQuantityGoodsCart !== 0) {
-      catCartRef.current.classList.toggle('activ');
+      // catCartRef.current.classList.toggle('activ');
+      dispath(cartOpen(false));
     }
   };
   // cart close in window ===========================================================================
@@ -113,8 +132,9 @@ export default function CartList() {
           e.composedPath().includes(x)
         )
       ) {
-        setOpenCart(false);
-        catCartRef.current.classList.remove('activ'); // !!!!!!!!!!!!!!!!!!!!!переделать на openCart
+        // setOpenCart(false);
+        // catCartRef.current.classList.remove('activ'); // переделать на openCart--------------------------
+        dispath(cartOpen(false));
       }
     };
 
@@ -123,53 +143,60 @@ export default function CartList() {
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
   //  ===========================================================================
+
   return (
-    <section className="main__goods-table-wrapper goods-table" ref={catCartRef}>
-      <div className="main__goods-table" onClick={clickHandler}>
-        {/* fullGoods */}
-        <div className="goods-table__full-goods-block">
-          <ul className="goods-table__full-goods">
-            {Object.keys(cart).map((el) => (
-              <li
-                className="goods-table__item"
-                key={el + goodsObj[el]['title']}>
-                {goodsObj[el]['title']} - {cart[el]}
-              </li>
-            ))}
-          </ul>
-          <div
-            className="goods-table__full-goods-close"
-            onClick={hadlerClose}></div>
-        </div>
-        <div className="cart__full-price">
-          Full price: {fullPrice()} {currency}
-        </div>
-        <div className="goods-table__cart cart">
-          {Object.keys(cart).map((el) => (
-            <Cart
-              title={goodsObj[el]['title']}
-              cost={
-                !selCostFlag
-                  ? goodsObj[el]['cost']
-                  : (goodsObj[el]['cost'] / 95).toFixed(0)
-              } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-              currency={currency}
-              quantity={cart[el]}
-              priceAllItem={
-                (!selCostFlag
-                  ? goodsObj[el]['cost']
-                  : (goodsObj[el]['cost'] / 95).toFixed(0)) *
-                  cart[el] +
-                ' ' +
-                currency
-              }
-              image={goodsObj[el]['image']}
-              articul={goodsObj[el]['articul']}
-              key={el + goodsObj[el]['title']}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <>
+      {cartOpenSt && (
+        <section
+          className="main__goods-table-wrapper goods-table activ"
+          ref={catCartRef}>
+          <div className="main__goods-table" onClick={clickHandler}>
+            {/* fullGoods */}
+            <div className="goods-table__full-goods-block">
+              <ul className="goods-table__full-goods">
+                {Object.keys(cart).map((el) => (
+                  <li
+                    className="goods-table__item"
+                    key={el + goodsObj[el].title}>
+                    {goodsObj[el].title} - {cart[el]}
+                  </li>
+                ))}
+              </ul>
+              <div
+                className="goods-table__full-goods-close"
+                onClick={hadlerClose}></div>
+            </div>
+            <div className="cart__full-price">
+              Full price: {fullPrice()} {currency}
+            </div>
+            <div className="goods-table__cart cart">
+              {Object.keys(cart).map((el) => (
+                <Cart
+                  title={goodsObj[el].title}
+                  cost={
+                    !selCostFlag
+                      ? goodsObj[el].cost
+                      : (goodsObj[el].cost / 95).toFixed(0)
+                  } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+                  currency={currency}
+                  quantity={cart[el]}
+                  priceAllItem={
+                    (!selCostFlag
+                      ? goodsObj[el].cost
+                      : (goodsObj[el].cost / 95).toFixed(0)) *
+                      cart[el] +
+                    ' ' +
+                    currency
+                  }
+                  image={goodsObj[el]['image']}
+                  articul={goodsObj[el]['articul']}
+                  key={el + goodsObj[el]['title']}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }

@@ -128,6 +128,7 @@ export default function GoodsList() {
   }, [currentPage, sortType.sortProperty, categoryName, searchInpVal]);
 
   // end -------------------------
+
   let clickHandler = (e) => {
     e.preventDefault();
     let targ = e.target;

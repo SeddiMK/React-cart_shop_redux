@@ -73,7 +73,7 @@ export const selectCurrensy = (state) => {
 };
 
 export const selectGoods = (state) => {
-  console.log(state.goodsVal.goodsValArr, 'state.goodsVal.goodsValArr');
+  // console.log(state.goodsVal.goodsValArr, 'state.goodsVal.goodsValArr');
   return state.goodsVal.goodsValArr;
 };
 

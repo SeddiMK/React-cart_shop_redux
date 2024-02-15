@@ -1,14 +1,33 @@
 import './Goods.css';
 
+import { useDispatch } from 'react-redux';
+
+import { increment } from '../../store/cartSlice';
+
 export default function Goods({
-  image,
+  articul,
   title,
   cost,
-  currency,
-  articul,
+  image,
   rating,
+  currency,
   quantityOneGoods,
 }) {
+  const dispath = useDispatch();
+  // передать все параметры в store dispatch CartList
+  const onClickAddGoods = () => {
+    const dataGoods = {
+      articul,
+      title,
+      cost,
+      image,
+      rating,
+      currency,
+      quantityOneGoods,
+    };
+    dispath(increment(dataGoods));
+  };
+
   return (
     <div className="goods-block">
       <div className="goods-block__imgage-wrap">
@@ -24,7 +43,8 @@ export default function Goods({
 
       <button
         className="goods-block__add-to-cart  btn add-to-cart"
-        data-key={articul}>
+        data-key={articul}
+        onClick={onClickAddGoods}>
         Add to cart <span>{quantityOneGoods}</span>
       </button>
     </div>

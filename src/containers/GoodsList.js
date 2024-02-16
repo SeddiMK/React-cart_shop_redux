@@ -9,7 +9,6 @@ import {
   selectCostFlag,
   selectCurrensy,
   selectGoods,
-  selGoodsValArr,
 } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
 import {
@@ -18,6 +17,7 @@ import {
   setSort,
   categoryName,
 } from '../store/filterSlice';
+import { fetchFurniture } from '../store/furnitureSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
@@ -37,6 +37,8 @@ export default function GoodsList() {
   let currentPage = useSelector((state) => state.filter.currentPage);
   let sortType = useSelector((state) => state.filter.sort);
 
+  let items = useSelector((state) => state.furniture.items);
+
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
@@ -47,7 +49,7 @@ export default function GoodsList() {
   // const [goodsItems, setGoodsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // изменить на true если данные берем с сервера
 
-  const axiosGoods = () => {
+  const axiosGoods = async () => {
     setIsLoading(true); // обновляем set загрузки
 
     // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
@@ -59,25 +61,44 @@ export default function GoodsList() {
 
     const searchInpValData = searchInpVal ? searchInpVal : '';
 
-    axios
-      .get(
-        `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?limit=2&page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
-      ) //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
-      .then((res) => {
-        console.log(res.data, 'axiosssss');
-        if (res.data) setIsLoading(false);
-        dispath(selGoodsValArr(res.data));
-        // dispath(goods(res.data));
-        // return res.data;
-      })
-      .catch((error) => {
-        console.log(error);
-        // return <Error />;
-      });
+    // .then((res) => {
+    //   console.log(res.data, 'axiosssss');
+    //   if (res.data) setIsLoading(false);
+    //   dispath(selGoodsValArr(res.data));
+    //   // dispath(goods(res.data));
+    //   // return res.data;
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   // return <Error />;
+    // });
+
+    try {
+      // const { data } = await axios.get(
+      //   `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
+      // ); //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)limit=6&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
+      // console.log(data, 'axiosssss');
+      console.log(fetchFurniture(), 'fetchFurniture');
+      dispath(
+        fetchFurniture({
+          sortBy,
+          order,
+          searchCategoryFilter,
+          searchInpValData,
+          currentPage,
+        })
+      );
+      dispath(goods(fetchFurniture()));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+
+    document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
   // qs строка параметров в URL -------------------------
-
   useEffect(() => {
     // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
@@ -117,7 +138,7 @@ export default function GoodsList() {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   useEffect(() => {
-    window.scrollTo(0, 0); // при перерисовке скорит на верх стр
+    document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
     console.log(!isSearch.current, '!isSearch.current--- для запроса!!!');
     isSearch.current = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //если был первый рендер, то запрашиваем данные

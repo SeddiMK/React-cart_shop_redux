@@ -41,9 +41,4 @@ export const {
   setFilters,
 } = filterSlice.actions;
 
-// export const setCategoryName = (state) => {
-//   // console.log(state.goodsVal.setCategoryName);
-//   return state.goodsVal.setCategoryName;
-// };
-
 export default filterSlice.reducer;

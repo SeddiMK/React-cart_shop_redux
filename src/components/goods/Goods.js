@@ -13,20 +13,21 @@ export default function Goods({
   currency,
   quantityOneGoods,
 }) {
-  const dispath = useDispatch();
-  // передать все параметры в store dispatch CartList
-  const onClickAddGoods = () => {
-    const dataGoods = {
-      articul,
-      title,
-      cost,
-      image,
-      rating,
-      currency,
-      quantityOneGoods,
-    };
-    dispath(increment(dataGoods));
-  };
+  // // карзина в локальном store/ карзину должен давать бэкенд
+  // const dispath = useDispatch();
+  // // передать все параметры в store dispatch CartList
+  // const onClickAddGoods = () => {
+  //   const dataGoods = {
+  //     articul,
+  //     title,
+  //     cost,
+  //     image,
+  //     rating,
+  //     currency,
+  //     quantityOneGoods,
+  //   };
+  //   dispath(increment(dataGoods));
+  // };
 
   return (
     <div className="goods-block">
@@ -44,7 +45,8 @@ export default function Goods({
       <button
         className="goods-block__add-to-cart  btn add-to-cart"
         data-key={articul}
-        onClick={onClickAddGoods}>
+        // onClick={onClickAddGoods}
+      >
         Add to cart <span>{quantityOneGoods}</span>
       </button>
     </div>

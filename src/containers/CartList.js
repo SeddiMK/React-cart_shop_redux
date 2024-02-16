@@ -59,17 +59,17 @@ export default function CartList() {
     return accum;
   }, {});
 
-  console.log(goodsObj, 'goodsObj');
+  // console.log(goodsObj, 'goodsObj');
 
-  const goodsObjCart = () => {
-    if (Object.entries(cart).length !== 0) {
-      cart.reduce((accum, item) => {
-        accum[item['articul']] = item;
-        return accum;
-      }, {});
-    }
-  };
-  console.log(goodsObjCart, 'goodsObjCart');
+  // const goodsObjCart = () => {
+  //   if (Object.entries(cart).length !== 0) {
+  //     cart.reduce((accum, item) => {
+  //       accum[item['articul']] = item;
+  //       return accum;
+  //     }, {});
+  //   }
+  // };
+  // console.log(goodsObjCart, 'goodsObjCart');
   // fullPrice---------------------------------------------------------------
   //full price
   // let fullPrice = 0;
@@ -215,25 +215,25 @@ export default function CartList() {
             <div className="goods-table__cart cart">
               {Object.keys(cart).map((el, i) => (
                 <Cart
-                  key={goodsObjCart[el].title + i}
-                  title={goodsObjCart[el].title}
+                  key={goodsObj[el].title + i}
+                  title={goodsObj[el].title}
                   cost={
                     !selCostFlag
-                      ? goodsObjCart[el].cost
-                      : (goodsObjCart[el].cost / 95).toFixed(0)
+                      ? goodsObj[el].cost
+                      : (goodsObj[el].cost / 95).toFixed(0)
                   } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
                   currency={currency}
                   quantity={cart[el]}
                   priceAllItem={
                     (!selCostFlag
-                      ? goodsObjCart[el].cost
-                      : (goodsObjCart[el].cost / 95).toFixed(0)) *
+                      ? goodsObj[el].cost
+                      : (goodsObj[el].cost / 95).toFixed(0)) *
                       cart[el] +
                     ' ' +
                     currency
                   }
-                  image={goodsObjCart[el]['image']}
-                  articul={goodsObjCart[el]['articul']}
+                  image={goodsObj[el]['image']}
+                  articul={goodsObj[el]['articul']}
                 />
               ))}
             </div>

@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     cartVal: {},
     articul: 'articul',
-    cartOpen: 'false',
+    cartOpen: false,
   },
   reducers: {
     increment: (state, data) => {
@@ -14,8 +14,10 @@ export const cartSlice = createSlice({
       if (state.cartVal[articul] === undefined) {
         state.cartVal[articul] = 0;
       }
-      state.cartVal[articul]++;
 
+      state.cartVal[articul]++;
+      console.log(state.cartVal[articul], 'state.cartVal[articul]');
+      console.log(state.cartVal, 'state.cartVal');
       // state.cartVal.push(data.payload); //----------------------
     },
     minus: (state, data) => {

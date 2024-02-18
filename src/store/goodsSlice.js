@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import goodsArr from '../data/goods.json';
+// import goodsArr from '../data/goods.json';
 
+let goodsArr = [1];
 export const goodsSlice = createSlice({
   name: 'goods',
   initialState: {
-    goodsValArr: goodsArr,
-    cost: goodsArr[0].cost,
-    currency: goodsArr[0].currency,
+    goodsValArr: [], //goodsArr
+    cost: 0, //goodsArr[0].cost,
+    currency: 'RUB', //goodsArr[0].currency,
     flagSelCurrency: false,
     fullQuantityGoodsSt: 0,
   },
   reducers: {
     selCurrensy(state, data) {
-      let selCurrensy = data.payload;
       if (state.currency !== undefined) {
-        if (state.currency !== selCurrensy) {
-          state.currency = selCurrensy;
+        if (state.currency !== data.payload) {
+          state.currency = data.payload;
         }
       }
     },
@@ -30,15 +30,16 @@ export const goodsSlice = createSlice({
         state.fullQuantityGoodsSt = data.payload;
       }
     },
-    // setGoodsValArr(state, data) {
-    //   if (state.goodsValArr !== undefined) {
-    //     state.goodsValArr = data.payload;
-    //   }
-    // },
+    setGoodsValArr(state, data) {
+      if (state.goodsValArr !== undefined) {
+        state.goodsValArr = data.payload;
+      }
+    },
   },
 });
 
-export const { selCurrensy, selCostFlag, fullQuantity } = goodsSlice.actions;
+export const { selCurrensy, selCostFlag, fullQuantity, setGoodsValArr } =
+  goodsSlice.actions;
 
 export const fullQuantityGoods = (state) => {
   return state.goodsVal.fullQuantityGoodsSt;

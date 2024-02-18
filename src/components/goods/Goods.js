@@ -1,9 +1,5 @@
 import './Goods.css';
 
-import { useDispatch } from 'react-redux';
-
-import { increment } from '../../store/cartSlice';
-
 export default function Goods({
   articul,
   title,
@@ -28,7 +24,6 @@ export default function Goods({
   //   };
   //   dispath(increment(dataGoods));
   // };
-
   return (
     <div className="goods-block">
       <div className="goods-block__imgage-wrap">
@@ -44,9 +39,7 @@ export default function Goods({
 
       <button
         className="goods-block__add-to-cart  btn add-to-cart"
-        data-key={articul}
-        // onClick={onClickAddGoods}
-      >
+        data-key={articul}>
         Add to cart <span>{quantityOneGoods}</span>
       </button>
     </div>

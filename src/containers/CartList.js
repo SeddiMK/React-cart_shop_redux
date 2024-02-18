@@ -25,33 +25,11 @@ export default function CartList() {
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
-  console.log(Object.keys(cart), 'Object.keys(cart)');
   // делаем запрос корзины у бэкенда по articul через get filter=  -------------------------------
   // const axiosCart = () => {
   //   // setIsLoading(true); // обновляем set загрузки
 
   //   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-  //   const articulCart = Object.key(cart);
-  //   console.log(articulCart, 'articulCart');
-  //   // const searchCategoryFilter =
-  //   //   categoryName !== 'allgoods' ? `${categoryName}` : '';
-
-  //   axios
-  //     .get(
-  //       `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?filter=`
-  //     ) //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара)&sortBy=cost&order=asc&page=${currentPage}&search=${valFilterSearch}&rating= можно вынести в отдельный файл
-  //     .then((res) => {
-  //       console.log(res.data, 'axiosssss');
-  //       // if (res.data) setIsLoading(false);
-  //       // dispath(selGoodsValArr(res.data));
-  //       // dispath(goods(res.data));
-  //       // return res.data;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       // return <Error />;
-  //     });
-  // };
 
   // переидексирую массив товара -----------------------------------------!!!!!!!!!!!!
   const goodsObj = goods.reduce((accum, item) => {
@@ -59,17 +37,6 @@ export default function CartList() {
     return accum;
   }, {});
 
-  // console.log(goodsObj, 'goodsObj');
-
-  // const goodsObjCart = () => {
-  //   if (Object.entries(cart).length !== 0) {
-  //     cart.reduce((accum, item) => {
-  //       accum[item['articul']] = item;
-  //       return accum;
-  //     }, {});
-  //   }
-  // };
-  // console.log(goodsObjCart, 'goodsObjCart');
   // fullPrice---------------------------------------------------------------
   //full price
   // let fullPrice = 0;
@@ -126,12 +93,6 @@ export default function CartList() {
     }
   });
 
-  // setTimeout(() => {
-  //   const cartClass = document.querySelector('.goods-table');
-  //   console.log(cartClass, '9879878989789789988989');
-  //   if (fullQuantityGoodsCart === 0) cartClass.classList.remove('activ');
-  // }, 1);
-
   useEffect(() => {
     // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
     // const cartClassUef = document.getElementsByClassName('goods-table')[0];
@@ -184,9 +145,7 @@ export default function CartList() {
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
   //  ===========================================================================
-  console.log(cart, 'cart');
-  console.log(goodsObj, 'goodsObj');
-  console.log(goods, 'goods');
+
   return (
     <>
       {cartOpenSt && (

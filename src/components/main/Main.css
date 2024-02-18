@@ -6,3 +6,8 @@
 .main__btn-send-comment {
     margin-bottom: 1.5rem;
 }
+
+.loading {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}

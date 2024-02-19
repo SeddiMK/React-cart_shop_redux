@@ -138,8 +138,6 @@ export default function GoodsList() {
     dispath(increment(targ.getAttribute('data-key')));
   };
 
-  console.log(cart, 'cart');
-  console.log(goods, 'goods');
   // if (loading) return <p className="loading"> Загрузка...</p>; //загрузка...
   return (
     <>

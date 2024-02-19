@@ -10,7 +10,9 @@ import {
   selectGoods,
 } from '../store/goodsSlice';
 import { selectCart, minus, del, cartOpen } from '../store/cartSlice';
+
 import Cart from '../components/cart/Cart';
+import ErrorBeckend from '../components/ErrorBeckend';
 
 export default function CartList() {
   const dispath = useDispatch();
@@ -146,6 +148,35 @@ export default function CartList() {
   }, []);
   //  ===========================================================================
 
+  const findEl = Object.keys(cart).map((el, i) => {
+    console.log(goodsObj[el].articul, 'goodsObj[el].title');
+    console.log(goodsObj[el].articul === undefined, 'goodsObj[el].title');
+    if (goodsObj[el].articul === undefined) <ErrorBeckend />;
+    //  <Cart
+    //     key={goodsObj[el].title + i}
+    //     title={goodsObj[el].title}
+    //     cost={
+    //       !selCostFlag
+    //         ? goodsObj[el].cost
+    //         : (goodsObj[el].cost / 95).toFixed(0)
+    //     } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+    //     currency={currency}
+    //     quantity={cart[el]}
+    //     priceAllItem={
+    //       (!selCostFlag
+    //         ? goodsObj[el].cost
+    //         : (goodsObj[el].cost / 95).toFixed(0)) *
+    //         cart[el] +
+    //       ' ' +
+    //       currency
+    //     }
+    //     image={goodsObj[el].image}
+    //     articul={goodsObj[el]['articul']}
+    //   />
+  });
+  console.log(findEl);
+  // : <ErrorBeckend/>
+  // ==========================================================================
   return (
     <>
       {cartOpenSt && (
@@ -191,7 +222,7 @@ export default function CartList() {
                     ' ' +
                     currency
                   }
-                  image={goodsObj[el]['image']}
+                  image={goodsObj[el].image}
                   articul={goodsObj[el]['articul']}
                 />
               ))}

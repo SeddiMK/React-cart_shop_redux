@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import goodsArr from '../data/goods.json';
 
-let goodsArr = [1];
 export const goodsSlice = createSlice({
   name: 'goods',
   initialState: {
@@ -35,6 +34,11 @@ export const goodsSlice = createSlice({
         state.goodsValArr = data.payload;
       }
     },
+    // selectCostFlag(state, data) {
+    //   if (state.currency !== 'RUB') {
+    //     state.currency = data.payload;
+    //   }
+    // },
   },
 });
 

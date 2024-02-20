@@ -133,54 +133,11 @@ export default function CartList() {
   }, []);
   //  ===========================================================================
   useEffect(() => {
-    const findElCart = Object.keys(cart).map((el, i) => {
-      console.log(goodsObj[el], 'goodsObj[el]');
-      return goodsObj[el] === undefined;
-      // if (goodsObj[el] === undefined) return 'el_in_cart';
-
-      //  <Cart
-      //     key={goodsObj[el].title + i}
-      //     title={goodsObj[el].title}
-      //     cost={
-      //       !selCostFlag
-      //         ? goodsObj[el].cost
-      //         : (goodsObj[el].cost / 95).toFixed(0)
-      //     } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-      //     currency={currency}
-      //     quantity={cart[el]}
-      //     priceAllItem={
-      //       (!selCostFlag
-      //         ? goodsObj[el].cost
-      //         : (goodsObj[el].cost / 95).toFixed(0)) *
-      //         cart[el] +
-      //       ' ' +
-      //       currency
-      //     }
-      //     image={goodsObj[el].image}
-      //     articul={goodsObj[el]['articul']}
-      //   />
-    });
+    const findElCart = Object.keys(cart).map(
+      (el, i) => goodsObj[el] === undefined
+    );
     setFindElFlag(findElCart.find((el) => el === true));
-
-    console.log(cart, 'cart');
-    console.log(goodsObj, 'goodsObj');
-
-    console.log(Boolean(findElCart), 'findElCart');
-
-    console.log(findElFlag, 'findElFlag');
   }, [goodsObj]);
-
-  // const findElFlag = () => {
-  //   dispath(cartOpen(false));
-  // };
-
-  // console.log(
-  //   Boolean(
-  //     Object.keys(cart).find((el) => )
-  //   ),
-  //   ' Boolean(findEl.find((el) => el === false)'
-  // );
-  // : <ErrorBeckend/>
 
   //========clickHandler============================================================================
   let clickHandler = (e) => {

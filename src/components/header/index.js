@@ -48,7 +48,12 @@ export default function Header() {
 
   // filter select category
   const handlerSelCategory = (e) => {
-    dispath(setCategoryName(e.toLowerCase().replace(' ', '')));
+    if (e.toLowerCase().replace(' ', '') === 'allgoods') {
+      dispath(setCategoryName(''));
+    } else {
+      dispath(setCategoryName(e.toLowerCase().replace(' ', '')));
+    }
+
     dispath(setCurrentPage(1));
   };
   // end

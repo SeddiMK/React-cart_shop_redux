@@ -45,20 +45,6 @@ export default function GoodsList() {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
 
-  //проверяем URL-параметры и сохраняем в redux
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-
-      const sort = listSort.find(
-        (obj) => obj.sortProperty === params.sortProperty
-      );
-      dispath(setFilters({ ...params, sort }));
-
-      console.log('-----------------был первый рендер--------------------');
-      isSearch.current = true; //флаг первого рендера
-    }
-  }, [dispath]);
   // data from backend-------------------------
 
   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
@@ -83,25 +69,52 @@ export default function GoodsList() {
     document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
+  //проверяем URL-параметры и сохраняем в redux
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = listSort.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      );
+      dispath(setFilters({ ...params, sort }));
+
+      console.log('-----------------был первый рендер--------------------');
+      isSearch.current = true; //флаг первого рендера
+    }
+  }, []);
+
   useEffect(() => {
     document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
 
-    console.log(isSearch.current, '!isSearch.current--- для запроса!!!');
-
-    // isSearch.current = false; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    console.log(!isSearch.current, '!isSearch.current--- для запроса!!!');
 
     //если был первый рендер, то запрашиваем данные
     if (!isSearch.current) {
       axiosGoods();
     }
-
     isSearch.current = false;
   }, [currentPage, sortType.sortProperty, categoryName, searchInpVal]);
+
+  // alert -----------------------
+  useEffect(() => {
+    //если был первый рендер, то запрашиваем данные
+    // !isSearch.current
+    if (!isMounted.current) {
+      alert(
+        'Внимание! Для отображения корзины сначала выберите все фильры, потом добавляйте товар в корзину.'
+      );
+    }
+    isSearch.current = false;
+  }, []);
 
   // end -------------------------
 
   // qs строка параметров в URL -------------------------
   useEffect(() => {
+    console.log(
+      isMounted.current,
+      'isMounted.current- проверяем произошел ли первый рендер или изменились ли параметры'
+    );
     // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
       const queryString = qs.stringify({
@@ -119,7 +132,6 @@ export default function GoodsList() {
     currentPage,
     sortType.sortProperty,
     searchInpVal,
-    items,
     navigate,
   ]);
 

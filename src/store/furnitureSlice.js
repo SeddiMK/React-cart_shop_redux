@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const fetchFurniture = createAsyncThunk(
   'furniture/fetchFurnitureStatus',
-  async (params) => {
+  async (params, thunkAPI) => {
     const {
       sortBy,
       order,

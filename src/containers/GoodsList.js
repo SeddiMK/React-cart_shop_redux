@@ -24,15 +24,14 @@ import Error from '../components/error';
 export default function GoodsList() {
   const dispath = useDispatch();
   const navigate = useNavigate();
-  const isSearch = useRef(false);
+  const isSearch = useRef(false); // флаг первого рендера
   const isMounted = useRef(false); // если мы делали что нибудь на стр, то первый рендер был
 
-  let searchInpVal = useSelector((state) => state.filter.searchInpVal);
-  let categoryName = useSelector((state) => state.filter.categoryName);
-  let currentPage = useSelector((state) => state.filter.currentPage);
-  let sortType = useSelector((state) => state.filter.sort);
+  let { searchInpVal, categoryName, currentPage, sort } = useSelector(
+    (state) => state.filter
+  );
 
-  let { items, status, loading } = useSelector((state) => state.furniture);
+  let { items, status } = useSelector((state) => state.furniture);
 
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
@@ -44,8 +43,8 @@ export default function GoodsList() {
   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
   // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   const axiosGoods = () => {
-    const sortBy = sortType.sortProperty.replace('-', '');
-    const order = sortType.sortProperty.includes('-') ? 'desc' : 'asc'; // убыванию или возрастанию с помощью тернарного оператора
+    const sortBy = sort.sortProperty.replace('-', '');
+    const order = sort.sortProperty.includes('-') ? 'desc' : 'asc'; // убыванию или возрастанию с помощью тернарного оператора
     const searchCategoryFilter =
       categoryName !== 'allgoods' ? `${categoryName}` : '';
     const searchInpValData = searchInpVal ? searchInpVal : '';
@@ -72,7 +71,6 @@ export default function GoodsList() {
       );
       dispath(setFilters({ ...params, sort }));
 
-      console.log('-----------------был первый рендер--------------------');
       isSearch.current = true; //флаг первого рендера
     }
   }, []);
@@ -80,14 +78,12 @@ export default function GoodsList() {
   useEffect(() => {
     document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
 
-    console.log(!isSearch.current, '!isSearch.current--- для запроса!!!');
-
     //если был первый рендер, то запрашиваем данные
     if (!isSearch.current) {
       axiosGoods();
     }
     isSearch.current = false;
-  }, [currentPage, sortType.sortProperty, categoryName, searchInpVal]);
+  }, [currentPage, sort.sortProperty, categoryName, searchInpVal]);
 
   // alert -----------------------
   useEffect(() => {
@@ -101,18 +97,12 @@ export default function GoodsList() {
     isSearch.current = false;
   }, []);
 
-  // end -------------------------
-
   // qs строка параметров в URL -------------------------
   useEffect(() => {
-    console.log(
-      isMounted.current,
-      'isMounted.current- проверяем произошел ли первый рендер или изменились ли параметры'
-    );
     // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
       const queryString = qs.stringify({
-        sortProperty: sortType.sortProperty,
+        sortProperty: sort.sortProperty,
         categoryName,
         currentPage,
         searchInpVal,
@@ -121,20 +111,14 @@ export default function GoodsList() {
       navigate(`?${queryString}`);
     }
     isMounted.current = true; // произoшeл первый рендер
-  }, [
-    categoryName,
-    currentPage,
-    sortType.sortProperty,
-    searchInpVal,
-    navigate,
-  ]);
+  }, [categoryName, currentPage, sort.sortProperty, searchInpVal, navigate]);
 
   // при изменении furnitureSlice вносим изменения
   useEffect(() => {
     if (status === 'success') dispath(setGoodsValArr(items));
   }, [status, items, dispath]);
 
-  //=end===============================
+  //=clickHandler===============================
   let clickHandler = (e) => {
     e.preventDefault();
     let targ = e.target;

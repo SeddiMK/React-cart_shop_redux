@@ -41,19 +41,12 @@ export const goodsSlice = createSlice({
 export const { selCurrensy, selCostFlag, fullQuantity, setGoodsValArr } =
   goodsSlice.actions;
 
-export const fullQuantityGoods = (state) => {
-  return state.goodsVal.fullQuantityGoodsSt;
-};
+export const fullQuantityGoods = (state) => state.goodsVal.fullQuantityGoodsSt;
 
-export const selectCostFlag = (state) => {
-  return state.goodsVal.flagSelCurrency;
-};
-export const selectCurrensy = (state) => {
-  return state.goodsVal.currency;
-};
+export const selectCostFlag = (state) => state.goodsVal.flagSelCurrency;
 
-export const selectGoods = (state) => {
-  return state.goodsVal.goodsValArr;
-};
+export const selectCurrensy = (state) => state.goodsVal.currency;
+
+export const selectGoods = (state) => state.goodsVal.goodsValArr;
 
 export default goodsSlice.reducer;

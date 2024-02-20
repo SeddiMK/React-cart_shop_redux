@@ -9,7 +9,7 @@ import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import About from '../pages/About';
 import Contacts from '../pages/Contacts';
-import FullProduct from '../pages/FullProduct';
+import FullOptions from '../pages/FullOptions';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />
-          <Route path="/fullProduct/:articul" element={<FullProduct />} />
+          <Route path="/fullOptions/:articul" element={<FullOptions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

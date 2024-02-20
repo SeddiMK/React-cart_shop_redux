@@ -20,8 +20,6 @@ export default function Search() {
 
   const updateInpSearchValue = useCallback(
     debounce((inp) => {
-      console.log(inp, 'debounce in debounceInpSearch');
-
       setSearchValue(inp);
       dispatch(searchInpHeader(inp));
     }, 250),

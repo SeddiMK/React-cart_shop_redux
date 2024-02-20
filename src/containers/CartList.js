@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 
 import {
   fullQuantityGoods,
@@ -102,7 +101,7 @@ export default function CartList() {
     //===============================================================
     // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
     if (fullQuantityGoodsCart === 0) dispath(cartOpen(false));
-  }, [fullQuantityGoodsCart]);
+  }, [fullQuantityGoodsCart, dispath]);
 
   // cart close in btn-close ===========================================================================
   const hadlerClose = (e) => {
@@ -137,7 +136,7 @@ export default function CartList() {
       (el, i) => goodsObj[el] === undefined
     );
     setFindElFlag(findElCart.find((el) => el === true));
-  }, [goodsObj]);
+  }, [goodsObj, cart]);
 
   //========clickHandler============================================================================
   let clickHandler = (e) => {

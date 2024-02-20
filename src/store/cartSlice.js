@@ -42,11 +42,18 @@ export const cartSlice = createSlice({
     del: (state, data) => {
       let articul = data.payload;
 
-      // // delete to cart
+      // delete to cart
       if (state.cartVal[articul] > 0) {
         state.cartVal[articul] = 0;
         delete state.cartVal[articul];
       }
+
+      // state.cartVal = []; //---------------------------
+    },
+    clear: (state) => {
+      console.log('clear======================');
+      // clear cart
+      state.cartVal = {};
 
       // state.cartVal = []; //---------------------------
     },
@@ -56,7 +63,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, minus, del, cartOpen } = cartSlice.actions;
+export const { increment, minus, del, clear, cartOpen } = cartSlice.actions;
 
 export const selectCart = (state) => {
   return state.cartVal.cartVal;

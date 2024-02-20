@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import qs from 'qs';
-import axios from 'axios';
 
 import {
   selectCostFlag,
@@ -12,13 +11,8 @@ import {
   setGoodsValArr,
 } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
-import {
-  setCurrentPage,
-  setFilters,
-  setSort,
-  categoryName,
-} from '../store/filterSlice';
-import { fetchFurniture, setItems } from '../store/furnitureSlice';
+import { setFilters } from '../store/filterSlice';
+import { fetchFurniture } from '../store/furnitureSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';

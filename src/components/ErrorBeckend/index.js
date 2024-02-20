@@ -6,7 +6,7 @@ export default function ErrorBeckend() {
       <div></div>
       <div className={style.root}>
         <h1>Ой... lkjkljkljkljkljkljklkljkljkllтвует.</h1>
-        <h3>На данный момент есть страницы: Home, About us, Contacts </h3>
+        <h3>Ошибка бекенда</h3>
       </div>
     </>
   );

@@ -23,6 +23,7 @@ export default function CartList() {
   const cart = useSelector(selectCart);
 
   // const [openCart, setOpenCart] = useState(true);
+  const [findElFlag, setFindElFlag] = useState(true);
   const catCartRef = useRef(null);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -101,25 +102,9 @@ export default function CartList() {
     //===============================================================
     // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
     if (fullQuantityGoodsCart === 0) dispath(cartOpen(false));
-
-    //====================================================================================
   }, [fullQuantityGoodsCart]);
 
-  let clickHandler = (e) => {
-    e.preventDefault();
-
-    let targ = e.target;
-    // if (!targ.classList.contains('goods-table')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
-    if (targ.classList.contains('delete-one-position')) {
-      dispath(minus(targ.getAttribute('data-key')));
-      // if (fullQuantityGoodsCart <= 1) cartClass.classList.remove('activ');
-    }
-    if (targ.classList.contains('delete-quantity')) {
-      dispath(del(targ.getAttribute('data-key')));
-    }
-  };
   // cart close in btn-close ===========================================================================
-
   const hadlerClose = (e) => {
     if (catCartRef.current && fullQuantityGoodsCart !== 0) {
       // catCartRef.current.classList.toggle('activ');
@@ -147,87 +132,126 @@ export default function CartList() {
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
   //  ===========================================================================
+  useEffect(() => {
+    const findElCart = Object.keys(cart).map((el, i) => {
+      console.log(goodsObj[el], 'goodsObj[el]');
+      return goodsObj[el] === undefined;
+      // if (goodsObj[el] === undefined) return 'el_in_cart';
 
-  const findEl = Object.keys(cart).map((el, i) => {
-    console.log(goodsObj[el].articul, 'goodsObj[el].title');
-    console.log(goodsObj[el].articul === undefined, 'goodsObj[el].title');
-    if (goodsObj[el].articul === undefined) <ErrorBeckend />;
-    //  <Cart
-    //     key={goodsObj[el].title + i}
-    //     title={goodsObj[el].title}
-    //     cost={
-    //       !selCostFlag
-    //         ? goodsObj[el].cost
-    //         : (goodsObj[el].cost / 95).toFixed(0)
-    //     } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-    //     currency={currency}
-    //     quantity={cart[el]}
-    //     priceAllItem={
-    //       (!selCostFlag
-    //         ? goodsObj[el].cost
-    //         : (goodsObj[el].cost / 95).toFixed(0)) *
-    //         cart[el] +
-    //       ' ' +
-    //       currency
-    //     }
-    //     image={goodsObj[el].image}
-    //     articul={goodsObj[el]['articul']}
-    //   />
-  });
-  console.log(findEl);
+      //  <Cart
+      //     key={goodsObj[el].title + i}
+      //     title={goodsObj[el].title}
+      //     cost={
+      //       !selCostFlag
+      //         ? goodsObj[el].cost
+      //         : (goodsObj[el].cost / 95).toFixed(0)
+      //     } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+      //     currency={currency}
+      //     quantity={cart[el]}
+      //     priceAllItem={
+      //       (!selCostFlag
+      //         ? goodsObj[el].cost
+      //         : (goodsObj[el].cost / 95).toFixed(0)) *
+      //         cart[el] +
+      //       ' ' +
+      //       currency
+      //     }
+      //     image={goodsObj[el].image}
+      //     articul={goodsObj[el]['articul']}
+      //   />
+    });
+    setFindElFlag(findElCart.find((el) => el === true));
+
+    console.log(cart, 'cart');
+    console.log(goodsObj, 'goodsObj');
+
+    console.log(Boolean(findElCart), 'findElCart');
+
+    console.log(findElFlag, 'findElFlag');
+  }, [goodsObj]);
+
+  // const findElFlag = () => {
+  //   dispath(cartOpen(false));
+  // };
+
+  // console.log(
+  //   Boolean(
+  //     Object.keys(cart).find((el) => )
+  //   ),
+  //   ' Boolean(findEl.find((el) => el === false)'
+  // );
   // : <ErrorBeckend/>
-  // ==========================================================================
+
+  //========clickHandler============================================================================
+  let clickHandler = (e) => {
+    e.preventDefault();
+
+    let targ = e.target;
+    // if (!targ.classList.contains('goods-table')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
+    if (targ.classList.contains('delete-one-position')) {
+      dispath(minus(targ.getAttribute('data-key')));
+      // if (fullQuantityGoodsCart <= 1) cartClass.classList.remove('activ');
+    }
+    if (targ.classList.contains('delete-quantity')) {
+      dispath(del(targ.getAttribute('data-key')));
+    }
+  };
+  // if (!findElFlag) return <ErrorBeckend />;
   return (
     <>
       {cartOpenSt && (
         <section
           className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>
-          <div className="main__goods-table" onClick={clickHandler}>
-            {/* fullGoods */}
-            <div className="goods-table__full-goods-block">
-              <ul className="goods-table__full-goods">
+          {!findElFlag ? (
+            <div className="main__goods-table" onClick={clickHandler}>
+              {/* fullGoods */}
+              <div className="goods-table__full-goods-block">
+                <ul className="goods-table__full-goods">
+                  {Object.keys(cart).map((el, i) => (
+                    <li
+                      className="goods-table__item"
+                      key={goodsObj[el].title + i}>
+                      {goodsObj[el].title} - {cart[el]}
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  className="goods-table__full-goods-close"
+                  onClick={hadlerClose}></div>
+              </div>
+              <div className="cart__full-price">
+                Full price: {fullPrice()} {currency}
+              </div>
+              <div className="goods-table__cart cart">
                 {Object.keys(cart).map((el, i) => (
-                  <li
-                    className="goods-table__item"
-                    key={goodsObj[el].title + i}>
-                    {goodsObj[el].title} - {cart[el]}
-                  </li>
+                  <Cart
+                    key={goodsObj[el].title + i}
+                    title={goodsObj[el].title}
+                    cost={
+                      !selCostFlag
+                        ? goodsObj[el].cost
+                        : (goodsObj[el].cost / 95).toFixed(0)
+                    } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+                    currency={currency}
+                    quantity={cart[el]}
+                    priceAllItem={
+                      (!selCostFlag
+                        ? goodsObj[el].cost
+                        : (goodsObj[el].cost / 95).toFixed(0)) *
+                        cart[el] +
+                      ' ' +
+                      currency
+                    }
+                    image={goodsObj[el].image}
+                    articul={goodsObj[el]['articul']}
+                  />
                 ))}
-              </ul>
-              <div
-                className="goods-table__full-goods-close"
-                onClick={hadlerClose}></div>
+              </div>
             </div>
-            <div className="cart__full-price">
-              Full price: {fullPrice()} {currency}
-            </div>
-            <div className="goods-table__cart cart">
-              {Object.keys(cart).map((el, i) => (
-                <Cart
-                  key={goodsObj[el].title + i}
-                  title={goodsObj[el].title}
-                  cost={
-                    !selCostFlag
-                      ? goodsObj[el].cost
-                      : (goodsObj[el].cost / 95).toFixed(0)
-                  } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-                  currency={currency}
-                  quantity={cart[el]}
-                  priceAllItem={
-                    (!selCostFlag
-                      ? goodsObj[el].cost
-                      : (goodsObj[el].cost / 95).toFixed(0)) *
-                      cart[el] +
-                    ' ' +
-                    currency
-                  }
-                  image={goodsObj[el].image}
-                  articul={goodsObj[el]['articul']}
-                />
-              ))}
-            </div>
-          </div>
+          ) : (
+            <ErrorBeckend />
+          )}
         </section>
       )}
     </>

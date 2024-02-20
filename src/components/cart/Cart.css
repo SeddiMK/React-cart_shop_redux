@@ -121,6 +121,8 @@
         top: 183px;
         left: 3%;
         width: 94%;
+        height: 90%;
+        overflow-x: scroll;
         background-color: #fff;
         border: 1px solid #fc8507;
         border-radius: .3rem;

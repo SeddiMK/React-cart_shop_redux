@@ -51,7 +51,6 @@ export const cartSlice = createSlice({
       // state.cartVal = []; //---------------------------
     },
     clear: (state) => {
-      console.log('clear======================');
       // clear cart
       state.cartVal = {};
 

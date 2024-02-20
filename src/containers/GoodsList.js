@@ -99,6 +99,7 @@ export default function GoodsList() {
 
   // qs строка параметров в URL -------------------------
   useEffect(() => {
+    console.log(isMounted.current, 'isMounted.current');
     // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
       const queryString = qs.stringify({

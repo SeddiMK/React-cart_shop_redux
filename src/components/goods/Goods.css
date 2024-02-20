@@ -59,6 +59,7 @@
         justify-items: stretch;
         gap: 1rem;
         flex-wrap: wrap;
+        height: 100%;
     }
 }
 

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import style from './ErrorBeckend.module.css';
 
-import { clear } from '../../store/cartSlice';
+import { clearCart } from '../../store/cartSlice';
 
 export default function ErrorBeckend() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function ErrorBeckend() {
           добавляйте товар в корзину.
         </p>
         <br></br>
-        <button className="btn" onClick={() => dispatch(clear())}>
+        <button className="btn" onClick={() => dispatch(clearCart())}>
           Очистить корзину и создать новую
         </button>
       </div>

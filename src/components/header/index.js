@@ -1,7 +1,7 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,12 +21,14 @@ import {
   setSort,
 } from '../../store/filterSlice';
 import { cartOpen } from '../../store/cartSlice';
+import { fetchFurniture } from '../../store/furnitureSlice';
 
 export default function Header() {
   const dispath = useDispatch();
+  const [sortValue] = useState(0);
+  const categoryName = useSelector((state) => state.filter.categoryName);
   let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
 
-  const [sortValue, setSortValue] = useState(0);
   // data-header-nav-link --// можно вынести в отдельный файл------------
   const linkHeaderArr = [
     'Home',
@@ -38,11 +40,10 @@ export default function Header() {
   ];
 
   const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
-
   // end -----------------
 
   const [burgerClick, setBurgerClick] = useState(false);
-
+  const [resetWindow, setResetWindow] = useState();
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   // const cartClass = document.querySelector('.goods-table');------------------------
 
@@ -53,16 +54,14 @@ export default function Header() {
     } else {
       dispath(setCategoryName(e.toLowerCase().replace(' ', '')));
     }
-
     dispath(setCurrentPage(1));
   };
-  // end
+
   // filter select sort
   const handlerSelSort = (e) => {
     dispath(setSort(e));
     dispath(setCurrentPage(1));
   };
-  // end
 
   const handlerSelCurrency = (e) => {
     dispath(selCostFlag(e.target.value !== 'RUB'));
@@ -77,6 +76,22 @@ export default function Header() {
     }
   };
 
+  const handleLogo = () => {
+    dispath(
+      fetchFurniture({
+        sortBy: 'rating',
+        order: 'desc',
+        searchCategoryFilter: '',
+        searchInpValData: '',
+        currentPage: '1',
+      })
+    );
+    // баг с  searchCategoryFilter !!!
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  };
+  console.log(categoryName, 'categoryName');
   // useEffect(() => {
   //   const navHeaderLeft = document.getElementsByClassName('menu__list-left');
   //   console.log(navHeaderLeft);
@@ -88,7 +103,7 @@ export default function Header() {
     <header className="header">
       <div className="header__wrapper">
         <div className="header__logo-burger">
-          <Link to="/" className="header__logo">
+          <Link to="/" className="header__logo" onClick={handleLogo}>
             ME
             {/* <img src="#" alt="Image logo" /> */}
           </Link>

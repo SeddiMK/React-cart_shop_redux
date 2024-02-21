@@ -8,14 +8,20 @@ import {
   selectCurrensy,
   selectGoods,
 } from '../store/goodsSlice';
-import { selectCart, minus, del, cartOpen } from '../store/cartSlice';
+import {
+  selectCart,
+  minus,
+  del,
+  cartOpen,
+  selectCartOpenSt,
+} from '../store/cartSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
 
 export default function CartList() {
   const dispath = useDispatch();
-  const cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
+  const selCartOpenSt = useSelector(selectCartOpenSt);
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
@@ -93,13 +99,14 @@ export default function CartList() {
     if (fullQuantityGoodsCart !== undefined) {
       dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0)));
     }
-  });
+  }, [cart, fullQuantityGoodsCart, dispath]);
 
   useEffect(() => {
     // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
     // const cartClassUef = document.getElementsByClassName('goods-table')[0];
     //===============================================================
     // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
+
     if (fullQuantityGoodsCart === 0) dispath(cartOpen(false));
   }, [fullQuantityGoodsCart, dispath]);
 
@@ -153,9 +160,10 @@ export default function CartList() {
     }
   };
   // if (!findElFlag) return <ErrorBeckend />;
+  // {selCartOpenSt && (       )}
   return (
     <>
-      {cartOpenSt && (
+      {selCartOpenSt && (
         <section
           className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>

@@ -34,6 +34,7 @@ export const goodsSlice = createSlice({
         state.goodsValArr = data.payload;
       }
     },
+
     // selectCostFlag(state, data) {
     //   if (state.currency !== 'RUB') {
     //     state.currency = data.payload;

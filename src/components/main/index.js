@@ -12,7 +12,6 @@ export default function Main() {
       {/* Вывод данных из хранилища */}
       <GoodsList />
       <CartList />
-
       <Pagination />
     </main>
   );

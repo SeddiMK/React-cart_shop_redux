@@ -8,7 +8,7 @@ export const filterSlice = createSlice({
     currentPage: 1,
     sort: {
       name: 'popularity',
-      sortProperty: 'rating',
+      sortProperty: '-rating',
     },
   },
   reducers: {

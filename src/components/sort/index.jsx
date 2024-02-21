@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 
 export const listSort = [
   {
-    name: 'increasing popularity',
-    sortProperty: 'rating',
-  },
-  {
-    name: 'decreasing popularity',
+    name: 'popularity',
     sortProperty: '-rating',
   },
+  // {
+  //   name: 'decreasing popularity',
+  //   sortProperty: 'rating',
+  // },
   {
     name: 'price increase',
     sortProperty: 'cost',

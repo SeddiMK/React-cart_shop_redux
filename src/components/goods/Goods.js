@@ -37,11 +37,11 @@ export default function Goods({
       </div>
       <div className="goods-block__rating">rating: {rating}</div>
 
-      <button
+      {/* <button
         className="goods-block__add-to-cart  btn add-to-cart"
         data-key={articul}>
         Add to cart <span>{quantityOneGoods}</span>
-      </button>
+      </button> */}
     </div>
   );
 }

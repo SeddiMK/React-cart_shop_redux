@@ -211,10 +211,17 @@
         text-align: center;
     }
 
-    .goods-block {
+    .goods-wraper {
         border-bottom: 1px solid #fc8507;
+        text-align: center;
         padding-bottom: 1rem;
-        margin-bottom: 1rem;
+    }
+
+
+    .goods-block {
+
+        padding-bottom: 1rem;
+
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import qs from 'qs';
 
@@ -99,7 +99,6 @@ export default function GoodsList() {
 
   // qs строка параметров в URL -------------------------
   useEffect(() => {
-    console.log(isMounted.current, 'isMounted.current');
     // проверяем произошел ли первый рендер или изменились ли параметры
     if (isMounted.current) {
       const queryString = qs.stringify({
@@ -140,17 +139,27 @@ export default function GoodsList() {
             {status === 'loading'
               ? [...new Array(10)].map((_, i) => <Skeleton key={i} />)
               : goods.map((el) => (
-                  <Goods
-                    key={el.articul}
-                    quantityOneGoods={cart[el.articul]}
-                    title={el.title}
-                    cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-                    image={el.image}
-                    articul={el.articul}
-                    rating={el.rating}
-                    description={el.description}
-                    currency={currency}
-                  />
+                  <div className="goods-wraper" key={el.articul}>
+                    <Link to={`/fullOptions/${el.articul}`}>
+                      <Goods
+                        quantityOneGoods={cart[el.articul]}
+                        title={el.title}
+                        cost={
+                          !selCostFlag ? el.cost : (el.cost / 95).toFixed(0)
+                        } // курс 1 доллара 95
+                        image={el.image}
+                        articul={el.articul}
+                        rating={el.rating}
+                        description={el.description}
+                        currency={currency}
+                      />
+                    </Link>
+                    <button
+                      className="goods-block__add-to-cart  btn add-to-cart"
+                      data-key={el.articul}>
+                      Add to cart <span>{cart[el.articul]}</span>
+                    </button>
+                  </div>
                 ))}
           </>
         )}

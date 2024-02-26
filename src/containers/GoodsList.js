@@ -41,7 +41,7 @@ export default function GoodsList() {
   // data from backend-------------------------
 
   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-  // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
+
   const axiosGoods = () => {
     const sortBy = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'desc' : 'asc'; // убыванию или возрастанию с помощью тернарного оператора
@@ -75,6 +75,7 @@ export default function GoodsList() {
     }
   }, []);
 
+  // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   useEffect(() => {
     document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
 

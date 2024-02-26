@@ -1,7 +1,7 @@
 import './Header.css';
 import '../../app/Common.css';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -26,7 +26,7 @@ import { fetchFurniture } from '../../store/furnitureSlice';
 export default function Header() {
   const dispath = useDispatch();
   const [sortValue] = useState(0);
-  const categoryName = useSelector((state) => state.filter.categoryName);
+  // const categoryName = useSelector((state) => state.filter.categoryName);
   let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
 
   // data-header-nav-link --// можно вынести в отдельный файл------------
@@ -43,9 +43,7 @@ export default function Header() {
   // end -----------------
 
   const [burgerClick, setBurgerClick] = useState(false);
-  const [resetWindow, setResetWindow] = useState();
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
-  // const cartClass = document.querySelector('.goods-table');------------------------
 
   // filter select category
   const handlerSelCategory = (e) => {
@@ -70,8 +68,6 @@ export default function Header() {
 
   const handleCart = () => {
     if (fullQuantityGoodsCart !== 0) {
-      // if (cartClass && fullQuantityGoodsCart !== 0)
-      // cartClass.classList.toggle('activ');
       dispath(cartOpen(!cartOpenSt));
     }
   };
@@ -91,7 +87,8 @@ export default function Header() {
       window.location.reload();
     }, 100);
   };
-  console.log(categoryName, 'categoryName');
+
+  // burgerClick --------------------------------------
   // useEffect(() => {
   //   const navHeaderLeft = document.getElementsByClassName('menu__list-left');
   //   console.log(navHeaderLeft);

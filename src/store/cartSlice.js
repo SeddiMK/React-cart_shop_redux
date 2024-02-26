@@ -16,7 +16,6 @@ export const cartSlice = createSlice({
       }
 
       state.cartVal[articul]++;
-      console.log(articul, 'articul');
       // state.cartVal.push(data.payload); //----------------------
     },
     minus: (state, data) => {

@@ -13,18 +13,24 @@ import { increment, selectCart } from '../store/cartSlice';
 
 import CartList from '../containers/CartList';
 
-export default function FullOptions() {
+const FullOptions: React.FC = () => {
   const dispath = useDispatch();
   const navigate = useNavigate();
-  const { articul } = useParams();
-  const [itemFurniture, setItemFurniture] = useState();
+  const { articul } = useParams<{
+    articul: string;
+  }>();
+  const [itemFurniture, setItemFurniture] = useState<{
+    image: string;
+    title: string;
+    description: string;
+    rating: number;
+    cost: number;
+  }>();
 
   const selCostFlag = useSelector(selectCostFlag);
-  let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
   const currency = useSelector(selectCurrensy);
   const cart = useSelector(selectCart);
-
-  console.log(articul, 'params');
+  let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
   useEffect(() => {
     async function fetchFurniture() {
@@ -33,7 +39,6 @@ export default function FullOptions() {
           `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture/${articul}`
         );
         setItemFurniture(data);
-        console.log(data, 'data in FullOptions');
         console.log(
           `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture/${articul}`,
           'URL'
@@ -55,6 +60,8 @@ export default function FullOptions() {
 
   //=clickHandler===============================
   let clickHandler = (e) => {
+    console.log(e, '----------------e-----------------');
+
     e.preventDefault();
     let targ = e.target;
 
@@ -91,10 +98,12 @@ export default function FullOptions() {
           className="goods-block__add-to-cart  btn add-to-cart"
           onClick={clickHandler}
           data-key={articul}>
-          Add to cart <span>{cart[articul]}</span>
+          Add to cart <span>{articul && cart[articul]}</span>
         </button>
       </div>
       <CartList />
     </div>
   );
-}
+};
+
+export default FullOptions;

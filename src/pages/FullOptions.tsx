@@ -54,14 +54,16 @@ const FullOptions: React.FC = () => {
 
   useEffect(() => {
     if (fullQuantityGoodsCart !== undefined) {
-      dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0)));
+      dispath(
+        fullQuantity(
+          Object.values(cart).reduce((a: number, b: any) => a + b, 0)
+        )
+      );
     }
   }, [fullQuantityGoodsCart, cart, dispath]);
 
   //=clickHandler===============================
-  let clickHandler = (e) => {
-    console.log(e, '----------------e-----------------');
-
+  let clickHandler = (e: any) => {
     e.preventDefault();
     let targ = e.target;
 

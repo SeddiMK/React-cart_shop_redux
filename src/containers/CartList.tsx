@@ -15,21 +15,26 @@ import {
   cartOpen,
   selectCartOpenSt,
 } from '../store/cartSlice';
+import { itemsReindexing } from '../store/furnitureSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
 
-export default function CartList() {
+const CartList: React.FC = () => {
   const dispath = useDispatch();
   const selCartOpenSt = useSelector(selectCartOpenSt);
-  const selCostFlag = useSelector(selectCostFlag);
+  const selCostFlag: boolean = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
+  // const itemsReindexing = useSelector<object>(itemsReindexing);
 
   // const [openCart, setOpenCart] = useState(true);
-  const [findElFlag, setFindElFlag] = useState(true);
+  // const [findElCart, setFindElCart] = useState([]);
+  const [findElFlag, setFindElFlag] = useState<boolean | undefined>(true);
   const catCartRef = useRef(null);
+  let goodsObj: object = useSelector(itemsReindexing);
+  // const [goodsObj, setGoodsObj] = useState<object>();
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
@@ -38,12 +43,26 @@ export default function CartList() {
   //   // setIsLoading(true); // обновляем set загрузки
 
   //   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-
+  //  ===========================================================================
   // переидексирую массив товара -----------------------------------------!!!!!!!!!!!!
-  const goodsObj = goods.reduce((accum, item) => {
-    accum[item['articul']] = item;
-    return accum;
-  }, {});
+
+  console.log(goods, 'goods');
+  console.log(goodsObj, 'goodsObj');
+  // console.log(itemsReindexing, 'goods.length');
+
+  useEffect(() => {
+    // console.log(Object.values(cart).length, 'Object.values(cart)');
+    // if (Object.values(cart).length > 1) {
+    //   setGoodsObj(
+    //     goods.reduce((accum: any, item: any) => {
+    //       accum[item.articul] = item;
+    //       return accum;
+    //     }, {})
+    //   );
+    // } else if (Object.values(cart).length === 1) {
+    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    // }
+  }, [cart, goods]);
 
   // fullPrice---------------------------------------------------------------
   //full price
@@ -70,21 +89,21 @@ export default function CartList() {
   //   }
   //   return sum;
   // };
+  // ------------------------------------------------------------!!!!!!
+
   const fullPrice = () => {
     const fullPriceArr = Object.keys(cart).map((el) => {
+      let priceInObj: any = goodsObj[el as keyof typeof goodsObj]['cost'];
+
       let price = 0;
-
       return (price +=
-        (!selCostFlag
-          ? goodsObj[el].cost
-          : (goodsObj[el].cost / 95).toFixed(0)) * cart[el]);
+        (!selCostFlag && goodsObj ? priceInObj : (priceInObj / 95).toFixed(0)) *
+        cart[el]);
     });
-
     let sum = 0;
     for (let i = 0; i < fullPriceArr.length; i++) {
       sum += fullPriceArr[i];
     }
-
     return sum;
   };
 
@@ -97,7 +116,11 @@ export default function CartList() {
   //=========================================================
   useEffect(() => {
     if (fullQuantityGoodsCart !== undefined) {
-      dispath(fullQuantity(Object.values(cart).reduce((a, b) => a + b, 0)));
+      dispath(
+        fullQuantity(
+          Object.values(cart).reduce((a: number, b: any) => a + b, 0)
+        )
+      );
     }
   }, [cart, fullQuantityGoodsCart, dispath]);
 
@@ -111,7 +134,7 @@ export default function CartList() {
   }, [fullQuantityGoodsCart, dispath]);
 
   // cart close in btn-close ===========================================================================
-  const hadlerClose = (e) => {
+  const hadlerClose = (e: any) => {
     if (catCartRef.current && fullQuantityGoodsCart !== 0) {
       // catCartRef.current.classList.toggle('activ');
       dispath(cartOpen(false));
@@ -121,7 +144,7 @@ export default function CartList() {
   useEffect(() => {
     const cartIcon = document.getElementsByClassName('cart-btn')[0];
 
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (
         ![catCartRef.current, cartIcon].some((x) =>
           e.composedPath().includes(x)
@@ -137,16 +160,9 @@ export default function CartList() {
 
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
-  //  ===========================================================================
-  useEffect(() => {
-    const findElCart = Object.keys(cart).map(
-      (el, i) => goodsObj[el] === undefined
-    );
-    setFindElFlag(findElCart.find((el) => el === true));
-  }, [goodsObj, cart]);
 
   //========clickHandler============================================================================
-  let clickHandler = (e) => {
+  let clickHandler = (e: any) => {
     e.preventDefault();
 
     let targ = e.target;
@@ -159,6 +175,7 @@ export default function CartList() {
       dispath(del(targ.getAttribute('data-key')));
     }
   };
+
   // if (!findElFlag) return <ErrorBeckend />;
   // {selCartOpenSt && (       )}
   return (
@@ -175,8 +192,9 @@ export default function CartList() {
                   {Object.keys(cart).map((el, i) => (
                     <li
                       className="goods-table__item"
-                      key={goodsObj[el].title + i}>
-                      {goodsObj[el].title} - {cart[el]}
+                      key={goodsObj[el as keyof typeof goodsObj]['title'] + i}>
+                      {goodsObj[el as keyof typeof goodsObj]['title']} -{' '}
+                      {cart[el]}
                     </li>
                   ))}
                 </ul>
@@ -190,25 +208,31 @@ export default function CartList() {
               <div className="goods-table__cart cart">
                 {Object.keys(cart).map((el, i) => (
                   <Cart
-                    key={goodsObj[el].title + i}
-                    title={goodsObj[el].title}
+                    key={goodsObj[el as keyof typeof goodsObj]['title'] + i}
+                    title={goodsObj[el as keyof typeof goodsObj]['title']}
                     cost={
                       !selCostFlag
-                        ? goodsObj[el].cost
-                        : (goodsObj[el].cost / 95).toFixed(0)
+                        ? goodsObj[el as keyof typeof goodsObj]['cost']
+                        : (
+                            goodsObj[el as keyof typeof goodsObj]['cost'] / 95
+                          ).toFixed(0)
                     } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
                     currency={currency}
                     quantity={cart[el]}
                     priceAllItem={
-                      (!selCostFlag
-                        ? goodsObj[el].cost
-                        : (goodsObj[el].cost / 95).toFixed(0)) *
-                        cart[el] +
-                      ' ' +
-                      currency
+                      !selCostFlag && goodsObj
+                        ? Number(goodsObj[el as keyof typeof goodsObj]['cost'])
+                        : Number(
+                            (
+                              goodsObj[el as keyof typeof goodsObj]['cost'] / 95
+                            ).toFixed(0)
+                          ) *
+                            cart[el] +
+                          ' ' +
+                          currency
                     }
-                    image={goodsObj[el].image}
-                    articul={goodsObj[el]['articul']}
+                    image={goodsObj[el as keyof typeof goodsObj]['image']}
+                    articul={goodsObj[el as keyof typeof goodsObj]['articul']}
                   />
                 ))}
               </div>
@@ -220,4 +244,6 @@ export default function CartList() {
       )}
     </>
   );
-}
+};
+
+export default CartList;

@@ -26,12 +26,22 @@ export const furnitureSlice = createSlice({
   name: 'furniture',
   initialState: {
     items: [],
+    itemsReindexing: [],
     status: 'loading', // loading | success | error
     loading: true,
   },
   reducers: {
     setItems: (state, data) => {
       state.items = data.payload;
+    },
+
+    setItemsReindexing: (state, data) => {
+      // if (state.items.length > 1) {
+      //   state.items.reduce((accum, item) => {
+      //     accum[item.articul] = item;
+      //     state.itemsReindexing = accum;
+      //   }, {});
+      // }
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +54,11 @@ export const furnitureSlice = createSlice({
       state.status = 'success';
       state.items = data.payload;
       state.loading = false;
+
+      state.items.reduce((accum, item) => {
+        accum[item.articul] = item;
+        return (state.itemsReindexing = accum);
+      }, {});
     });
     builder.addCase(fetchFurniture.rejected, (state) => {
       state.status = 'error';
@@ -53,6 +68,8 @@ export const furnitureSlice = createSlice({
   },
 });
 
-export const { setItems } = furnitureSlice.actions;
+export const { setItems, setItemsReindexing } = furnitureSlice.actions;
+
+export const itemsReindexing = (state) => state.furniture.itemsReindexing;
 
 export default furnitureSlice.reducer;

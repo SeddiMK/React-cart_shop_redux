@@ -1,6 +1,6 @@
-import './Null.css';
-import './App.css';
-import './Common.css';
+import './Null.scss';
+import './App.scss';
+import './Common.scss';
 
 import Header from '../components/header';
 import Footer from '../components/footer';

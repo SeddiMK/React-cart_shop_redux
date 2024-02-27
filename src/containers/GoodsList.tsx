@@ -21,7 +21,7 @@ import Error from '../components/error';
 
 // get data from store
 // list data
-export default function GoodsList() {
+const GoodsList: React.FC = () => {
   const dispath = useDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false); // флаг первого рендера
@@ -167,4 +167,6 @@ export default function GoodsList() {
       </div>
     </>
   );
-}
+};
+
+export default GoodsList;

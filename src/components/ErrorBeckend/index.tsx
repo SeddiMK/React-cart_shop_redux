@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 
-import style from './ErrorBeckend.module.css';
+import style from './ErrorBeckend.module.scss';
 
 import { clearCart } from '../../store/cartSlice';
 
-export default function ErrorBeckend() {
+const ErrorBeckend: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
@@ -28,4 +28,6 @@ export default function ErrorBeckend() {
       </div>
     </>
   );
-}
+};
+
+export default ErrorBeckend;

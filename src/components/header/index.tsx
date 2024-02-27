@@ -23,7 +23,7 @@ import {
 import { cartOpen } from '../../store/cartSlice';
 import { fetchFurniture } from '../../store/furnitureSlice';
 
-export default function Header() {
+const Header: React.FC = () => {
   const dispath = useDispatch();
   const [sortValue] = useState(0);
   // const categoryName = useSelector((state) => state.filter.categoryName);
@@ -167,4 +167,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

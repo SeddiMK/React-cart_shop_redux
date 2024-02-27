@@ -1,4 +1,4 @@
-import styles from './search.module.css';
+import styles from './search.module.scss';
 
 import React, { useCallback, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
@@ -6,11 +6,11 @@ import { useDispatch } from 'react-redux';
 
 import { searchInpHeader, setCurrentPage } from '../../store/filterSlice';
 
-export default function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // кнопка очистки
   // const onClickClear = () => {
@@ -19,7 +19,7 @@ export default function Search() {
   // }
 
   const updateInpSearchValue = useCallback(
-    debounce((inp) => {
+    debounce((inp: string) => {
       setSearchValue(inp);
       dispatch(searchInpHeader(inp));
     }, 250),
@@ -49,9 +49,11 @@ export default function Search() {
         placeholder="Search..."
       />
       <button
-        type="search"
+        type="button"
         onClick={handlerSearchBtn}
         className={styles.btn}></button>
     </form>
   );
-}
+};
+
+export default Search;

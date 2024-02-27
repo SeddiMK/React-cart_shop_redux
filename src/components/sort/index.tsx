@@ -3,7 +3,12 @@ import styles from './sort.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export const listSort = [
+type SortItem = {
+  name: string;
+  sortProperty: string;
+};
+
+export const listSort: SortItem[] = [
   {
     name: 'popularity',
     sortProperty: '-rating',
@@ -22,13 +27,18 @@ export const listSort = [
   },
 ]; // можно вынести в отдельный файл
 
-export default function Sort({ value, onChangeSort }) {
+type SortProps = {
+  value: any; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  onChangeSort: any;
+};
+
+const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
   const [open, setOpen] = useState(false);
   const nameSort = useSelector((state) => state.filter.sort);
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
-  const onClickListItem = (i) => {
-    onChangeSort(i);
+  const onClickListItem = (obj: SortItem) => {
+    onChangeSort(obj);
     setOpen(false);
   };
 
@@ -53,11 +63,11 @@ export default function Sort({ value, onChangeSort }) {
       </p>
       {open && (
         <div className={'sort__popup ' + styles.root}>
-          <ul name="sort">
+          <ul>
             {listSort.map((obj, i) => (
               <li
                 onClick={() => onClickListItem(obj)}
-                key={obj + i}
+                key={i}
                 value={i}
                 className={
                   value.sortProperty === obj.sortProperty ? 'active' : ''
@@ -70,4 +80,6 @@ export default function Sort({ value, onChangeSort }) {
       )}
     </div>
   );
-}
+};
+
+export default Sort;

@@ -1,6 +1,7 @@
-import style from './Error.module.css';
+import React from 'react';
+import style from './Error.module.scss';
 
-export default function Error() {
+const Error: React.FC = () => {
   return (
     <>
       <div></div>
@@ -10,4 +11,6 @@ export default function Error() {
       </div>
     </>
   );
-}
+};
+
+export default Error;

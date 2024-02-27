@@ -25,7 +25,8 @@ import { fetchFurniture } from '../../store/furnitureSlice';
 
 const Header: React.FC = () => {
   const dispath = useDispatch();
-  const [sortValue] = useState(0);
+
+  const [sortValue] = useState(null);
   // const categoryName = useSelector((state) => state.filter.categoryName);
   let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
 

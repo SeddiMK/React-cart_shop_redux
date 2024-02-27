@@ -1,6 +1,16 @@
-import './Goods.css';
+import './Goods.scss';
 
-export default function Goods({
+type GoodsProps = {
+  articul: string;
+  title: string;
+  cost: number;
+  image: string;
+  rating: number;
+  currency: string;
+  quantityOneGoods: number;
+};
+
+const Goods: React.FC<GoodsProps> = ({
   articul,
   title,
   cost,
@@ -8,7 +18,7 @@ export default function Goods({
   rating,
   currency,
   quantityOneGoods,
-}) {
+}) => {
   // // карзина в локальном store/ карзину должен давать бэкенд
   // const dispath = useDispatch();
   // // передать все параметры в store dispatch CartList
@@ -44,4 +54,6 @@ export default function Goods({
       </button> */}
     </div>
   );
-}
+};
+
+export default Goods;

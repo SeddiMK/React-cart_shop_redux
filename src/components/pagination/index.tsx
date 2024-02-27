@@ -6,12 +6,12 @@ import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../../store/filterSlice';
 
-export default function Pagination() {
+const Pagination: React.FC = () => {
   const dispath = useDispatch();
 
   let currentPage = useSelector((state) => state.filter.currentPage);
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispath(setCurrentPage(number));
   };
 
@@ -32,4 +32,6 @@ export default function Pagination() {
       />
     </div>
   );
-}
+};
+
+export default Pagination;

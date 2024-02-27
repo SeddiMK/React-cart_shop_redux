@@ -1,8 +1,8 @@
-import './Burger.css';
+import './Burger.scss';
 
 import React, { useState } from 'react';
 
-export default function Burger() {
+const Burger: React.FC = () => {
   const [isClosed, setIsClosed] = useState(true);
 
   return (
@@ -54,4 +54,6 @@ export default function Burger() {
       </div>
     </>
   );
-}
+};
+
+export default Burger;

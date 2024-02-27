@@ -1,8 +1,10 @@
-import React from 'react';
+import styles from './select.module.scss';
 
-import styles from './select.module.css';
+type CategoriesProps = {
+  onChangeCategories: any;
+};
 
-export default function Categories({ onChangeCategories }) {
+const Categories: React.FC<CategoriesProps> = ({ onChangeCategories }) => {
   let selectCategory = [
     'All goods',
     'Cartoon',
@@ -27,4 +29,6 @@ export default function Categories({ onChangeCategories }) {
       ))}
     </select>
   );
-}
+};
+
+export default Categories;

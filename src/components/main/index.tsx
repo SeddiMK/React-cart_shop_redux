@@ -1,12 +1,10 @@
-import './Main.css';
-
-import React from 'react';
+import './Main.scss';
 
 import GoodsList from '../../containers/GoodsList';
 import CartList from '../../containers/CartList';
 import Pagination from '../pagination';
 
-export default function Main() {
+const Main: React.FC = () => {
   return (
     <main className="main">
       {/* Вывод данных из хранилища */}
@@ -15,4 +13,6 @@ export default function Main() {
       <Pagination />
     </main>
   );
-}
+};
+
+export default Main;

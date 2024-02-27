@@ -1,6 +1,16 @@
-import './Cart.css';
+import './Cart.scss';
 
-export default function Cart(props) {
+type CartProps = {
+  articul: string;
+  title: string;
+  image: string;
+  currency: string;
+  quantity: number;
+  priceAllItem: number;
+  cost: number;
+};
+
+const Cart: React.FC<CartProps> = (props) => {
   return (
     <>
       <div className=" cart__one-product">
@@ -44,4 +54,6 @@ export default function Cart(props) {
       </div>
     </>
   );
-}
+};
+
+export default Cart;

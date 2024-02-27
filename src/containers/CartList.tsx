@@ -31,7 +31,7 @@ const CartList: React.FC = () => {
 
   // const [openCart, setOpenCart] = useState(true);
   // const [findElCart, setFindElCart] = useState([]);
-  const [findElFlag, setFindElFlag] = useState<boolean | undefined>(true);
+  const [findElFlag, setFindElFlag] = useState<boolean>(true);
   const catCartRef = useRef(null);
   let goodsObj: object = useSelector(itemsReindexing);
   // const [goodsObj, setGoodsObj] = useState<object>();
@@ -48,9 +48,9 @@ const CartList: React.FC = () => {
 
   console.log(goods, 'goods');
   console.log(goodsObj, 'goodsObj');
-  // console.log(itemsReindexing, 'goods.length');
 
   useEffect(() => {
+    // if(cart)!!!!!!!!!!!!!!!!!!!!!!
     // console.log(Object.values(cart).length, 'Object.values(cart)');
     // if (Object.values(cart).length > 1) {
     //   setGoodsObj(
@@ -60,7 +60,6 @@ const CartList: React.FC = () => {
     //     }, {})
     //   );
     // } else if (Object.values(cart).length === 1) {
-    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     // }
   }, [cart, goods]);
 
@@ -184,7 +183,7 @@ const CartList: React.FC = () => {
         <section
           className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>
-          {!findElFlag ? (
+          {findElFlag ? (
             <div className="main__goods-table" onClick={clickHandler}>
               {/* fullGoods */}
               <div className="goods-table__full-goods-block">

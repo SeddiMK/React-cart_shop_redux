@@ -6,8 +6,8 @@ type CartProps = {
   image: string;
   currency: string;
   quantity: number;
-  priceAllItem: number;
-  cost: number;
+  priceAllItem: string | number;
+  cost: string;
 };
 
 const Cart: React.FC<CartProps> = (props) => {

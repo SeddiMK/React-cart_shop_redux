@@ -34,12 +34,8 @@ const linkHeaderArr = [
 ];
 const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 // end -----------------
-type HeaderProps = {
-  linkHeaderArr: string[];
-  linkHeaderAuthArr: string[];
-};
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC = () => {
   const dispath = useDispatch();
 
   const [sortValue] = useState(null);
@@ -77,15 +73,16 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const handleLogo = () => {
-    dispath(
-      fetchFurniture({
-        sortBy: 'rating',
-        order: 'desc',
-        searchCategoryFilter: '',
-        searchInpValData: '',
-        currentPage: '1',
-      })
-    );
+    // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // dispath(
+    //   fetchFurniture({
+    //     sortBy: 'rating',
+    //     order: 'desc',
+    //     searchCategoryFilter: '',
+    //     searchInpValData: '',
+    //     currentPage: '1',
+    //   })
+    // );
     // баг с  searchCategoryFilter !!!
     setTimeout(() => {
       window.location.reload();

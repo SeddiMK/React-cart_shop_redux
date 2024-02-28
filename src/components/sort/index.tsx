@@ -44,8 +44,11 @@ const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
 
   // закрываем окно вне области клика Sort by
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      const _event = e as MouseEvent & {
+        composedPath(): Node[];
+      };
+      if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     };

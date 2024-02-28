@@ -22,7 +22,7 @@ const Pagination: React.FC = () => {
         breakLabel="..."
         nextLabel=">"
         previousLabel="<"
-        onPageChange={(e) => {
+        onPageChange={(e: any) => {
           onChangePage(e.selected + 1);
         }}
         pageRangeDisplayed={4}

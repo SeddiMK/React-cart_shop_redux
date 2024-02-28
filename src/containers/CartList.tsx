@@ -141,12 +141,23 @@ const CartList: React.FC = () => {
   };
   // cart close in window ===========================================================================
   useEffect(() => {
-    const cartIcon = document.getElementsByClassName('cart-btn')[0];
+    const cartIcon: Element = document.getElementsByClassName('cart-btn')[0];
 
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const _event = e as MouseEvent & {
+        composedPath(): Node[];
+      };
+      // if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
+      //   setOpen(false);
+      // }
+      // if (
+      //   ![catCartRef.current, cartIcon].some((x: Element | null) =>
+      //     _event.composedPath().includes(x)
+      //   )
+      // ) {
       if (
-        ![catCartRef.current, cartIcon].some((x) =>
-          e.composedPath().includes(x)
+        ![catCartRef.current, cartIcon].some(
+          (x: Element | null) => x && _event.composedPath().includes(x)
         )
       ) {
         // setOpenCart(false);

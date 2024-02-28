@@ -23,31 +23,34 @@ import {
 import { cartOpen } from '../../store/cartSlice';
 import { fetchFurniture } from '../../store/furnitureSlice';
 
-const Header: React.FC = () => {
+// data-header-nav-link --// можно вынести в отдельный файл------------
+const linkHeaderArr = [
+  'Home',
+  'Products',
+  'Discount',
+  'HITs',
+  'About us',
+  'Contacts',
+];
+const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
+// end -----------------
+type HeaderProps = {
+  linkHeaderArr: string[];
+  linkHeaderAuthArr: string[];
+};
+
+const Header: React.FC<HeaderProps> = () => {
   const dispath = useDispatch();
 
   const [sortValue] = useState(null);
   // const categoryName = useSelector((state) => state.filter.categoryName);
   let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
 
-  // data-header-nav-link --// можно вынести в отдельный файл------------
-  const linkHeaderArr = [
-    'Home',
-    'Products',
-    'Discount',
-    'HITs',
-    'About us',
-    'Contacts',
-  ];
-
-  const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
-  // end -----------------
-
   const [burgerClick, setBurgerClick] = useState(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
   // filter select category
-  const handlerSelCategory = (e) => {
+  const handlerSelCategory = (e: string) => {
     if (e.toLowerCase().replace(' ', '') === 'allgoods') {
       dispath(setCategoryName(''));
     } else {
@@ -57,12 +60,12 @@ const Header: React.FC = () => {
   };
 
   // filter select sort
-  const handlerSelSort = (e) => {
+  const handlerSelSort = (e: {}) => {
     dispath(setSort(e));
     dispath(setCurrentPage(1));
   };
 
-  const handlerSelCurrency = (e) => {
+  const handlerSelCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispath(selCostFlag(e.target.value !== 'RUB'));
     dispath(selCurrensy(e.target.value));
   };

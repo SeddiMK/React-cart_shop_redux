@@ -28,8 +28,8 @@ export const listSort: SortItem[] = [
 ]; // можно вынести в отдельный файл
 
 type SortProps = {
-  value: any; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  onChangeSort: any;
+  value: any; //=================!!!!!!!!!!!!!!!!!!!!!
+  onChangeSort: (obj: {}) => void;
 };
 
 const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {

@@ -26,13 +26,13 @@ const Search: React.FC = () => {
     []
   );
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateInpSearchValue(e.target.value);
     setValue(e.target.value);
     dispatch(setCurrentPage(1));
   };
 
-  const handlerSearchBtn = (e) => {
+  const handlerSearchBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // отправить данные в store для поиска
     dispatch(searchInpHeader(searchValue));

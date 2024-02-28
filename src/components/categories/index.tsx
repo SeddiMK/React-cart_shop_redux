@@ -1,19 +1,18 @@
 import styles from './select.module.scss';
 
 type CategoriesProps = {
-  onChangeCategories: any;
+  onChangeCategories: (value: string) => void;
 };
+let selectCategory = [
+  'All goods',
+  'Cartoon',
+  'Chair',
+  'Bed',
+  'Table',
+  'Drawer',
+];
 
 const Categories: React.FC<CategoriesProps> = ({ onChangeCategories }) => {
-  let selectCategory = [
-    'All goods',
-    'Cartoon',
-    'Chair',
-    'Bed',
-    'Table',
-    'Drawer',
-  ];
-
   return (
     <select
       name="category"

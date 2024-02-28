@@ -11,8 +11,8 @@ const Pagination: React.FC = () => {
 
   let currentPage = useSelector((state) => state.filter.currentPage);
 
-  const onChangePage = (number: number) => {
-    dispath(setCurrentPage(number));
+  const onChangePage = (page: number) => {
+    dispath(setCurrentPage(page));
   };
 
   return (

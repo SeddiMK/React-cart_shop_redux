@@ -31,7 +31,7 @@ const CartList: React.FC = () => {
 
   // const [openCart, setOpenCart] = useState(true);
   // const [findElCart, setFindElCart] = useState([]);
-  const [findElFlag, setFindElFlag] = useState<boolean>(true);
+  const [findElFlag] = useState<boolean>(true);
   const catCartRef = useRef(null);
   let goodsObj: object = useSelector(itemsReindexing);
   // const [goodsObj, setGoodsObj] = useState<object>();

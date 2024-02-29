@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-// import goodsArr from '../data/goods.json';
+// import goodsArr from '../action/goods.json';
 
 type GoodsSliceState = {
   goodsValArr: [];
@@ -23,32 +23,35 @@ export const goodsSlice = createSlice({
   name: 'goods',
   initialState,
   reducers: {
-    selCurrensy(state, data) {
+    selCurrensy(state, action: PayloadAction<string>) {
       if (state.currency !== undefined) {
-        if (state.currency !== data.payload) {
-          state.currency = data.payload;
+        if (state.currency !== action.payload) {
+          state.currency = action.payload;
         }
       }
     },
-    selCostFlag(state, data) {
-      if (state.currency !== selCurrensy) {
-        state.flagSelCurrency = data.payload;
+    selCostFlag(state, action: PayloadAction<boolean>) {
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      state.flagSelCurrency = action.payload;
+
+      // if (state.currency !== selCurrensy) {
+      //   state.flagSelCurrency = action.payload;
+      // }
+    },
+    fullQuantity(state, action: PayloadAction<number>) {
+      if (action.payload !== undefined) {
+        state.fullQuantityGoodsSt = action.payload;
       }
     },
-    fullQuantity(state, data) {
-      if (data.payload !== undefined) {
-        state.fullQuantityGoodsSt = data.payload;
-      }
-    },
-    setGoodsValArr(state, data) {
+    setGoodsValArr(state, action: PayloadAction<[]>) {
       if (state.goodsValArr !== undefined) {
-        state.goodsValArr = data.payload;
+        state.goodsValArr = action.payload;
       }
     },
 
-    // selectCostFlag(state, data) {
+    // selectCostFlag(state, action) {
     //   if (state.currency !== 'RUB') {
-    //     state.currency = data.payload;
+    //     state.currency = action.payload;
     //   }
     // },
   },

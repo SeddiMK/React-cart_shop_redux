@@ -23,18 +23,18 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    increment: (state, data: PayloadAction<string>) => {
-      let articul = data.payload;
+    increment: (state, action: PayloadAction<string>) => {
+      let articul = action.payload;
 
       if (state.cartVal[articul] === undefined) {
         state.cartVal[articul] = 0;
       }
 
       state.cartVal[articul]++;
-      // state.cartVal.push(data.payload); //----------------------
+      // state.cartVal.push(action.payload); //----------------------
     },
-    minus: (state, data: PayloadAction<string>) => {
-      let articul = data.payload;
+    minus: (state, action: PayloadAction<string>) => {
+      let articul = action.payload;
 
       if (state.cartVal[articul] === undefined) {
         state.cartVal[articul] = 0;
@@ -45,7 +45,7 @@ export const cartSlice = createSlice({
         state.cartVal[articul]--;
       }
 
-      // state.cartVal = state.cartVal.filter(obj => obj[articul] === data.payload); //----------------------
+      // state.cartVal = state.cartVal.filter(obj => obj[articul] === action.payload); //----------------------
 
       // // delete to cart
       if (state.cartVal[articul] === 0) {
@@ -53,8 +53,8 @@ export const cartSlice = createSlice({
         delete state.cartVal[articul];
       }
     },
-    del: (state, data: PayloadAction<string>) => {
-      let articul = data.payload;
+    del: (state, action: PayloadAction<string>) => {
+      let articul = action.payload;
 
       // delete to cart
       if (state.cartVal[articul] > 0) {
@@ -70,8 +70,8 @@ export const cartSlice = createSlice({
 
       // state.cartVal = []; //---------------------------
     },
-    cartOpen: (state, data: PayloadAction<false>) => {
-      state.cartOpen = data.payload;
+    cartOpen: (state, action: PayloadAction<false>) => {
+      state.cartOpen = action.payload;
     },
   },
 });

@@ -2,6 +2,7 @@ import styles from './sort.module.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 type SortItem = {
   name: string;
@@ -34,7 +35,7 @@ type SortProps = {
 
 const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
   const [open, setOpen] = useState(false);
-  const nameSort = useSelector((state) => state.filter.sort);
+  const nameSort = useSelector((state: RootState) => state.filter.sort);
   const sortRef = useRef<HTMLDivElement>(null);
 
   const onClickListItem = (obj: SortItem) => {

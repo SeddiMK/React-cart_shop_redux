@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 // import goodsArr from '../data/goods.json';
 
@@ -46,12 +47,14 @@ export const goodsSlice = createSlice({
 export const { selCurrensy, selCostFlag, fullQuantity, setGoodsValArr } =
   goodsSlice.actions;
 
-export const fullQuantityGoods = (state) => state.goodsVal.fullQuantityGoodsSt;
+export const fullQuantityGoods = (state: RootState) =>
+  state.goodsVal.fullQuantityGoodsSt;
 
-export const selectCostFlag = (state) => state.goodsVal.flagSelCurrency;
+export const selectCostFlag = (state: RootState) =>
+  state.goodsVal.flagSelCurrency;
 
-export const selectCurrensy = (state) => state.goodsVal.currency;
+export const selectCurrensy = (state: RootState) => state.goodsVal.currency;
 
-export const selectGoods = (state) => state.goodsVal.goodsValArr;
+export const selectGoods = (state: RootState) => state.goodsVal.goodsValArr;
 
 export default goodsSlice.reducer;

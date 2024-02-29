@@ -1,12 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '.';
+
+type CartItem = {
+  articul: string;
+  cost: number;
+};
+
+interface CartSliceState {
+  cartVal: { [articul: string]: any }; // CartItem[]; //
+  articul: string;
+  cartOpen: false;
+}
+
+const initialState: CartSliceState = {
+  cartVal: {},
+  articul: 'articul',
+  cartOpen: false,
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    cartVal: {},
-    articul: 'articul',
-    cartOpen: false,
-  },
+  initialState,
   reducers: {
     increment: (state, data) => {
       let articul = data.payload;
@@ -63,7 +77,7 @@ export const cartSlice = createSlice({
 
 export const { increment, minus, del, clearCart, cartOpen } = cartSlice.actions;
 
-export const selectCartOpenSt = (state) => state.cartVal.cartOpen;
-export const selectCart = (state) => state.cartVal.cartVal;
+export const selectCartOpenSt = (state: RootState) => state.cartVal.cartOpen;
+export const selectCart = (state: RootState) => state.cartVal.cartVal;
 
 export default cartSlice.reducer;

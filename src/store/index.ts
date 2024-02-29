@@ -5,7 +5,7 @@ import cartSlice from './cartSlice';
 import filter from './filterSlice';
 import furniture from './furnitureSlice';
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
     goodsVal: goodsSlice,
     cartVal: cartSlice,
@@ -13,3 +13,5 @@ export default configureStore({
     furniture,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;

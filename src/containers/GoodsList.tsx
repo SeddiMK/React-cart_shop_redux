@@ -18,6 +18,7 @@ import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
 import { listSort } from '../components/sort';
 import Error from '../components/error';
+import { RootState } from '../store';
 
 // get data from store
 // list data
@@ -28,10 +29,10 @@ const GoodsList: React.FC = () => {
   const isMounted = useRef(false); // если мы делали что нибудь на стр, то первый рендер был
 
   let { searchInpVal, categoryName, currentPage, sort } = useSelector(
-    (state) => state.filter
+    (state: RootState) => state.filter
   );
 
-  let { items, status } = useSelector((state) => state.furniture);
+  let { items, status } = useSelector((state: RootState) => state.furniture);
 
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);

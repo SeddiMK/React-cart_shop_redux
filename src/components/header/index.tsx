@@ -22,6 +22,7 @@ import {
 } from '../../store/filterSlice';
 import { cartOpen } from '../../store/cartSlice';
 import { fetchFurniture } from '../../store/furnitureSlice';
+import { RootState } from '../../store';
 
 // data-header-nav-link --// можно вынести в отдельный файл------------
 const linkHeaderArr = [
@@ -40,7 +41,7 @@ const Header: React.FC = () => {
 
   const [sortValue] = useState(null);
   // const categoryName = useSelector((state) => state.filter.categoryName);
-  let cartOpenSt = useSelector((state) => state.cartVal.cartOpen);
+  let cartOpenSt = useSelector((state: RootState) => state.cartVal.cartOpen);
 
   const [burgerClick, setBurgerClick] = useState(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);

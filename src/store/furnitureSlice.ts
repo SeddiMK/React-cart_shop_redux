@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { RootState } from '.';
 
 export const fetchFurniture = createAsyncThunk(
   'furniture/fetchFurnitureStatus',
-  async (params, thunkAPI) => {
+  async (params) => {
     const {
       sortBy,
       order,
@@ -70,6 +71,7 @@ export const furnitureSlice = createSlice({
 
 export const { setItems, setItemsReindexing } = furnitureSlice.actions;
 
-export const itemsReindexing = (state) => state.furniture.itemsReindexing;
+export const itemsReindexing = (state: RootState) =>
+  state.furniture.itemsReindexing;
 
 export default furnitureSlice.reducer;

@@ -75,15 +75,15 @@ const Header: React.FC = () => {
 
   const handleLogo = () => {
     // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // dispath(
-    //   fetchFurniture({
-    //     sortBy: 'rating',
-    //     order: 'desc',
-    //     searchCategoryFilter: '',
-    //     searchInpValData: '',
-    //     currentPage: '1',
-    //   })
-    // );
+    dispath(
+      fetchFurniture({
+        sortBy: 'rating',
+        order: 'desc',
+        searchCategoryFilter: '',
+        searchInpValData: '',
+        currentPage: '1',
+      })
+    );
     // баг с  searchCategoryFilter !!!
     setTimeout(() => {
       window.location.reload();

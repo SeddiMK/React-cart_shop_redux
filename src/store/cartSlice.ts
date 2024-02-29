@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 type CartItem = {
   articul: string;
   cost: number;
@@ -9,7 +10,7 @@ type CartItem = {
 interface CartSliceState {
   cartVal: { [articul: string]: any }; // CartItem[]; //
   articul: string;
-  cartOpen: false;
+  cartOpen: boolean;
 }
 
 const initialState: CartSliceState = {
@@ -22,7 +23,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    increment: (state, data) => {
+    increment: (state, data: PayloadAction<string>) => {
       let articul = data.payload;
 
       if (state.cartVal[articul] === undefined) {
@@ -32,7 +33,7 @@ export const cartSlice = createSlice({
       state.cartVal[articul]++;
       // state.cartVal.push(data.payload); //----------------------
     },
-    minus: (state, data) => {
+    minus: (state, data: PayloadAction<string>) => {
       let articul = data.payload;
 
       if (state.cartVal[articul] === undefined) {
@@ -52,7 +53,7 @@ export const cartSlice = createSlice({
         delete state.cartVal[articul];
       }
     },
-    del: (state, data) => {
+    del: (state, data: PayloadAction<string>) => {
       let articul = data.payload;
 
       // delete to cart
@@ -69,7 +70,7 @@ export const cartSlice = createSlice({
 
       // state.cartVal = []; //---------------------------
     },
-    cartOpen: (state, data) => {
+    cartOpen: (state, data: PayloadAction<false>) => {
       state.cartOpen = data.payload;
     },
   },

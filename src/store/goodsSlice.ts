@@ -3,15 +3,25 @@ import { RootState } from '.';
 
 // import goodsArr from '../data/goods.json';
 
+type GoodsSliceState = {
+  goodsValArr: [];
+  cost: number;
+  currency: string;
+  flagSelCurrency: boolean;
+  fullQuantityGoodsSt: number;
+};
+
+const initialState: GoodsSliceState = {
+  goodsValArr: [], //goodsArr
+  cost: 0, //goodsArr[0].cost,
+  currency: 'RUB', //goodsArr[0].currency,
+  flagSelCurrency: false,
+  fullQuantityGoodsSt: 0,
+};
+
 export const goodsSlice = createSlice({
   name: 'goods',
-  initialState: {
-    goodsValArr: [], //goodsArr
-    cost: 0, //goodsArr[0].cost,
-    currency: 'RUB', //goodsArr[0].currency,
-    flagSelCurrency: false,
-    fullQuantityGoodsSt: 0,
-  },
+  initialState,
   reducers: {
     selCurrensy(state, data) {
       if (state.currency !== undefined) {

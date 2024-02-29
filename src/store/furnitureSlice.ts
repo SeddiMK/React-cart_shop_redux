@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '.';
 
@@ -23,26 +23,45 @@ export const fetchFurniture = createAsyncThunk(
   }
 );
 
+type Furniture = {
+  articul: string;
+  title: string;
+  cost: number;
+  image: string;
+  rating: number;
+  description: string;
+  currency: string;
+};
+
+interface FurnitureSliceState {
+  items: Furniture[];
+  itemsReindexing: [];
+  status: 'loading' | 'success' | 'error';
+  loading: boolean;
+}
+
+const initialState: FurnitureSliceState = {
+  items: [],
+  itemsReindexing: [],
+  status: 'loading', // loading | success | error
+  loading: true,
+};
+
 export const furnitureSlice = createSlice({
   name: 'furniture',
-  initialState: {
-    items: [],
-    itemsReindexing: [],
-    status: 'loading', // loading | success | error
-    loading: true,
-  },
+  initialState,
   reducers: {
-    setItems: (state, data) => {
+    setItems: (state, data: PayloadAction<Furniture[]>) => {
       state.items = data.payload;
     },
 
-    setItemsReindexing: (state, data) => {
-      // if (state.items.length > 1) {
-      //   state.items.reduce((accum, item) => {
-      //     accum[item.articul] = item;
-      //     state.itemsReindexing = accum;
-      //   }, {});
-      // }
+    setItemsReindexing: (state) => {
+      if (state.items.length > 1) {
+        state.items.reduce((accum, item) => {
+          accum[item.articul] = item;
+          state.itemsReindexing = accum;
+        }, {});
+      }
     },
   },
   extraReducers: (builder) => {

@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
+import { Furniture } from './furnitureSlice';
+
 // import goodsArr from '../action/goods.json';
 
 type GoodsSliceState = {
-  goodsValArr: [];
+  goodsValArr: Furniture[];
   cost: number;
   currency: string;
   flagSelCurrency: boolean;

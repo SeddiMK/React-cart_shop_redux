@@ -31,7 +31,7 @@ export const fetchFurniture = createAsyncThunk(
   }
 );
 
-type Furniture = {
+export type Furniture = {
   articul: string;
   title: string;
   cost: number;

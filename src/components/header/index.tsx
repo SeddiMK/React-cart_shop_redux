@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Burger from '../burger';
 import Search from '../search';
 import Categories from '../categories';
-import Sort from '../sort';
+import SortPopup from '../sort';
 
 import {
   selCostFlag,
@@ -21,7 +21,10 @@ import {
   setSort,
 } from '../../store/filterSlice';
 import { cartOpen } from '../../store/cartSlice';
-import { fetchFurniture } from '../../store/furnitureSlice';
+import {
+  SearchFurnitureParams,
+  fetchFurniture,
+} from '../../store/furnitureSlice';
 import { RootState } from '../../store';
 
 // data-header-nav-link --// можно вынести в отдельный файл------------
@@ -75,15 +78,16 @@ const Header: React.FC = () => {
 
   const handleLogo = () => {
     // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    dispath(
-      fetchFurniture({
-        sortBy: 'rating',
-        order: 'desc',
-        searchCategoryFilter: '',
-        searchInpValData: '',
-        currentPage: '1',
-      })
-    );
+    // dispath(
+    //   fetchFurniture({
+    //     sortBy: 'rating',
+    //     order: 'desc',
+    //     searchCategoryFilter: '',
+    //     searchInpValData: '',
+    //     currentPage: 1,
+    //   })
+    // );
+    dispath(fetchFurniture({} as SearchFurnitureParams));
     // баг с  searchCategoryFilter !!!
     setTimeout(() => {
       window.location.reload();
@@ -154,7 +158,7 @@ const Header: React.FC = () => {
 
               <Categories onChangeCategories={handlerSelCategory} />
             </div>
-            <Sort value={sortValue} onChangeSort={handlerSelSort} />
+            <SortPopup value={sortValue} onChangeSort={handlerSelSort} />
           </div>
           <ul className="menu__list-right list-right auth_block">
             {linkHeaderAuthArr.map((el, i) => (

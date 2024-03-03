@@ -3,28 +3,29 @@ import styles from './sort.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { SortPropertyEnum } from '../../store/filterSlice';
 
 type SortItem = {
   name: string;
-  sortProperty: string;
+  sortProperty: SortPropertyEnum;
 };
 
 export const listSort: SortItem[] = [
   {
     name: 'popularity',
-    sortProperty: '-rating',
+    sortProperty: SortPropertyEnum.RATING_ASC,
   },
   // {
   //   name: 'decreasing popularity',
-  //   sortProperty: 'rating',
+  //   sortProperty: 'rating', //SortPropertyEnum.RATING_DESC
   // },
   {
     name: 'price increase',
-    sortProperty: 'cost',
+    sortProperty: SortPropertyEnum.COST_DESC,
   },
   {
     name: 'decreasing prices',
-    sortProperty: '-cost',
+    sortProperty: SortPropertyEnum.COST_ASC,
   },
 ]; // можно вынести в отдельный файл
 
@@ -33,7 +34,7 @@ type SortProps = {
   onChangeSort: (obj: {}) => void;
 };
 
-const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
+const SortPopup: React.FC<SortProps> = ({ value, onChangeSort }) => {
   const [open, setOpen] = useState(false);
   const nameSort = useSelector((state: RootState) => state.filter.sort);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -86,4 +87,4 @@ const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
   );
 };
 
-export default Sort;
+export default SortPopup;

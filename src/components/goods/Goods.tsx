@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Goods.scss';
 
 type GoodsProps = {
@@ -36,10 +37,11 @@ const Goods: React.FC<GoodsProps> = ({
   // };
   return (
     <div className="goods-block">
-      <div className="goods-block__imgage-wrap">
-        <img className="goods-block__img" src={image} alt={title} />
-      </div>
-
+      <Link to={`/fullOptions/${articul}`}>
+        <div className="goods-block__imgage-wrap">
+          <img className="goods-block__img" src={image} alt={title} />
+        </div>
+      </Link>
       <div className="goods-block__title-coast">
         <p>{title}</p>
 

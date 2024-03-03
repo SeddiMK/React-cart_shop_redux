@@ -11,19 +11,19 @@ import {
   setGoodsValArr,
 } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
-import { setFilters } from '../store/filterSlice';
-import { fetchFurniture } from '../store/furnitureSlice';
+import { FilterSliceState, setFilters } from '../store/filterSlice';
+import { SearchFurnitureParams, fetchFurniture } from '../store/furnitureSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
 import { listSort } from '../components/sort';
 import Error from '../components/error';
-import { RootState } from '../store';
+import { RootState, useAppDispatch } from '../store';
 
 // get data from store
 // list data
 const GoodsList: React.FC = () => {
-  const dispath = useDispatch();
+  const dispath = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false); // флаг первого рендера
   const isMounted = useRef(false); // если мы делали что нибудь на стр, то первый рендер был
@@ -56,7 +56,7 @@ const GoodsList: React.FC = () => {
         order,
         searchCategoryFilter,
         searchInpValData,
-        currentPage,
+        currentPage: String(currentPage),
       })
     );
 
@@ -66,11 +66,19 @@ const GoodsList: React.FC = () => {
   //проверяем URL-параметры и сохраняем в redux
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = listSort.find(
-        (obj) => obj.sortProperty === params.sortProperty
+      const params = qs.parse(
+        window.location.search.substring(1)
+      ) as unknown as SearchFurnitureParams;
+      const sort = listSort.find((obj) => obj.sortProperty === params.sortBy);
+
+      dispath(
+        setFilters({
+          sort: sort || listSort[0],
+          categoryName: params.searchCategoryFilter,
+          searchInpVal: params.searchInpValData,
+          currentPage: Number(params.currentPage),
+        })
       );
-      dispath(setFilters({ ...params, sort }));
 
       isSearch.current = true; //флаг первого рендера
     }
@@ -121,15 +129,16 @@ const GoodsList: React.FC = () => {
   }, [status, items, dispath]);
 
   //=clickHandler===============================
-  let clickHandler = (e) => {
+  let clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    let targ = e.target;
+    let targ = e.target as HTMLButtonElement;
 
     if (!targ.classList.contains('add-to-cart')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
 
     dispath(increment(targ.getAttribute('data-key')));
   };
-
+  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
+  // <Link to={`/fullOptions/${el.articul}`}></Link>
   // if (loading) return <p className="loading"> Загрузка...</p>; //загрузка...
   return (
     <>
@@ -139,23 +148,20 @@ const GoodsList: React.FC = () => {
         ) : (
           <>
             {status === 'loading'
-              ? [...new Array(10)].map((_, i) => <Skeleton key={i} />)
+              ? skeletons
               : goods.map((el) => (
                   <div className="goods-wraper" key={el.articul}>
-                    <Link to={`/fullOptions/${el.articul}`}>
-                      <Goods
-                        quantityOneGoods={cart[el.articul]}
-                        title={el.title}
-                        cost={
-                          !selCostFlag ? el.cost : (el.cost / 95).toFixed(0)
-                        } // курс 1 доллара 95
-                        image={el.image}
-                        articul={el.articul}
-                        rating={el.rating}
-                        description={el.description}
-                        currency={currency}
-                      />
-                    </Link>
+                    <Goods
+                      quantityOneGoods={cart[el.articul]}
+                      title={el.title}
+                      cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+                      image={el.image}
+                      articul={el.articul}
+                      rating={el.rating}
+                      description={el.description}
+                      currency={currency}
+                    />
+
                     <button
                       className="goods-block__add-to-cart  btn add-to-cart"
                       data-key={el.articul}>

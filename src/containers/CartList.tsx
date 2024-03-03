@@ -49,19 +49,20 @@ const CartList: React.FC = () => {
   console.log(goods, 'goods');
   console.log(goodsObj, 'goodsObj');
 
-  useEffect(() => {
-    // if(cart)!!!!!!!!!!!!!!!!!!!!!!
-    // console.log(Object.values(cart).length, 'Object.values(cart)');
-    // if (Object.values(cart).length > 1) {
-    //   setGoodsObj(
-    //     goods.reduce((accum: any, item: any) => {
-    //       accum[item.articul] = item;
-    //       return accum;
-    //     }, {})
-    //   );
-    // } else if (Object.values(cart).length === 1) {
-    // }
-  }, [cart, goods]);
+  // useEffect(() => {
+  //   // if(cart)!!!!!!!!!!!!!!!!!!!!!!
+  //   console.log(Object.values(cart).length, 'Object.values(cart)');
+
+  //   if (Object.values(cart).length > 1) {
+  //     setGoodsObj(
+  //       goods.reduce((accum: any, item: any) => {
+  //         accum[item.articul] = item;
+  //         return accum;
+  //       }, {})
+  //     );
+  //   } else if (Object.values(cart).length === 1) {
+  //   }
+  // }, [cart, goods]);
 
   // fullPrice---------------------------------------------------------------
   //full price

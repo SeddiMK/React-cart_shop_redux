@@ -23,7 +23,7 @@ import { RootState, useAppDispatch } from '../store';
 // get data from store
 // list data
 const GoodsList: React.FC = () => {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false); // флаг первого рендера
   const isMounted = useRef(false); // если мы делали что нибудь на стр, то первый рендер был
@@ -50,7 +50,7 @@ const GoodsList: React.FC = () => {
       categoryName !== 'allgoods' ? `${categoryName}` : '';
     const searchInpValData = searchInpVal ? searchInpVal : '';
 
-    dispath(
+    dispatch(
       fetchFurniture({
         sortBy,
         order,
@@ -71,7 +71,7 @@ const GoodsList: React.FC = () => {
       ) as unknown as SearchFurnitureParams;
       const sort = listSort.find((obj) => obj.sortProperty === params.sortBy);
 
-      dispath(
+      dispatch(
         setFilters({
           sort: sort || listSort[0],
           categoryName: params.searchCategoryFilter,
@@ -125,8 +125,8 @@ const GoodsList: React.FC = () => {
 
   // при изменении furnitureSlice вносим изменения
   useEffect(() => {
-    if (status === 'success') dispath(setGoodsValArr(items));
-  }, [status, items, dispath]);
+    if (status === 'success') dispatch(setGoodsValArr(items));
+  }, [status, items, dispatch]);
 
   //=clickHandler===============================
   let clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -135,7 +135,7 @@ const GoodsList: React.FC = () => {
 
     if (!targ.classList.contains('add-to-cart')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
 
-    dispath(increment(targ.getAttribute('data-key')));
+    dispatch(increment(targ.getAttribute('data-key')));
   };
   const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
   // <Link to={`/fullOptions/${el.articul}`}></Link>

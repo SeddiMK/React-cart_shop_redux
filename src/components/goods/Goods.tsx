@@ -8,6 +8,7 @@ type GoodsProps = {
   image: string;
   rating: number;
   currency: string;
+  description: string;
   quantityOneGoods: number;
 };
 
@@ -18,6 +19,7 @@ const Goods: React.FC<GoodsProps> = ({
   image,
   rating,
   currency,
+  description,
   quantityOneGoods,
 }) => {
   // // карзина в локальном store/ карзину должен давать бэкенд

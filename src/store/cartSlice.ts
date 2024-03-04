@@ -3,12 +3,11 @@ import { RootState } from '.';
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 type CartItem = {
-  articul: string;
-  cost: number;
+  [articul: string]: number;
 };
 
 interface CartSliceState {
-  cartVal: { [articul: string]: any }; // CartItem[]; //
+  cartVal: CartItem; // CartItem[]; //
   articul: string;
   cartOpen: boolean;
 }

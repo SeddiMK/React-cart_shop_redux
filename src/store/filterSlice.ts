@@ -20,7 +20,7 @@ export interface FilterSliceState {
 
 const initialState: FilterSliceState = {
   categoryName: 'allgoods',
-  searchInpVal: ' ',
+  searchInpVal: '',
   currentPage: 1,
   sort: {
     name: 'popularity',

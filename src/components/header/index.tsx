@@ -75,9 +75,9 @@ const Header: React.FC = () => {
 
   const handleCart = () => {
     // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // if (fullQuantityGoodsCart !== 0) {
-    //   dispath(cartOpen(!cartOpenSt));
-    // }
+    if (fullQuantityGoodsCart !== 0) {
+      dispath(cartOpen(!cartOpenSt as false));
+    }
   };
 
   const handleLogo = () => {

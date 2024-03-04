@@ -45,7 +45,7 @@ export const goodsSlice = createSlice({
         state.fullQuantityGoodsSt = action.payload;
       }
     },
-    setGoodsValArr(state, action: PayloadAction<[]>) {
+    setGoodsValArr(state, action: PayloadAction<Furniture[]>) {
       if (state.goodsValArr !== undefined) {
         state.goodsValArr = action.payload;
       }

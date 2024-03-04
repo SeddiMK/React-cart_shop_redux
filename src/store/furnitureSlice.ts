@@ -30,10 +30,10 @@ export const fetchFurniture = createAsyncThunk<
     params;
 
   const { data } = await axios.get<Furniture[]>(
-    `https://65c21d61f7e6ea59682aa9c7.mockapi.io/action_shop_furniture?limit=9&page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
+    `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?limit=9&page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
   ); //limit=должен давать бэкенд(mockapi.io- не дает всех страниц от количетва товара и массив, объект корзины)limit=6&sortBy=cost&order=asc
   console.log(
-    `https://65c21d61f7e6ea59682aa9c7.mockapi.io/action_shop_furniture?page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
+    `https://65c21d61f7e6ea59682aa9c7.mockapi.io/data_shop_furniture?page=${currentPage}&sortBy=${sortBy}&order=${order}&search=${searchInpValData}&filter=${searchCategoryFilter}`
   );
   return data; // as Furniture[];
 });
@@ -45,8 +45,8 @@ export enum Status {
 }
 
 interface FurnitureSliceState {
-  items: [];
-  itemsReindexing: [];
+  items: Furniture[];
+  itemsReindexing: Furniture[];
   status: Status;
   loading: boolean;
 }
@@ -68,7 +68,7 @@ export const furnitureSlice = createSlice({
 
     setItemsReindexing: (state) => {
       if (state.items.length > 1) {
-        state.items.reduce((accum, item) => {
+        state.items.reduce((accum: any, item) => {
           accum.item.articul = item;
           return (state.itemsReindexing = accum);
         }, []);

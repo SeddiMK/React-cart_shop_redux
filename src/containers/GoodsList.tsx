@@ -60,33 +60,33 @@ const GoodsList: React.FC = () => {
       })
     );
 
-    document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
+    document.getElementById('root')!.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
   //проверяем URL-параметры и сохраняем в redux
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(
-        window.location.search.substring(1)
-      ) as unknown as SearchFurnitureParams;
-      const sort = listSort.find((obj) => obj.sortProperty === params.sortBy);
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(
+  //       window.location.search.substring(1)
+  //     ) as unknown as SearchFurnitureParams;
+  //     const sort = listSort.find((obj) => obj.sortProperty === params.sortBy);
 
-      dispatch(
-        setFilters({
-          sort: sort || listSort[0],
-          categoryName: params.searchCategoryFilter,
-          searchInpVal: params.searchInpValData,
-          currentPage: Number(params.currentPage),
-        })
-      );
+  //     dispatch(
+  //       setFilters({
+  //         sort: sort || listSort[0],
+  //         categoryName: params.searchCategoryFilter,
+  //         searchInpVal: params.searchInpValData,
+  //         currentPage: Number(params.currentPage),
+  //       })
+  //     );
 
-      isSearch.current = true; //флаг первого рендера
-    }
-  }, []);
+  //     isSearch.current = true; //флаг первого рендера
+  //   }
+  // }, []);
 
   // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   useEffect(() => {
-    document.getElementById('root').scrollIntoView(); // при перерисовке скорит на верх стр
+    document.getElementById('root')!.scrollIntoView(); // при перерисовке скорит на верх стр
 
     //если был первый рендер, то запрашиваем данные
     if (!isSearch.current) {
@@ -135,7 +135,9 @@ const GoodsList: React.FC = () => {
 
     if (!targ.classList.contains('add-to-cart')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
 
-    dispatch(increment(targ.getAttribute('data-key')));
+    if (targ.classList.contains('add-to-cart')) {
+      dispatch(increment(targ.getAttribute('data-key')!));
+    }
   };
   const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
   // <Link to={`/fullOptions/${el.articul}`}></Link>
@@ -154,7 +156,9 @@ const GoodsList: React.FC = () => {
                     <Goods
                       quantityOneGoods={cart[el.articul]}
                       title={el.title}
-                      cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
+                      cost={Number(
+                        !selCostFlag ? el.cost : (el.cost / 95).toFixed(0)
+                      )} // курс 1 доллара 95
                       image={el.image}
                       articul={el.articul}
                       rating={el.rating}

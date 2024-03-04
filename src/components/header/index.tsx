@@ -1,5 +1,5 @@
-import './Header.css';
-import '../../app/Common.css';
+import './Header.scss';
+import '../../app/Common.scss';
 
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
   fullQuantityGoods,
 } from '../../store/goodsSlice';
 import {
+  Sort,
   setCategoryName,
   setCurrentPage,
   setSort,
@@ -44,7 +45,9 @@ const Header: React.FC = () => {
 
   const [sortValue] = useState(null);
   // const categoryName = useSelector((state) => state.filter.categoryName);
-  let cartOpenSt = useSelector((state: RootState) => state.cartVal.cartOpen);
+  let cartOpenSt: boolean = useSelector(
+    (state: RootState) => state.cartVal.cartOpen
+  );
 
   const [burgerClick, setBurgerClick] = useState(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -61,7 +64,7 @@ const Header: React.FC = () => {
 
   // filter select sort
   const handlerSelSort = (e: {}) => {
-    dispath(setSort(e));
+    dispath(setSort(e as Sort));
     dispath(setCurrentPage(1));
   };
 
@@ -71,9 +74,10 @@ const Header: React.FC = () => {
   };
 
   const handleCart = () => {
-    if (fullQuantityGoodsCart !== 0) {
-      dispath(cartOpen(!cartOpenSt));
-    }
+    // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // if (fullQuantityGoodsCart !== 0) {
+    //   dispath(cartOpen(!cartOpenSt));
+    // }
   };
 
   const handleLogo = () => {
@@ -87,7 +91,7 @@ const Header: React.FC = () => {
     //     currentPage: 1,
     //   })
     // );
-    dispath(fetchFurniture({} as SearchFurnitureParams));
+    // dispath(fetchFurniture({} as SearchFurnitureParams));
     // баг с  searchCategoryFilter !!!
     setTimeout(() => {
       window.location.reload();

@@ -45,7 +45,7 @@ export enum Status {
 }
 
 interface FurnitureSliceState {
-  items: Furniture[];
+  items: [];
   itemsReindexing: [];
   status: Status;
   loading: boolean;
@@ -62,14 +62,14 @@ export const furnitureSlice = createSlice({
   name: 'furniture',
   initialState,
   reducers: {
-    setItems: (state, action: PayloadAction<Furniture[]>) => {
+    setItems: (state, action: PayloadAction<[]>) => {
       state.items = action.payload;
     },
 
     setItemsReindexing: (state) => {
       if (state.items.length > 1) {
         state.items.reduce((accum, item) => {
-          accum[item.articul] = item;
+          accum.item.articul = item;
           return (state.itemsReindexing = accum);
         }, []);
       }

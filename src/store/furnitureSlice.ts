@@ -46,14 +46,14 @@ export enum Status {
 
 interface FurnitureSliceState {
   items: Furniture[];
-  itemsReindexing: Furniture[];
+  itemsReindexing: {};
   status: Status;
   loading: boolean;
 }
 
 const initialState: FurnitureSliceState = {
   items: [],
-  itemsReindexing: [],
+  itemsReindexing: {},
   status: Status.LOADING, // loading | success | error
   loading: true,
 };
@@ -66,15 +66,19 @@ export const furnitureSlice = createSlice({
       state.items = action.payload;
     },
 
-    setItemsReindexing: (state) => {
-      console.log(state.items, '--------------------------state.items');
-      if (state.items.length > 1) {
-        state.items.reduce((accum: any, item) => {
-          accum.item.articul = item;
-          return (state.itemsReindexing = accum);
-        }, []);
-      }
-    },
+    // setItemsReindexing: (state, action: PayloadAction<{}>) => {
+    //   console.log(
+    //     state.itemsReindexing,
+    //     '--------------------------state.itemsReindexing'
+    //   );
+
+    //   // if (Object.keys(action.payload).length > 0) {
+    //   //   state.items.reduce<{}>((accum: any, item: any) => {
+    //   //     accum[item.articul] = item;
+    //   //     return (state.itemsReindexing = accum);
+    //   //   }, {});
+    //   // }
+    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFurniture.pending, (state) => {
@@ -87,13 +91,15 @@ export const furnitureSlice = createSlice({
       state.items = action.payload;
       state.loading = false;
       if (state.items.length > 1) {
-        setItemsReindexing();
+        // furnitureSlice.caseReducers.setItemsReindexing();
+        // -----------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!
+        state.items.reduce<{}>((accum: any, item: any) => {
+          accum[item.articul] = item;
+          return (state.itemsReindexing = accum);
+        }, {});
       }
-      // state.items.reduce<[]>((accum, item) => {
-      //   accum[item.articul] = item;
-      //   return (state.itemsReindexing = accum);
-      // }, []);
     });
+
     builder.addCase(fetchFurniture.rejected, (state) => {
       state.status = Status.ERROR;
       state.items = [];
@@ -102,9 +108,10 @@ export const furnitureSlice = createSlice({
   },
 });
 
-export const { setItems, setItemsReindexing } = furnitureSlice.actions;
+export const { setItems } = furnitureSlice.actions;
 
 export const itemsReindexing = (state: RootState) =>
   state.furniture.itemsReindexing;
+export const itemsFurnutere = (state: RootState) => state.furniture.items;
 
 export default furnitureSlice.reducer;

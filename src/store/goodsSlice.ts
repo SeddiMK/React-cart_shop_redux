@@ -6,7 +6,7 @@ import { Furniture } from './furnitureSlice';
 // import goodsArr from '../action/goods.json';
 
 type GoodsSliceState = {
-  goodsValArr: Furniture[];
+  // goodsValArr: Furniture[];
   cost: number;
   currency: string;
   flagSelCurrency: boolean;
@@ -14,7 +14,7 @@ type GoodsSliceState = {
 };
 
 const initialState: GoodsSliceState = {
-  goodsValArr: [], //goodsArr
+  // goodsValArr: [], //goodsArr
   cost: 0, //goodsArr[0].cost,
   currency: 'RUB', //goodsArr[0].currency,
   flagSelCurrency: false,
@@ -45,11 +45,11 @@ export const goodsSlice = createSlice({
         state.fullQuantityGoodsSt = action.payload;
       }
     },
-    setGoodsValArr(state, action: PayloadAction<Furniture[]>) {
-      if (state.goodsValArr !== undefined) {
-        state.goodsValArr = action.payload;
-      }
-    },
+    // setGoodsValArr(state, action: PayloadAction<Furniture[]>) {
+    //   if (state.goodsValArr !== undefined) {
+    //     state.goodsValArr = action.payload;
+    //   }
+    // },
 
     // selectCostFlag(state, action) {
     //   if (state.currency !== 'RUB') {
@@ -59,8 +59,7 @@ export const goodsSlice = createSlice({
   },
 });
 
-export const { selCurrensy, selCostFlag, fullQuantity, setGoodsValArr } =
-  goodsSlice.actions;
+export const { selCurrensy, selCostFlag, fullQuantity } = goodsSlice.actions; //, setGoodsValArr
 
 export const fullQuantityGoods = (state: RootState) =>
   state.goodsVal.fullQuantityGoodsSt;
@@ -70,6 +69,6 @@ export const selectCostFlag = (state: RootState) =>
 
 export const selectCurrensy = (state: RootState) => state.goodsVal.currency;
 
-export const selectGoods = (state: RootState) => state.goodsVal.goodsValArr;
+// export const selectGoods = (state: RootState) => state.goodsVal.goodsValArr;
 
 export default goodsSlice.reducer;

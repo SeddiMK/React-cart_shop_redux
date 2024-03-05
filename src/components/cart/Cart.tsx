@@ -7,7 +7,7 @@ type CartProps = {
   currency: string;
   quantity: number;
   priceAllItem: string | number;
-  cost: string;
+  cost: string | number;
 };
 
 const Cart: React.FC<CartProps> = (props) => {

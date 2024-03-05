@@ -6,7 +6,6 @@ import {
   fullQuantity,
   selectCostFlag,
   selectCurrensy,
-  selectGoods,
 } from '../store/goodsSlice';
 import {
   selectCart,
@@ -14,31 +13,23 @@ import {
   del,
   cartOpen,
   selectCartOpenSt,
+  CartItem,
 } from '../store/cartSlice';
-import {
-  Furniture,
-  itemsReindexing,
-  setItemsReindexing,
-} from '../store/furnitureSlice';
+import { itemsReindexing } from '../store/furnitureSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
+import { useAppDispatch } from '../store';
 
 const CartList: React.FC = () => {
-  const dispath = useDispatch();
-  const selCartOpenSt = useSelector(selectCartOpenSt);
+  const dispath = useAppDispatch();
+  const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
   const selCostFlag: boolean = useSelector(selectCostFlag);
-  const currency = useSelector(selectCurrensy);
-  const goods: Furniture[] = useSelector(selectGoods);
-  const cart = useSelector(selectCart);
-  // const itemsReindexing = useSelector<object>(itemsReindexing);
+  const currency: string = useSelector(selectCurrensy);
+  const goodsReindex: any = useSelector(itemsReindexing);
+  const cart: CartItem = useSelector(selectCart);
 
-  // const [openCart, setOpenCart] = useState(true);
-  // const [findElCart, setFindElCart] = useState([]);
-  const [findElFlag] = useState<boolean>(true);
   const catCartRef = useRef(null);
-  // let goodsObj: object = useSelector(itemsReindexing);
-  const [goodsObj, setGoodsObj] = useState<Furniture[]>();
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
@@ -50,13 +41,11 @@ const CartList: React.FC = () => {
   //  ===========================================================================
   // переидексирую массив товара -----------------------------------------!!!!!!!!!!!!
 
-  console.log(goods, 'goods');
-  console.log(goodsObj, 'goodsObj');
+  // console.log(goodsObj, 'goodsObj');
   // useEffect(() => {
-  //   console.log(goodsObj, '--------------------goodsObj');
-  //   dispath(setItemsReindexing(cart));
+  //   dispath(setItemsReindexing(goods));
   // }, [goods, cart]);
-  
+
   // useEffect(() => {
   //   // if(cart)!!!!!!!!!!!!!!!!!!!!!!
   //   console.log(Object.values(cart).length, 'Object.values(cart)');
@@ -97,18 +86,18 @@ const CartList: React.FC = () => {
   //   }
   //   return sum;
   // };
-  // ------------------------------------------------------------!!!!!!
 
-  const fullPrice = () => {
-    const fullPriceArr = Object.keys(cart).map((el) => {
-      let priceInObj: any = goodsObj[el as keyof typeof goodsObj]['cost'];
+  const fullPrice = (): number => {
+    const fullPriceArr: number[] = Object.keys(cart).map((el) => {
+      const priceInObj: number = goodsReindex[el].cost;
 
-      let price = 0;
-      return (price +=
-        (!selCostFlag && goodsObj ? priceInObj : (priceInObj / 95).toFixed(0)) *
-        cart[el]);
+      let price: number = 0;
+      return (price += (Number(
+        !selCostFlag && goodsReindex ? priceInObj : priceInObj / 95
+      ) * cart[el]) as number);
     });
-    let sum = 0;
+
+    let sum: number = 0;
     for (let i = 0; i < fullPriceArr.length; i++) {
       sum += fullPriceArr[i];
     }
@@ -126,7 +115,7 @@ const CartList: React.FC = () => {
     if (fullQuantityGoodsCart !== undefined) {
       dispath(
         fullQuantity(
-          Object.values(cart).reduce((a: number, b: any) => a + b, 0)
+          Object.values(cart).reduce((a: number, b: number) => a + b, 0)
         )
       );
     }
@@ -195,27 +184,27 @@ const CartList: React.FC = () => {
     }
   };
 
-  // if (!findElFlag) return <ErrorBeckend />;
-  // {selCartOpenSt && (       )}
+  console.log(cart, '----------------------cart');
+
   return (
     <>
       {selCartOpenSt && (
         <section
           className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>
-          {findElFlag ? (
+          {Object.keys(cart).length ? (
             <div className="main__goods-table" onClick={clickHandler}>
               {/* fullGoods */}
               <div className="goods-table__full-goods-block">
                 <ul className="goods-table__full-goods">
-                  {Object.keys(cart).map((el, i) => (
-                    <li
-                      className="goods-table__item"
-                      key={goodsObj[el as keyof typeof goodsObj]['title'] + i}>
-                      {goodsObj[el as keyof typeof goodsObj]['title']} -{' '}
-                      {cart[el]}
-                    </li>
-                  ))}
+                  {Object.keys(cart).map((el: string, i: number) => {
+                    const item = goodsReindex[el];
+                    return (
+                      <li className="goods-table__item" key={item.title + i}>
+                        {item.title} - {cart[el]}
+                      </li>
+                    );
+                  })}
                 </ul>
                 <div
                   className="goods-table__full-goods-close"
@@ -225,35 +214,31 @@ const CartList: React.FC = () => {
                 Full price: {fullPrice()} {currency}
               </div>
               <div className="goods-table__cart cart">
-                {Object.keys(cart).map((el, i) => (
-                  <Cart
-                    key={goodsObj[el as keyof typeof goodsObj]['title'] + i}
-                    title={goodsObj[el as keyof typeof goodsObj]['title']}
-                    cost={
-                      !selCostFlag
-                        ? goodsObj[el as keyof typeof goodsObj]['cost']
-                        : (
-                            goodsObj[el as keyof typeof goodsObj]['cost'] / 95
-                          ).toFixed(0)
-                    } //cost={!selCostFlag ? el.cost : (el.cost / 95).toFixed(0)} // курс 1 доллара 95
-                    currency={currency}
-                    quantity={cart[el]}
-                    priceAllItem={
-                      !selCostFlag && goodsObj
-                        ? Number(goodsObj[el as keyof typeof goodsObj]['cost'])
-                        : Number(
-                            (
-                              goodsObj[el as keyof typeof goodsObj]['cost'] / 95
-                            ).toFixed(0)
-                          ) *
-                            cart[el] +
-                          ' ' +
-                          currency
-                    }
-                    image={goodsObj[el as keyof typeof goodsObj]['image']}
-                    articul={goodsObj[el as keyof typeof goodsObj]['articul']}
-                  />
-                ))}
+                {Object.keys(cart).map((el: string, i: number) => {
+                  const item = goodsReindex[el as keyof typeof goodsReindex];
+                  // const cost = item && typeof item === 'object' ? item.cost : 0;
+
+                  return (
+                    <Cart
+                      key={item.title + i}
+                      title={item.title}
+                      cost={
+                        !selCostFlag ? item.cost : (item.cost / 95).toFixed(0)
+                      }
+                      currency={currency}
+                      quantity={cart[el]}
+                      priceAllItem={
+                        !selCostFlag
+                          ? Number(item.cost) * cart[el]
+                          : Number((item.cost / 95).toFixed(0)) * cart[el] +
+                            ' ' +
+                            currency
+                      }
+                      image={item.image}
+                      articul={item.articul}
+                    />
+                  );
+                })}
               </div>
             </div>
           ) : (

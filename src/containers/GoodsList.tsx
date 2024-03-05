@@ -4,15 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import qs from 'qs';
 
-import {
-  selectCostFlag,
-  selectCurrensy,
-  selectGoods,
-  setGoodsValArr,
-} from '../store/goodsSlice';
+import { selectCostFlag, selectCurrensy } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
 import { FilterSliceState, setFilters } from '../store/filterSlice';
-import { SearchFurnitureParams, fetchFurniture } from '../store/furnitureSlice';
+import {
+  SearchFurnitureParams,
+  fetchFurniture,
+  itemsFurnutere,
+} from '../store/furnitureSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
@@ -36,7 +35,7 @@ const GoodsList: React.FC = () => {
 
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
-  const goods = useSelector(selectGoods);
+  const goods = useSelector(itemsFurnutere);
   const cart = useSelector(selectCart);
 
   // data from backend-------------------------
@@ -95,14 +94,14 @@ const GoodsList: React.FC = () => {
     isSearch.current = false;
   }, [currentPage, sort.sortProperty, categoryName, searchInpVal]);
 
-  // alert -----------------------
+  // alert ---------------------------------------------
   useEffect(() => {
     //если был первый рендер, то запрашиваем данные
     // !isSearch.current
     if (!isMounted.current) {
-      alert(
-        'Внимание! Для отображения корзины сначала выберите все фильры, потом добавляйте товар в корзину.'
-      );
+      // alert(
+      //   'Внимание! Для отображения корзины сначала выберите все фильры, потом добавляйте товар в корзину.'
+      // );
     }
     isSearch.current = false;
   }, []);
@@ -124,9 +123,9 @@ const GoodsList: React.FC = () => {
   }, [categoryName, currentPage, sort.sortProperty, searchInpVal, navigate]);
 
   // при изменении furnitureSlice вносим изменения
-  useEffect(() => {
-    if (status === 'success') dispatch(setGoodsValArr(items));
-  }, [status, items, dispatch]);
+  // useEffect(() => {
+  //   if (status === 'success') dispatch(setGoodsValArr(items));
+  // }, [status, items, dispatch]);
 
   //=clickHandler===============================
   let clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {

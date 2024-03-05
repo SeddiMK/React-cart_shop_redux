@@ -1,13 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 type CartItem = {
   [articul: string]: number;
 };
 
 interface CartSliceState {
-  cartVal: CartItem; // CartItem[]; //
+  cartVal: CartItem;
   articul: string;
   cartOpen: boolean;
 }

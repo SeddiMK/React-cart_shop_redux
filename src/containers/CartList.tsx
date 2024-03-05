@@ -15,7 +15,11 @@ import {
   cartOpen,
   selectCartOpenSt,
 } from '../store/cartSlice';
-import { itemsReindexing } from '../store/furnitureSlice';
+import {
+  Furniture,
+  itemsReindexing,
+  setItemsReindexing,
+} from '../store/furnitureSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
@@ -25,7 +29,7 @@ const CartList: React.FC = () => {
   const selCartOpenSt = useSelector(selectCartOpenSt);
   const selCostFlag: boolean = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
-  const goods = useSelector(selectGoods);
+  const goods: Furniture[] = useSelector(selectGoods);
   const cart = useSelector(selectCart);
   // const itemsReindexing = useSelector<object>(itemsReindexing);
 
@@ -33,8 +37,8 @@ const CartList: React.FC = () => {
   // const [findElCart, setFindElCart] = useState([]);
   const [findElFlag] = useState<boolean>(true);
   const catCartRef = useRef(null);
-  let goodsObj: object = useSelector(itemsReindexing);
-  // const [goodsObj, setGoodsObj] = useState<object>();
+  // let goodsObj: object = useSelector(itemsReindexing);
+  const [goodsObj, setGoodsObj] = useState<Furniture[]>();
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
@@ -48,7 +52,11 @@ const CartList: React.FC = () => {
 
   console.log(goods, 'goods');
   console.log(goodsObj, 'goodsObj');
-
+  // useEffect(() => {
+  //   console.log(goodsObj, '--------------------goodsObj');
+  //   dispath(setItemsReindexing(cart));
+  // }, [goods, cart]);
+  
   // useEffect(() => {
   //   // if(cart)!!!!!!!!!!!!!!!!!!!!!!
   //   console.log(Object.values(cart).length, 'Object.values(cart)');

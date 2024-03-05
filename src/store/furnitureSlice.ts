@@ -67,6 +67,7 @@ export const furnitureSlice = createSlice({
     },
 
     setItemsReindexing: (state) => {
+      console.log(state.items, '--------------------------state.items');
       if (state.items.length > 1) {
         state.items.reduce((accum: any, item) => {
           accum.item.articul = item;

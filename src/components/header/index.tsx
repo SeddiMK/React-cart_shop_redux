@@ -43,7 +43,10 @@ const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 const Header: React.FC = () => {
   const dispath = useDispatch();
 
-  const [sortValue] = useState(null);
+  // const [sortValue] = useState(null);
+  const sortValue = useSelector((state: RootState) => state.filter.sort);
+  console.log(sortValue);
+
   // const categoryName = useSelector((state) => state.filter.categoryName);
   let cartOpenSt: boolean = useSelector(
     (state: RootState) => state.cartVal.cartOpen

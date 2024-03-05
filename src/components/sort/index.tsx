@@ -3,9 +3,9 @@ import styles from './sort.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { SortPropertyEnum } from '../../store/filterSlice';
+import { Sort, SortPropertyEnum } from '../../store/filterSlice';
 
-type SortItem = {
+export type SortItem = {
   name: string;
   sortProperty: SortPropertyEnum;
 };
@@ -30,7 +30,7 @@ export const listSort: SortItem[] = [
 ]; // можно вынести в отдельный файл
 
 type SortProps = {
-  value: any; //=================!!!!!!!!!!!!!!!!!!!!!
+  value: SortItem; //=================!!!!!!!!!!!!!!!!!!!!!
   onChangeSort: (obj: {}) => void;
 };
 

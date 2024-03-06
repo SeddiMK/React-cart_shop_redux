@@ -9,12 +9,14 @@ interface CartSliceState {
   cartVal: CartItem;
   articul: string;
   cartOpen: boolean;
+  cartOpenError: boolean;
 }
 
 const initialState: CartSliceState = {
   cartVal: {},
   articul: 'articul',
   cartOpen: false,
+  cartOpenError: false,
 };
 
 export const cartSlice = createSlice({
@@ -59,24 +61,26 @@ export const cartSlice = createSlice({
         state.cartVal[articul] = 0;
         delete state.cartVal[articul];
       }
-
-      // state.cartVal = []; //---------------------------
     },
     clearCart: (state) => {
       // clear cart
       state.cartVal = {};
-
-      // state.cartVal = []; //---------------------------
     },
     cartOpen: (state, action: PayloadAction<false>) => {
       state.cartOpen = action.payload;
     },
+    cartOpenError: (state, action: PayloadAction<boolean>) => {
+      state.cartOpenError = action.payload;
+    },
   },
 });
 
-export const { increment, minus, del, clearCart, cartOpen } = cartSlice.actions;
+export const { increment, minus, del, clearCart, cartOpen, cartOpenError } =
+  cartSlice.actions;
 
 export const selectCartOpenSt = (state: RootState) => state.cartVal.cartOpen;
+export const selectCartOpenErrorSt = (state: RootState) =>
+  state.cartVal.cartOpenError;
 export const selectCart = (state: RootState) => state.cartVal.cartVal;
 
 export default cartSlice.reducer;

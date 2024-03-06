@@ -22,7 +22,11 @@ const ErrorBeckend: React.FC = () => {
           добавляйте товар в корзину.
         </p>
         <br></br>
-        <button className="btn" onClick={() => dispatch(clearCart())}>
+        <button
+          className="btn"
+          onClick={() => {
+            dispatch(clearCart());
+          }}>
           Очистить корзину и создать новую
         </button>
       </div>

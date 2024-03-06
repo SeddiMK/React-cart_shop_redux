@@ -21,10 +21,18 @@ import {
   setCurrentPage,
   setSort,
 } from '../../store/filterSlice';
-import { cartOpen } from '../../store/cartSlice';
+import {
+  CartItem,
+  cartOpen,
+  selectCart,
+  selectCartOpenSt,
+  selectCartOpenErrorSt,
+  cartOpenError,
+} from '../../store/cartSlice';
 import {
   SearchFurnitureParams,
   fetchFurniture,
+  itemsReindexing,
 } from '../../store/furnitureSlice';
 import { RootState } from '../../store';
 
@@ -42,13 +50,14 @@ const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 
 const Header: React.FC = () => {
   const dispath = useDispatch();
-
+  const goodsReindex: any = useSelector(itemsReindexing);
+  const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
+  const [cartFlagError, setCartFlagError] = useState(true);
 
   // const categoryName = useSelector((state) => state.filter.categoryName);
-  let cartOpenSt: boolean = useSelector(
-    (state: RootState) => state.cartVal.cartOpen
-  );
+  const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
+  const selCartOpenErrorSt: any = useSelector(selectCartOpenErrorSt);
 
   const [burgerClick, setBurgerClick] = useState(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -75,10 +84,22 @@ const Header: React.FC = () => {
   };
 
   const handleCart = () => {
-    // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if (fullQuantityGoodsCart !== 0) {
-      dispath(cartOpen(!cartOpenSt as false));
-    }
+    //======== Проверка, есть ли в масииве товаров все товары из корзины ==========================
+    const cartGoodsFlag = () => {
+      for (const el of Object.keys(cart)) {
+        if (goodsReindex.hasOwnProperty(el) && fullQuantityGoodsCart !== 0) {
+          dispath(cartOpen(!selCartOpenSt as false));
+          dispath(cartOpenError(true));
+          break;
+        } else {
+          dispath(cartOpen(!selCartOpenSt as false));
+          dispath(cartOpenError(false));
+          break;
+        }
+      }
+    };
+
+    cartGoodsFlag();
   };
 
   const handleLogo = () => {

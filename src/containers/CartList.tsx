@@ -14,21 +14,24 @@ import {
   cartOpen,
   selectCartOpenSt,
   CartItem,
+  selectCartOpenErrorSt,
 } from '../store/cartSlice';
 import { itemsReindexing } from '../store/furnitureSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
-import { useAppDispatch } from '../store';
+import { RootState, useAppDispatch } from '../store';
 
 const CartList: React.FC = () => {
   const dispath = useAppDispatch();
   const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
+  const selCartOpenErrorSt: boolean = useSelector(selectCartOpenErrorSt);
   const selCostFlag: boolean = useSelector(selectCostFlag);
   const currency: string = useSelector(selectCurrensy);
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
 
+  const [cartFlagError, setCartFlagError] = useState(true);
   const catCartRef = useRef(null);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -127,8 +130,9 @@ const CartList: React.FC = () => {
     //===============================================================
     // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
 
-    if (fullQuantityGoodsCart === 0) dispath(cartOpen(false));
-  }, [fullQuantityGoodsCart, dispath]);
+    if (selCartOpenSt && fullQuantityGoodsCart === 0) dispath(cartOpen(false));
+    // if(cartOpenSt)
+  }, [fullQuantityGoodsCart, selCartOpenSt, dispath]);
 
   // cart close in btn-close ===========================================================================
   const hadlerClose = (e: any) => {
@@ -184,15 +188,13 @@ const CartList: React.FC = () => {
     }
   };
 
-  console.log(cart, '----------------------cart');
-
   return (
     <>
       {selCartOpenSt && (
         <section
           className="main__goods-table-wrapper goods-table"
           ref={catCartRef}>
-          {Object.keys(cart).length ? (
+          {selCartOpenErrorSt && Object.keys(cart).length ? (
             <div className="main__goods-table" onClick={clickHandler}>
               {/* fullGoods */}
               <div className="goods-table__full-goods-block">

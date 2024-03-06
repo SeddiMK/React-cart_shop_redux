@@ -17,6 +17,7 @@ import {
 } from '../../store/goodsSlice';
 import {
   Sort,
+  searchInpHeader,
   setCategoryName,
   setCurrentPage,
   setSort,
@@ -49,15 +50,18 @@ const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 // end -----------------
 
 const Header: React.FC = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
+  const searchInpValStore = useSelector(
+    (state: RootState) => state.filter.searchInpVal
+  );
   const [cartFlagError, setCartFlagError] = useState(true);
+  const [valSearch, setValSearch] = useState('null');
 
   // const categoryName = useSelector((state) => state.filter.categoryName);
   const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
-  const selCartOpenErrorSt: any = useSelector(selectCartOpenErrorSt);
 
   const [burgerClick, setBurgerClick] = useState(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
@@ -65,22 +69,26 @@ const Header: React.FC = () => {
   // filter select category
   const handlerSelCategory = (e: string) => {
     if (e.toLowerCase().replace(' ', '') === 'allgoods') {
-      dispath(setCategoryName(''));
+      console.log(111111111111111);
+
+      dispatch(setCategoryName(''));
+      dispatch(searchInpHeader(''));
+      setValSearch('');
     } else {
-      dispath(setCategoryName(e.toLowerCase().replace(' ', '')));
+      dispatch(setCategoryName(e.toLowerCase().replace(' ', '')));
     }
-    dispath(setCurrentPage(1));
+    dispatch(setCurrentPage(1));
   };
 
   // filter select sort
   const handlerSelSort = (e: {}) => {
-    dispath(setSort(e as Sort));
-    dispath(setCurrentPage(1));
+    dispatch(setSort(e as Sort));
+    dispatch(setCurrentPage(1));
   };
 
   const handlerSelCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispath(selCostFlag(e.target.value !== 'RUB'));
-    dispath(selCurrensy(e.target.value));
+    dispatch(selCostFlag(e.target.value !== 'RUB'));
+    dispatch(selCurrensy(e.target.value));
   };
 
   const handleCart = () => {
@@ -88,12 +96,12 @@ const Header: React.FC = () => {
     const cartGoodsFlag = () => {
       for (const el of Object.keys(cart)) {
         if (goodsReindex.hasOwnProperty(el) && fullQuantityGoodsCart !== 0) {
-          dispath(cartOpen(!selCartOpenSt as false));
-          dispath(cartOpenError(true));
+          dispatch(cartOpen(!selCartOpenSt as false));
+          dispatch(cartOpenError(true));
           break;
         } else {
-          dispath(cartOpen(!selCartOpenSt as false));
-          dispath(cartOpenError(false));
+          dispatch(cartOpen(!selCartOpenSt as false));
+          dispatch(cartOpenError(false));
           break;
         }
       }
@@ -104,7 +112,7 @@ const Header: React.FC = () => {
 
   const handleLogo = () => {
     // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // dispath(
+    // dispatch(
     //   fetchFurniture({
     //     sortBy: 'rating',
     //     order: 'desc',
@@ -113,7 +121,7 @@ const Header: React.FC = () => {
     //     currentPage: 1,
     //   })
     // );
-    // dispath(fetchFurniture({} as SearchFurnitureParams));
+    // dispatch(fetchFurniture({} as SearchFurnitureParams));
     // баг с  searchCategoryFilter !!!
     setTimeout(() => {
       window.location.reload();
@@ -162,7 +170,7 @@ const Header: React.FC = () => {
           </ul>
 
           <div className="header__search-cart block-search-cart">
-            <Search />
+            <Search value={valSearch} />
 
             <div className="block-search-cart__cart cart-header">
               <div className="cart-header__icon">

@@ -13,7 +13,7 @@ interface CartSliceState {
 }
 
 const initialState: CartSliceState = {
-  cartVal: {},
+  cartVal: JSON.parse(localStorage.getItem('cart')) || {},
   articul: 'articul',
   cartOpen: false,
   cartOpenError: false,

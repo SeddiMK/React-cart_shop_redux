@@ -1,7 +1,7 @@
 import './Header.scss';
 import '../../app/Common.scss';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -51,6 +51,7 @@ const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
+  const isMounted = useRef(false);
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
@@ -138,10 +139,14 @@ const Header: React.FC = () => {
 
   // save data from localstorage ---------------------------------
   useEffect(() => {
-    const jsonCart = JSON.stringify(cart);
-    localStorage.setItem('cart', jsonCart);
-    // JSON.parse(jsonCart);
-    console.log(JSON.parse(jsonCart), '----------JSON.parse(jsonCart)');
+    if (isMounted.current) {
+      const jsonCart = JSON.stringify(cart);
+      localStorage.setItem('cart', jsonCart);
+
+      // cart=JSON.parse(jsonCart);
+      console.log(jsonCart, '----------jsonCart');
+    }
+    isMounted.current = true;
   }, [cart]);
   return (
     <header className="header">

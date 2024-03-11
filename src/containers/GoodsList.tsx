@@ -136,7 +136,8 @@ const GoodsList: React.FC = () => {
                     <button
                       className="goods-block__add-to-cart  btn add-to-cart"
                       data-key={el.articul}>
-                      Add to cart <span>{cart[el.articul]}</span>
+                      Add to cart
+                      {cart[el.articul] && <span>{cart[el.articul]}</span>}
                     </button>
                   </div>
                 ))}

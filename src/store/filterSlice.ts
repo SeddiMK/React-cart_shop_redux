@@ -45,12 +45,6 @@ export const filterSlice = createSlice({
       state.searchInpVal = action.payload;
     },
     setFilters(state, action: PayloadAction<FilterSliceState>) {
-      // state.categoryName = action.payload.categoryName;
-      // state.searchInpVal = action.payload.searchInpVal;
-      // state.currentPage = Number(action.payload.currentPage);
-      // state.sort = action.payload.sort;
-
-      // ---------------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
       if (Object.keys(action.payload).length) {
         state.categoryName = action.payload.categoryName;
         state.searchInpVal = action.payload.searchInpVal;

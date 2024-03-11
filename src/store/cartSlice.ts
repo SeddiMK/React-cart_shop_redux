@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
+import { getCartFromLS } from '../utils/getCartLS';
 
 export type CartItem = {
   [articul: string]: number;
@@ -13,7 +14,7 @@ interface CartSliceState {
 }
 
 const initialState: CartSliceState = {
-  cartVal: JSON.parse(localStorage.getItem('cart')) || {},
+  cartVal: getCartFromLS(),
   articul: 'articul',
   cartOpen: false,
   cartOpenError: false,

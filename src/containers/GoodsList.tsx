@@ -1,21 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import qs from 'qs';
 
 import { selectCostFlag, selectCurrensy } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
-import { FilterSliceState, setFilters } from '../store/filterSlice';
-import {
-  SearchFurnitureParams,
-  fetchFurniture,
-  itemsFurnutere,
-} from '../store/furnitureSlice';
+import { fetchFurniture, itemsFurnutere } from '../store/furnitureSlice';
 
 import Goods from '../components/goods/Goods';
 import Skeleton from '../components/sceleton/Skeleton';
-import { listSort } from '../components/sort';
 import Error from '../components/error';
 import { RootState, useAppDispatch } from '../store';
 
@@ -30,13 +24,14 @@ const GoodsList: React.FC = () => {
   let { searchInpVal, categoryName, currentPage, sort } = useSelector(
     (state: RootState) => state.filter
   );
-
-  let { items, status } = useSelector((state: RootState) => state.furniture);
+  // const loading = useState((state: RootState) => state.furniture.status);
+  let { status } = useSelector((state: RootState) => state.furniture);
 
   const selCostFlag = useSelector(selectCostFlag);
   const currency = useSelector(selectCurrensy);
   const goods = useSelector(itemsFurnutere);
   const cart = useSelector(selectCart);
+  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
 
   // data from backend-------------------------
 
@@ -62,27 +57,6 @@ const GoodsList: React.FC = () => {
     document.getElementById('root')!.scrollIntoView(); // при перерисовке скорит на верх стр
   };
 
-  //проверяем URL-параметры и сохраняем в redux
-  // useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(
-  //       window.location.search.substring(1)
-  //     ) as unknown as SearchFurnitureParams;
-  //     const sort = listSort.find((obj) => obj.sortProperty === params.sortBy);
-
-  //     dispatch(
-  //       setFilters({
-  //         sort: sort || listSort[0],
-  //         categoryName: params.searchCategoryFilter,
-  //         searchInpVal: params.searchInpValData,
-  //         currentPage: Number(params.currentPage),
-  //       })
-  //     );
-
-  //     isSearch.current = true; //флаг первого рендера
-  //   }
-  // }, []);
-
   // делаем чтобы не было 2 запроса, т.к. useEffect первый рендер делает васегда
   useEffect(() => {
     document.getElementById('root')!.scrollIntoView(); // при перерисовке скорит на верх стр
@@ -99,9 +73,9 @@ const GoodsList: React.FC = () => {
     //если был первый рендер, то запрашиваем данные
     // !isSearch.current
     if (!isMounted.current) {
-      // alert(
-      //   'Внимание! Для отображения корзины сначала выберите все фильры, потом добавляйте товар в корзину.'
-      // );
+      alert(
+        'Внимание! Для отображения корзины сначала выберите все фильры, потом добавляйте товар в корзину.'
+      );
     }
     isSearch.current = false;
   }, []);
@@ -122,11 +96,6 @@ const GoodsList: React.FC = () => {
     isMounted.current = true; // произoшeл первый рендер
   }, [categoryName, currentPage, sort.sortProperty, searchInpVal, navigate]);
 
-  // при изменении furnitureSlice вносим изменения
-  // useEffect(() => {
-  //   if (status === 'success') dispatch(setGoodsValArr(items));
-  // }, [status, items, dispatch]);
-
   //=clickHandler===============================
   let clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -138,9 +107,8 @@ const GoodsList: React.FC = () => {
       dispatch(increment(targ.getAttribute('data-key')!));
     }
   };
-  const skeletons = [...new Array(10)].map((_, i) => <Skeleton key={i} />);
-  // <Link to={`/fullOptions/${el.articul}`}></Link>
-  // if (loading) return <p className="loading"> Загрузка...</p>; //загрузка...
+
+  // if (status === 'loading') return <p className="loading"> Загрузка...</p>; //загрузка...
   return (
     <>
       <div className="main__goods-field goods-field" onClick={clickHandler}>

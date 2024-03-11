@@ -3,13 +3,14 @@ import styles from './sort.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { Sort, SortPropertyEnum } from '../../store/filterSlice';
+import { SortPropertyEnum } from '../../store/filterSlice';
 
 export type SortItem = {
   name: string;
   sortProperty: SortPropertyEnum;
 };
 
+// listSort-------------- можно вынести в отдельный файл
 export const listSort: SortItem[] = [
   {
     name: 'popularity',
@@ -27,7 +28,7 @@ export const listSort: SortItem[] = [
     name: 'decreasing prices',
     sortProperty: SortPropertyEnum.COST_ASC,
   },
-]; // можно вынести в отдельный файл
+];
 
 type SortProps = {
   value: SortItem; //=================!!!!!!!!!!!!!!!!!!!!!

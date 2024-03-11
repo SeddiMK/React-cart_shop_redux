@@ -27,14 +27,9 @@ import {
   cartOpen,
   selectCart,
   selectCartOpenSt,
-  selectCartOpenErrorSt,
   cartOpenError,
 } from '../../store/cartSlice';
-import {
-  SearchFurnitureParams,
-  fetchFurniture,
-  itemsReindexing,
-} from '../../store/furnitureSlice';
+import { itemsReindexing } from '../../store/furnitureSlice';
 import { RootState } from '../../store';
 
 // data-header-nav-link --// можно вынести в отдельный файл------------
@@ -55,13 +50,9 @@ const Header: React.FC = () => {
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
-  const searchInpValStore = useSelector(
-    (state: RootState) => state.filter.searchInpVal
-  );
-  const [cartFlagError, setCartFlagError] = useState(true);
+
   const [valSearch, setValSearch] = useState('null');
 
-  // const categoryName = useSelector((state) => state.filter.categoryName);
   const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
 
   const [burgerClick, setBurgerClick] = useState(false);
@@ -70,8 +61,6 @@ const Header: React.FC = () => {
   // filter select category
   const handlerSelCategory = (e: string) => {
     if (e.toLowerCase().replace(' ', '') === 'allgoods') {
-      console.log(111111111111111);
-
       dispatch(setCategoryName(''));
       dispatch(searchInpHeader(''));
       setValSearch('');
@@ -124,9 +113,9 @@ const Header: React.FC = () => {
     // );
     // dispatch(fetchFurniture({} as SearchFurnitureParams));
     // баг с  searchCategoryFilter !!!
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 100);
   };
 
   // burgerClick --------------------------------------
@@ -142,9 +131,6 @@ const Header: React.FC = () => {
     if (isMounted.current) {
       const jsonCart = JSON.stringify(cart);
       localStorage.setItem('cart', jsonCart);
-
-      // cart=JSON.parse(jsonCart);
-      console.log(jsonCart, '----------jsonCart');
     }
     isMounted.current = true;
   }, [cart]);

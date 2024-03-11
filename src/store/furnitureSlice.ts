@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '.';
-import { Sort } from './filterSlice';
 
 export type SearchFurnitureParams = {
   sortBy: string;
@@ -65,20 +64,6 @@ export const furnitureSlice = createSlice({
     setItems: (state, action: PayloadAction<[]>) => {
       state.items = action.payload;
     },
-
-    // setItemsReindexing: (state, action: PayloadAction<{}>) => {
-    //   console.log(
-    //     state.itemsReindexing,
-    //     '--------------------------state.itemsReindexing'
-    //   );
-
-    //   // if (Object.keys(action.payload).length > 0) {
-    //   //   state.items.reduce<{}>((accum: any, item: any) => {
-    //   //     accum[item.articul] = item;
-    //   //     return (state.itemsReindexing = accum);
-    //   //   }, {});
-    //   // }
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFurniture.pending, (state) => {
@@ -91,8 +76,7 @@ export const furnitureSlice = createSlice({
       state.items = action.payload;
       state.loading = false;
       if (state.items.length > 1) {
-        // furnitureSlice.caseReducers.setItemsReindexing();
-        // -----------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!
+        // setItemsReindexing -----------------------------------
         state.items.reduce<{}>((accum: any, item: any) => {
           accum[item.articul] = item;
           return (state.itemsReindexing = accum);

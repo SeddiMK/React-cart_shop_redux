@@ -1,12 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-import { Furniture } from './furnitureSlice';
-
 // import goodsArr from '../action/goods.json';
 
 type GoodsSliceState = {
-  // goodsValArr: Furniture[];
   cost: number;
   currency: string;
   flagSelCurrency: boolean;
@@ -14,9 +11,8 @@ type GoodsSliceState = {
 };
 
 const initialState: GoodsSliceState = {
-  // goodsValArr: [], //goodsArr
-  cost: 0, //goodsArr[0].cost,
-  currency: 'RUB', //goodsArr[0].currency,
+  cost: 0,
+  currency: 'RUB',
   flagSelCurrency: false,
   fullQuantityGoodsSt: 0,
 };
@@ -33,29 +29,13 @@ export const goodsSlice = createSlice({
       }
     },
     selCostFlag(state, action: PayloadAction<boolean>) {
-      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       state.flagSelCurrency = action.payload;
-
-      // if (state.currency !== selCurrensy) {
-      //   state.flagSelCurrency = action.payload;
-      // }
     },
     fullQuantity(state, action: PayloadAction<number>) {
       if (action.payload !== undefined) {
         state.fullQuantityGoodsSt = action.payload;
       }
     },
-    // setGoodsValArr(state, action: PayloadAction<Furniture[]>) {
-    //   if (state.goodsValArr !== undefined) {
-    //     state.goodsValArr = action.payload;
-    //   }
-    // },
-
-    // selectCostFlag(state, action) {
-    //   if (state.currency !== 'RUB') {
-    //     state.currency = action.payload;
-    //   }
-    // },
   },
 });
 

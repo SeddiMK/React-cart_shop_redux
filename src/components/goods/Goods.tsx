@@ -19,24 +19,7 @@ const Goods: React.FC<GoodsProps> = ({
   image,
   rating,
   currency,
-  description,
-  quantityOneGoods,
 }) => {
-  // // карзина в локальном store/ карзину должен давать бэкенд
-  // const dispath = useDispatch();
-  // // передать все параметры в store dispatch CartList
-  // const onClickAddGoods = () => {
-  //   const dataGoods = {
-  //     articul,
-  //     title,
-  //     cost,
-  //     image,
-  //     rating,
-  //     currency,
-  //     quantityOneGoods,
-  //   };
-  //   dispath(increment(dataGoods));
-  // };
   return (
     <div className="goods-block">
       <Link to={`/fullOptions/${articul}`}>

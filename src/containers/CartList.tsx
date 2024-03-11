@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 import {
   fullQuantityGoods,
@@ -20,7 +20,7 @@ import { itemsReindexing } from '../store/furnitureSlice';
 
 import Cart from '../components/cart/Cart';
 import ErrorBeckend from '../components/ErrorBeckend';
-import { RootState, useAppDispatch } from '../store';
+import { useAppDispatch } from '../store';
 
 const CartList: React.FC = () => {
   const dispath = useAppDispatch();
@@ -31,65 +31,11 @@ const CartList: React.FC = () => {
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
 
-  const [cartFlagError, setCartFlagError] = useState(true);
   const catCartRef = useRef(null);
 
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
-  // делаем запрос корзины у бэкенда по articul через get filter=  -------------------------------
-  // const axiosCart = () => {
-  //   // setIsLoading(true); // обновляем set загрузки
-
-  //   // setTimeout(() => setIsLoading(false), 1000); // !!! убрать имитация загрузки с сервера
-  //  ===========================================================================
-  // переидексирую массив товара -----------------------------------------!!!!!!!!!!!!
-
-  // console.log(goodsObj, 'goodsObj');
-  // useEffect(() => {
-  //   dispath(setItemsReindexing(goods));
-  // }, [goods, cart]);
-
-  // useEffect(() => {
-  //   // if(cart)!!!!!!!!!!!!!!!!!!!!!!
-  //   console.log(Object.values(cart).length, 'Object.values(cart)');
-
-  //   if (Object.values(cart).length > 1) {
-  //     setGoodsObj(
-  //       goods.reduce((accum: any, item: any) => {
-  //         accum[item.articul] = item;
-  //         return accum;
-  //       }, {})
-  //     );
-  //   } else if (Object.values(cart).length === 1) {
-  //   }
-  // }, [cart, goods]);
-
-  // fullPrice---------------------------------------------------------------
-  //full price
-  // let fullPrice = 0;
-  // Object.keys(cart).map((el) => {
-  //   return (fullPrice +=
-  //     (!selCostFlag
-  //       ? goodsObj[el]['cost']
-  //       : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el]);
-  // });
-
-  // const fullPriceArr = Object.keys(cart).map((el) => {
-  //   let price = 0;
-  //   return (price +=
-  //     (!selCostFlag
-  //       ? goodsObj[el]['cost']
-  //       : (goodsObj[el]['cost'] / 95).toFixed(0)) * cart[el]);
-  // });
-
-  // const fullPrice = () => {
-  //   let sum = 0;
-  //   for (let i = 0; i < fullPriceArr.length; i++) {
-  //     sum += fullPriceArr[i];
-  //   }
-  //   return sum;
-  // };
-
+  // fullPrice ----------------------------------------------------------
   const fullPrice = (): number => {
     const fullPriceArr: number[] = Object.keys(cart).map((el) => {
       const priceInObj: number = goodsReindex[el].cost;
@@ -108,12 +54,6 @@ const CartList: React.FC = () => {
   };
 
   //=========================================================
-  // full Quantity
-  // let fullQuantity = 0;
-  // let fullQuantitySumm = Object.keys(cart).map(
-  //   (el) => (fullQuantity += Number(cart[el]))
-  // );
-  //=========================================================
   useEffect(() => {
     if (fullQuantityGoodsCart !== undefined) {
       dispath(
@@ -125,13 +65,7 @@ const CartList: React.FC = () => {
   }, [cart, fullQuantityGoodsCart, dispath]);
 
   useEffect(() => {
-    // Получаем ссылку на элемент, при клике на который, скрытие не будет происходить
-    // const cartClassUef = document.getElementsByClassName('goods-table')[0];
-    //===============================================================
-    // if (fullQuantityGoodsCart === 0) cartClassUef.classList.remove('activ')-----------------------------;
-
     if (selCartOpenSt && fullQuantityGoodsCart === 0) dispath(cartOpen(false));
-    // if(cartOpenSt)
   }, [fullQuantityGoodsCart, selCartOpenSt, dispath]);
 
   // cart close in btn-close ===========================================================================
@@ -149,21 +83,11 @@ const CartList: React.FC = () => {
       const _event = e as MouseEvent & {
         composedPath(): Node[];
       };
-      // if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
-      //   setOpen(false);
-      // }
-      // if (
-      //   ![catCartRef.current, cartIcon].some((x: Element | null) =>
-      //     _event.composedPath().includes(x)
-      //   )
-      // ) {
       if (
         ![catCartRef.current, cartIcon].some(
           (x: Element | null) => x && _event.composedPath().includes(x)
         )
       ) {
-        // setOpenCart(false);
-        // catCartRef.current.classList.remove('activ'); // переделать на openCart--------------------------
         dispath(cartOpen(false));
       }
     };
@@ -178,10 +102,8 @@ const CartList: React.FC = () => {
     e.preventDefault();
 
     let targ = e.target;
-    // if (!targ.classList.contains('goods-table')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
     if (targ.classList.contains('delete-one-position')) {
       dispath(minus(targ.getAttribute('data-key')));
-      // if (fullQuantityGoodsCart <= 1) cartClass.classList.remove('activ');
     }
     if (targ.classList.contains('delete-quantity')) {
       dispath(del(targ.getAttribute('data-key')));
@@ -196,7 +118,6 @@ const CartList: React.FC = () => {
           ref={catCartRef}>
           {selCartOpenErrorSt && Object.keys(cart).length ? (
             <div className="main__goods-table" onClick={clickHandler}>
-              {/* fullGoods */}
               <div className="goods-table__full-goods-block">
                 <ul className="goods-table__full-goods">
                   {Object.keys(cart).map((el: string, i: number) => {
@@ -218,7 +139,6 @@ const CartList: React.FC = () => {
               <div className="goods-table__cart cart">
                 {Object.keys(cart).map((el: string, i: number) => {
                   const item = goodsReindex[el as keyof typeof goodsReindex];
-                  // const cost = item && typeof item === 'object' ? item.cost : 0;
 
                   return (
                     <Cart

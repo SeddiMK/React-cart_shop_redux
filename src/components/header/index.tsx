@@ -101,21 +101,10 @@ const Header: React.FC = () => {
   };
 
   const handleLogo = () => {
-    // ------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // dispatch(
-    //   fetchFurniture({
-    //     sortBy: 'rating',
-    //     order: 'desc',
-    //     searchCategoryFilter: '',
-    //     searchInpValData: '',
-    //     currentPage: 1,
-    //   })
-    // );
-    // dispatch(fetchFurniture({} as SearchFurnitureParams));
     // баг с  searchCategoryFilter !!!
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 100);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   // burgerClick --------------------------------------

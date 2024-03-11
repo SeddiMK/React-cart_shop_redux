@@ -1,7 +1,7 @@
 import './Header.scss';
 import '../../app/Common.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -136,6 +136,13 @@ const Header: React.FC = () => {
   //   // if (burgerClick) console.log(navHeaderLeft.classList.contains('is-open'));
   // }, [burgerClick]);
 
+  // save data from localstorage ---------------------------------
+  useEffect(() => {
+    const jsonCart = JSON.stringify(cart);
+    localStorage.setItem('cart', jsonCart);
+    // JSON.parse(jsonCart);
+    console.log(JSON.parse(jsonCart), '----------JSON.parse(jsonCart)');
+  }, [cart]);
   return (
     <header className="header">
       <div className="header__wrapper">

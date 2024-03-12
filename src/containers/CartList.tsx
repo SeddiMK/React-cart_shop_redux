@@ -15,6 +15,7 @@ import {
   selectCartOpenSt,
   CartItem,
   selectCartOpenErrorSt,
+  clearCart,
 } from '../store/cartSlice';
 import { itemsReindexing } from '../store/furnitureSlice';
 
@@ -97,7 +98,7 @@ const CartList: React.FC = () => {
     return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
   }, []);
 
-  //========clickHandler============================================================================
+  // clickHandler ------------------------------------------------------
   let clickHandler = (e: any) => {
     e.preventDefault();
 
@@ -129,6 +130,13 @@ const CartList: React.FC = () => {
                     );
                   })}
                 </ul>
+                <div className="goods-table__clear-cart">
+                  <button
+                    onClick={() => dispath(clearCart())}
+                    className="goods-block__add-to-cart  btn clear-cart">
+                    Clear cart
+                  </button>
+                </div>
                 <div
                   className="goods-table__full-goods-close"
                   onClick={hadlerClose}></div>

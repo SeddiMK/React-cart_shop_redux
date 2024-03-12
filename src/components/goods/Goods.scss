@@ -18,6 +18,14 @@
   max-width: 15rem;
   min-width: 100%;
 }
+.goods-block__click-bate {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5rem;
+  text-align: center;
+  font-size: 0.7rem;
+}
 
 .goods-block__img {
   width: 100%;
@@ -43,15 +51,6 @@
 }
 
 .btn span {
-}
-
-.add-to-cart {
-}
-.add-to-cart span {
-  background-color: #ffa544;
-  border-radius: 50%;
-  margin-left: 5px;
-  padding: 3px 4px;
 }
 
 /* @media============================================= */

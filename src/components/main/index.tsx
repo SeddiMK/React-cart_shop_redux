@@ -2,10 +2,12 @@ import './Main.scss';
 import React from 'react';
 
 import GoodsList from '../../containers/GoodsList';
-// import CartList from '../../containers/CartList';
 import Pagination from '../pagination';
 
-const CartList = React.lazy(() => import('../../containers/CartList'));
+// import CartList from '../../containers/CartList';
+const CartList = React.lazy(
+  () => import(/* webpackChunkName:"CartList" */ '../../containers/CartList')
+);
 
 const Main: React.FC = () => {
   return (

@@ -25,6 +25,9 @@ const Goods: React.FC<GoodsProps> = ({
       <Link to={`/fullOptions/${articul}`}>
         <div className="goods-block__imgage-wrap">
           <img className="goods-block__img" src={image} alt={title} />
+          <div className="goods-block__click-bate">
+            Click hier or image to more options
+          </div>
         </div>
       </Link>
       <div className="goods-block__title-coast">
@@ -33,12 +36,6 @@ const Goods: React.FC<GoodsProps> = ({
         <p>{cost + ' ' + currency}</p>
       </div>
       <div className="goods-block__rating">rating: {rating}</div>
-
-      {/* <button
-        className="goods-block__add-to-cart  btn add-to-cart"
-        data-key={articul}>
-        Add to cart <span>{quantityOneGoods}</span>
-      </button> */}
     </div>
   );
 };

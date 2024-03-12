@@ -1,7 +1,8 @@
+import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import {
   fullQuantity,
@@ -11,7 +12,8 @@ import {
 } from '../store/goodsSlice';
 import { increment, selectCart } from '../store/cartSlice';
 
-import CartList from '../containers/CartList';
+// import CartList from '../containers/CartList';
+const CartList = React.lazy(() => import('../containers/CartList'));
 
 const FullOptions: React.FC = () => {
   const dispath = useDispatch();
@@ -80,11 +82,12 @@ const FullOptions: React.FC = () => {
       <img src={itemFurniture.image} alt={itemFurniture.title} />
       <div>
         <h2>{itemFurniture.title}</h2>
+        <br />
         <h5>Articul: {articul}</h5>
       </div>
 
       <p>
-        Description: {itemFurniture.title} {itemFurniture.description}
+        Description: {itemFurniture.title}- {itemFurniture.description}
       </p>
       <h4>
         Price:{' '}
@@ -95,15 +98,29 @@ const FullOptions: React.FC = () => {
         {/* курс 1 доллара 95 */}
       </h4>
       <h4>Rating: {itemFurniture.rating}</h4>
+      <br />
       <div>
         <button
           className="goods-block__add-to-cart  btn add-to-cart"
           onClick={clickHandler}
           data-key={articul}>
-          Add to cart <span>{articul && cart[articul]}</span>
+          Add to cart {articul && cart[articul] && <span>{cart[articul]}</span>}
         </button>
+        <div></div>
+        <br />
+        <Link to={`/`}>
+          <button
+            className="goods-block__add-to-cart  btn add-to-cart"
+            data-key={articul}>
+            Go back to full furnitures
+          </button>
+        </Link>
       </div>
-      <CartList />
+
+      <React.Suspense fallback={<div>Download cart...</div>}>
+        <CartList />
+      </React.Suspense>
+      <br />
     </div>
   );
 };

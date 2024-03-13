@@ -12,7 +12,6 @@ const CartList = React.lazy(
 const Main: React.FC = () => {
   return (
     <main className="main">
-      {/* Вывод данных из хранилища */}
       <GoodsList />
 
       <React.Suspense fallback={<div>Загрузка корзины...</div>}>

@@ -7,7 +7,7 @@ import Footer from '../components/footer';
 
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
-import About from '../pages/About';
+import About from '../pages/about';
 import Contacts from '../pages/Contacts';
 import FullOptions from '../pages/FullOptions';
 

@@ -1,16 +1,39 @@
 import './Burger.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Burger: React.FC = () => {
-  const [isClosed, setIsClosed] = useState(true);
+type burgerProps = {
+  // burgerClickMenu: (i: boolean) => void;
+  burgerClick: boolean;
+  setBurgerClick: (i: boolean) => void;
+  onClick: any;
+};
 
+const Burger: React.FC<burgerProps> = ({
+  onClick,
+  burgerClick,
+  setBurgerClick,
+}) => {
+  const [isClosed, setIsClosed] = useState(false);
+  // setBurgerClick(true);
+  useEffect(() => {
+    console.log(isClosed, 'isClosed---------------');
+    setIsClosed(burgerClick);
+  }, [burgerClick]);
+
+  const handlerBtn = () => {
+    setIsClosed(!isClosed);
+    console.log(isClosed, 'isClosed---------------');
+    setBurgerClick(isClosed);
+  };
+
+  // () => setBurgerClick(isClosed)   onClick={onClick}
   return (
     <>
       <div
         id="hamburger"
-        onClick={() => setIsClosed(!isClosed)}
-        className={'hamburglar ' + (isClosed ? 'is-closed' : 'is-open')}>
+        onClick={() => handlerBtn()}
+        className={'hamburglar ' + (!isClosed ? 'is-closed' : 'is-open')}>
         <div className="burger-icon">
           <div className="burger-container">
             <span className="burger-bun-top"></span>
@@ -57,3 +80,6 @@ const Burger: React.FC = () => {
 };
 
 export default Burger;
+function burgerClick(): any {
+  throw new Error('Function not implemented.');
+}

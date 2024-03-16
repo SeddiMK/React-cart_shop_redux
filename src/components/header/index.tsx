@@ -1,7 +1,7 @@
 import './Header.scss';
 import '../../app/Common.scss';
 
-import { useEffect, useRef, useState } from 'react';
+import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -47,6 +47,7 @@ const linkHeaderAuthArr = ['Sig in', 'Registration', 'Logout'];
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
+  const menuListRef: LegacyRef<HTMLUListElement> = useRef(null);
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
@@ -55,7 +56,7 @@ const Header: React.FC = () => {
 
   const selCartOpenSt: boolean = useSelector(selectCartOpenSt);
 
-  const [burgerClick, setBurgerClick] = useState(false);
+  const [burgerClick, setBurgerClick] = useState<boolean>(false);
   let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
 
   // filter select category
@@ -82,7 +83,7 @@ const Header: React.FC = () => {
   };
 
   const handleCart = () => {
-    //======== Проверка, есть ли в масииве товаров все товары из корзины ==========================
+    //======== Проверка, есть ли в масииве товаров все товары из корзины ==========
     const cartGoodsFlag = () => {
       for (const el of Object.keys(cart)) {
         if (goodsReindex.hasOwnProperty(el) && fullQuantityGoodsCart !== 0) {
@@ -107,13 +108,64 @@ const Header: React.FC = () => {
     }, 100);
   };
 
-  // burgerClick --------------------------------------
+  // burgerClick in window--------------------------------------
   // useEffect(() => {
   //   const navHeaderLeft = document.getElementsByClassName('menu__list-left');
   //   console.log(navHeaderLeft);
   //   console.log(burgerClick, 'burgerClick');
   //   // if (burgerClick) console.log(navHeaderLeft.classList.contains('is-open'));
   // }, [burgerClick]);
+
+  const onClickBurger = () => {
+    console.log('burger click');
+    setBurgerClick(!burgerClick);
+  };
+  console.log(burgerClick, 'burgerClick -------------- ');
+  useEffect(() => {
+    // const cartIcon: Element = document.getElementsByClassName('cart-btn')[0];
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const _event = e as MouseEvent & {
+        composedPath(): Node[];
+      };
+
+      console.log(!burgerClick, '!burgerClick -------------- ');
+
+      console.log(
+        menuListRef.current,
+        'console.log(menuListRef.current);-------------------------'
+      );
+      console.log(
+        ![menuListRef.current].some(
+          (x: Element | null) => x && _event.composedPath().includes(x)
+        ),
+        '![menuListRef.current] -------------- '
+      );
+
+      if (
+        !burgerClick &&
+        ![menuListRef.current].some(
+          (x: Element | null) => x && _event.composedPath().includes(x)
+        )
+      ) {
+        console.log(menuListRef.current, 'if-------------!!!!!!!!!!!!!');
+
+        setBurgerClick(false);
+        // dispath(menuOpen(false));
+      }
+      // if (
+      //   ![catCartRef.current, cartIcon].some(
+      //     (x: Element | null) => x && _event.composedPath().includes(x)
+      //   )
+      // ) {
+      //   dispath(cartOpen(false));
+      // }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside); //unMount- сработает при размонтировании, при ухода со стр! //добавляем удаление обработчика, т.к. при ухода со стр стрый обработчик остается! return - сделай при размонтировании
+  }, [burgerClick]);
 
   // save data from localstorage ---------------------------------
   useEffect(() => {
@@ -123,6 +175,7 @@ const Header: React.FC = () => {
     }
     isMounted.current = true;
   }, [cart]);
+
   return (
     <header className="header">
       <div className="header__wrapper">
@@ -132,29 +185,40 @@ const Header: React.FC = () => {
             {/* <img src="#" alt="Image logo" /> */}
           </Link>
           {/* Menu Burger */}
-          <div onClick={() => setBurgerClick(!burgerClick)}>
-            <Burger />
+          <div>
+            {/*onClick={() => setBurgerClick(!burgerClick)} <Burger burgerClickMenu={(i: boolean) => setBurgerClick(i)} /> */}
+            <Burger
+              onClick={onClickBurger}
+              burgerClick={burgerClick}
+              setBurgerClick={setBurgerClick}
+            />
           </div>
         </div>
         <nav className="header__nav menu">
           {/* {'menu__list-left' + (burgerClick ? ' activ-nav' : '')}  */}
-          <ul className={'menu__list-left' + (burgerClick ? ' activ-nav' : '')}>
-            {linkHeaderArr.map((el, i) => (
-              <li className="menu__item" key={el + i}>
-                {/* автоматически добавляет название из массива linkHeaderArr в Link to(href) */}
-                <NavLink
-                  to={
-                    '/' +
-                    (el.toLowerCase().trim().split(' ')[0] === 'home'
-                      ? ''
-                      : el.toLowerCase().trim().split(' ')[0])
-                  }
-                  className="menu__link">
-                  {el}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          {!burgerClick && (
+            <ul
+              ref={menuListRef}
+              className={
+                'menu__list-left' + (!burgerClick ? ' activ-nav' : '')
+              }>
+              {linkHeaderArr.map((el, i) => (
+                <li className="menu__item" key={el + i}>
+                  {/* автоматически добавляет название из массива linkHeaderArr в Link to(href) */}
+                  <NavLink
+                    to={
+                      '/' +
+                      (el.toLowerCase().trim().split(' ')[0] === 'home'
+                        ? ''
+                        : el.toLowerCase().trim().split(' ')[0])
+                    }
+                    className="menu__link">
+                    {el}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="header__search-cart block-search-cart">
             <Search value={valSearch} />

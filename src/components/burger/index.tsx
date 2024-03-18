@@ -16,24 +16,25 @@ const Burger: React.FC<burgerProps> = ({
 }) => {
   const [isClosed, setIsClosed] = useState(false);
   // setBurgerClick(true);
-  useEffect(() => {
-    console.log(isClosed, 'isClosed---------------');
-    setIsClosed(burgerClick);
-  }, [burgerClick]);
+  // useEffect(() => {
+  //   console.log(isClosed, 'isClosed---------------');
+  //   setIsClosed(burgerClick);
+  // }, [burgerClick]);
 
   const handlerBtn = () => {
     setIsClosed(!isClosed);
-    console.log(isClosed, 'isClosed---------------');
+    console.log(isClosed, 'isClosed---in BUrger------------');
     setBurgerClick(isClosed);
   };
+  console.log(burgerClick, 'burgerClick in BURGER------------');
 
   // () => setBurgerClick(isClosed)   onClick={onClick}
   return (
     <>
       <div
         id="hamburger"
-        onClick={() => handlerBtn()}
-        className={'hamburglar ' + (!isClosed ? 'is-closed' : 'is-open')}>
+        onClick={() => setBurgerClick(!burgerClick)}
+        className={'hamburglar ' + (burgerClick ? 'is-closed' : 'is-open')}>
         <div className="burger-icon">
           <div className="burger-container">
             <span className="burger-bun-top"></span>

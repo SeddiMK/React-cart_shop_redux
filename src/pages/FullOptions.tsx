@@ -85,10 +85,11 @@ const FullOptions: React.FC = () => {
         <br />
         <h5>Articul: {articul}</h5>
       </div>
-
+      <br />
       <p>
         Description: {itemFurniture.title}- {itemFurniture.description}
       </p>
+      <br />
       <h4>
         Price:{' '}
         {!selCostFlag
@@ -97,6 +98,7 @@ const FullOptions: React.FC = () => {
         {currency}
         {/* курс 1 доллара 95 */}
       </h4>
+      <br />
       <h4>Rating: {itemFurniture.rating}</h4>
       <br />
       <div>

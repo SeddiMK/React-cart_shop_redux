@@ -230,6 +230,7 @@
   }
 
   .header__logo-burger {
+    order: -1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -250,7 +251,9 @@
     margin-right: clamp(7px, 1vw, 20px);
     /* margin-bottom: clamp(15px, 1vw, 20px); */
   }
-
+  #hamburger {
+    order: -1;
+  }
   .block-search-cart {
     /* margin-bottom: 1.8rem; */
   }
@@ -309,16 +312,13 @@
     margin: 0;
   }
   .menu__list-right {
+    max-width: 505px;
     width: 100%;
     justify-content: center;
   }
 }
 
 @media (min-width: 675px) {
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  .menu__list-right {
-    width: auto;
-  }
   .header__search-cart {
     margin-right: 1rem;
   }

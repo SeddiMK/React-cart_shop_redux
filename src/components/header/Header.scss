@@ -233,7 +233,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+
     margin-bottom: 15px;
   }
 
@@ -260,7 +260,7 @@
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
-    width: 100%;
+    width: auto;
   }
 
   .menu__list-left {
@@ -268,28 +268,24 @@
     position: absolute;
     z-index: 2;
     width: 280px;
+    max-width: 18rem;
     opacity: 0;
     top: -100%;
 
     transition: all 0.4s ease-in-out;
-  }
-
-  .menu__list-left.activ-nav {
-    /* position: absolute;
-        z-index: 1; */
-
-    /* right: 10px;
-        top: 117px; */
-    top: 20%;
-    opacity: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
-    max-width: 18rem;
 
     padding: 0.8rem;
+  }
+
+  .menu__list-left.activ-nav {
+    top: 20%;
+    opacity: 1;
+
     line-height: 1.5;
     background-color: var(--form-border-color);
     border-radius: 0.3rem;
@@ -303,7 +299,27 @@
 }
 
 @media (min-width: 603px) {
-  .menu__list-left.activ-nav {
+  .menu {
+    flex-wrap: wrap;
+  }
+  .menu__list-left {
+    margin-right: 1rem;
+  }
+  .header__search-cart {
+    margin: 0;
+  }
+  .menu__list-right {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 675px) {
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  .menu__list-right {
+    width: auto;
+  }
+  .header__search-cart {
     margin-right: 1rem;
   }
 }
@@ -312,8 +328,33 @@
   #hamburger {
     display: none;
   }
+  .header__wrapper {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .menu {
+    justify-content: center;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
 
   .menu__list-left {
-    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    opacity: 1;
+    background-color: var(--btn-send-com);
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .menu__list-right {
+    width: 100%;
+    white-space: nowrap;
   }
 }

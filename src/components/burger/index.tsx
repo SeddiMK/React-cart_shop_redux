@@ -6,29 +6,28 @@ type burgerProps = {
   // burgerClickMenu: (i: boolean) => void;
   burgerClick: boolean;
   setBurgerClick: (i: boolean) => void;
-  onClick: any;
 };
 
-const Burger: React.FC<burgerProps> = ({
-  onClick,
-  burgerClick,
-  setBurgerClick,
-}) => {
-  const [isClosed, setIsClosed] = useState(false);
+const Burger: React.FC<burgerProps> = ({ burgerClick, setBurgerClick }) => {
+  // const [isClosed, setIsClosed] = useState(false);
   // setBurgerClick(true);
   // useEffect(() => {
-  //   console.log(isClosed, 'isClosed---------------');
-  //   setIsClosed(burgerClick);
+  //   // console.log(isClosed, 'isClosed---------------');
+  //   // setIsClosed(burgerClick);
   // }, [burgerClick]);
 
-  const handlerBtn = () => {
-    setIsClosed(!isClosed);
-    console.log(isClosed, 'isClosed---in BUrger------------');
-    setBurgerClick(isClosed);
-  };
+  // const handlerBtn = () => {
+  //   setBurgerClick(!burgerClick);
+  // };
   console.log(burgerClick, 'burgerClick in BURGER------------');
 
+  // useEffect(() => {
+  //   // console.log(isClosed, 'isClosed---------------');
+  //   // setIsClosed(burgerClick);
+  //   setBurgerClick(burgerClick);
+  // }, [burgerClick]);
   // () => setBurgerClick(isClosed)   onClick={onClick}
+  // setBurgerClick(true);
   return (
     <>
       <div

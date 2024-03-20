@@ -73,7 +73,6 @@
 }
 
 .menu__item {
-  margin-right: calc(1vw + 0.1em);
   margin-bottom: clamp(7px, 0.5vw, 14px);
 }
 
@@ -148,7 +147,7 @@
 }
 
 .cart-header::after {
-  content: '*курс USD/RUB: 95';
+  content: '*курс RUB/USD: 95р';
   position: absolute;
   color: #000000;
   font-size: 0.6rem;
@@ -264,6 +263,7 @@
     justify-content: center;
     flex-wrap: wrap;
     width: auto;
+    margin: 0 auto;
   }
 
   .menu__list-left {
@@ -306,19 +306,33 @@
     flex-wrap: wrap;
   }
   .menu__list-left {
-    margin-right: 1rem;
-  }
-  .header__search-cart {
-    margin: 0;
+    margin-right: 0;
   }
   .menu__list-right {
-    max-width: 505px;
-    width: 100%;
     justify-content: center;
   }
 }
 
-@media (min-width: 675px) {
+@media (min-width: 560px) {
+  .menu {
+    width: 100%;
+  }
+  .header__search-cart {
+    margin-right: 1rem;
+  }
+}
+@media (min-width: 680px) {
+  .header__search-cart {
+    margin-right: 1rem;
+  }
+}
+@media (min-width: 780px) {
+  #hamburger {
+    order: 1;
+  }
+  .menu {
+    width: auto;
+  }
   .header__search-cart {
     margin-right: 1rem;
   }
@@ -351,6 +365,7 @@
     opacity: 1;
     background-color: var(--btn-send-com);
     padding: 0;
+    margin-right: 0.8rem;
     margin-bottom: 0;
   }
   .menu__list-right {

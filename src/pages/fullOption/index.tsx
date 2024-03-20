@@ -1,3 +1,5 @@
+import './FullOptions.scss';
+
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -9,11 +11,11 @@ import {
   fullQuantityGoods,
   selectCurrensy,
   selectCostFlag,
-} from '../store/goodsSlice';
-import { increment, selectCart } from '../store/cartSlice';
+} from '../../store/goodsSlice';
+import { increment, minus, selectCart } from '../../store/cartSlice';
 
 // import CartList from '../containers/CartList';
-const CartList = React.lazy(() => import('../containers/CartList'));
+const CartList = React.lazy(() => import('../../containers/CartList'));
 
 const FullOptions: React.FC = () => {
   const dispath = useDispatch();
@@ -64,8 +66,8 @@ const FullOptions: React.FC = () => {
     }
   }, [fullQuantityGoodsCart, cart, dispath]);
 
-  //=clickHandler===============================
-  let clickHandler = (e: any) => {
+  //=clickHandlerAddGoods===============================
+  let clickHandlerAdd = (e: any) => {
     e.preventDefault();
     let targ = e.target;
 
@@ -73,56 +75,83 @@ const FullOptions: React.FC = () => {
 
     dispath(increment(targ.getAttribute('data-key')));
   };
+  //=clickHandlerDeleteOneGoods===============================
+  let clickHandlerDel = (e: any) => {
+    e.preventDefault();
+    let targ = e.target;
+
+    if (!targ.classList.contains('add-to-cart')) return true; // если клик не по кнопке с классом(add-to-cart), то уходим
+
+    dispath(minus(targ.getAttribute('data-key')));
+  };
+  // ----------------------------------------------------------
 
   if (!itemFurniture) {
     return <p>Download...</p>;
   }
   return (
-    <div>
-      <img src={itemFurniture.image} alt={itemFurniture.title} />
-      <div>
-        <h2>{itemFurniture.title}</h2>
-        <br />
+    <div className="full-options">
+      <div className="full-options__image-wrp img-wrp">
+        <img
+          className="full-options__img img"
+          src={itemFurniture.image}
+          alt={itemFurniture.title}
+        />
+      </div>
+
+      <div className="full-options__title">
+        <h2>
+          <b>{itemFurniture.title}</b>
+        </h2>
+
         <h5>Articul: {articul}</h5>
       </div>
-      <br />
-      <p>
-        Description: {itemFurniture.title}- {itemFurniture.description}
-      </p>
-      <br />
-      <h4>
-        Price:{' '}
-        {!selCostFlag
-          ? itemFurniture.cost
-          : (itemFurniture.cost / 95).toFixed(0)}{' '}
-        {currency}
-        {/* курс 1 доллара 95 */}
-      </h4>
-      <br />
-      <h4>Rating: {itemFurniture.rating}</h4>
-      <br />
-      <div>
+
+      <div className="full-options__desc desc">
+        <p className="desc__title">
+          Description: {itemFurniture.title}- {itemFurniture.description}
+        </p>
+
+        <h4 className="desc__price">
+          Price:{' '}
+          {!selCostFlag
+            ? itemFurniture.cost
+            : (itemFurniture.cost / 95).toFixed(0)}{' '}
+          {currency}
+          {/* курс 1 доллара 95 */}
+        </h4>
+
+        <h4 className="desc__rating rating">Rating: {itemFurniture.rating}</h4>
+      </div>
+
+      <div className="full-options__btn-block btn-block">
         <button
-          className="goods-block__add-to-cart  btn add-to-cart"
-          onClick={clickHandler}
+          className="btn-block goods-block__add-to-cart btn add-to-cart"
+          onClick={clickHandlerAdd}
           data-key={articul}>
           Add to cart {articul && cart[articul] && <span>{cart[articul]}</span>}
         </button>
-        <div></div>
-        <br />
+        <button
+          className="btn-block goods-block__del-to-cart btn add-to-cart"
+          onClick={clickHandlerDel}
+          data-key={articul}>
+          Delete one position{' '}
+          {articul && cart[articul] && <span>{cart[articul]}</span>}
+        </button>
+      </div>
+      <div className="full-options__btn-block">
         <Link to={`/`}>
           <button
-            className="goods-block__add-to-cart  btn add-to-cart"
+            className="btn-block goods-block__go-back btn"
             data-key={articul}>
             Go back to full furnitures
           </button>
         </Link>
       </div>
 
-      <React.Suspense fallback={<div>Download cart...</div>}>
+      <React.Suspense fallback={<div> Download cart...</div>}>
         <CartList />
       </React.Suspense>
-      <br />
     </div>
   );
 };

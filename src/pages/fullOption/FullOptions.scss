@@ -1,0 +1,21 @@
+.full-options {
+  &__image-wrp {
+  }
+  &__title h2 {
+    margin-bottom: 0.5rem;
+  }
+  &__desc p {
+    margin-bottom: 0.3rem;
+  }
+  &__desc h4:not(:last-child) {
+    margin-bottom: 0.3rem;
+  }
+
+  &__btn-block button:not(:last-child) {
+    margin-right: 0.4rem;
+    // margin-bottom: 0.7rem;
+  }
+  & > div {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,13 +1,13 @@
 .main {
-    padding: clamp(10px, 1vw, 15px);
-    margin-bottom: 2rem;
+  padding: clamp(10px, 1vw, 15px);
+  background-color: #fff;
 }
 
 .main__btn-send-comment {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .loading {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }

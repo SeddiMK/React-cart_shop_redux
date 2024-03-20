@@ -23,8 +23,8 @@ const Goods: React.FC<GoodsProps> = ({
   return (
     <div className="goods-block">
       <Link to={`/fullOptions/${articul}`}>
-        <div className="goods-block__imgage-wrap">
-          <img className="goods-block__img" src={image} alt={title} />
+        <div className="goods-block__image-wrap img-wrp">
+          <img className="goods-block__img img" src={image} alt={title} />
           <div className="goods-block__click-bate">
             Click hier or image to more options
           </div>
@@ -35,7 +35,7 @@ const Goods: React.FC<GoodsProps> = ({
 
         <p>{cost + ' ' + currency}</p>
       </div>
-      <div className="goods-block__rating">rating: {rating}</div>
+      <div className="goods-block__rating rating">rating: {rating}</div>
     </div>
   );
 };

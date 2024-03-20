@@ -1,5 +1,6 @@
 .about {
   padding: 1rem 0;
+  background-color: #fff;
 }
 .about__title {
   margin-bottom: 1rem;
@@ -17,7 +18,9 @@
 }
 .contact__my-contact {
 }
-
+.contact__link:hover {
+  color: red;
+}
 .contact__my-contact > p:not(:last-child) {
   margin-bottom: 0.6rem;
 }

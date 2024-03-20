@@ -2,3 +2,32 @@
   background-color: #fff;
   padding: 2rem 0;
 }
+.contact {
+  &__my-contact {
+  }
+  &__my-contact-link {
+    & div:not(:last-child) {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  &__my-contact-mail {
+  }
+  &__icon {
+  }
+  &__my-contact-git-hub {
+  }
+  &__my-contact-skype {
+  }
+}
+
+.my-contact {
+  display: flex;
+  align-items: center;
+}
+.my-contact b {
+  margin-right: 0.3rem;
+}
+.my-contact div {
+  margin-right: 0.3rem;
+}

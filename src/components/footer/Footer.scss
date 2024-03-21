@@ -2,25 +2,6 @@
   background-color: hsla(196, 83%, 84%, 1);
 
   width: 100%;
-
-  &__wraper {
-  }
-  &__logo {
-  }
-  &__link {
-  }
-  &__contacts {
-  }
-  &__contacts {
-  }
-  &__about-us {
-  }
-  &__link-icon {
-  }
-  &__icon {
-  }
-  &__copy-text {
-  }
 }
 
 @media (min-width: 320px) {
@@ -66,19 +47,12 @@
         white-space: nowrap;
       }
     }
-    &__contacts {
-    }
-    &__contacts {
-    }
-    &__about-us {
-    }
+
     &__link-icon {
       display: flex;
       & a:not(:last-child) {
         margin-right: 1.2rem;
       }
-    }
-    &__icon {
     }
     &__copy-text {
       display: flex;
@@ -87,55 +61,26 @@
     }
   }
 }
-@media (min-width: 1000px) {
+
+@media (min-width: 430px) {
   .footer {
     &__wraper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-bottom: 2rem;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 2rem 0 3rem;
     }
-    &__logo {
-      font-size: 2rem;
-      font-family: 'SuperThing NBP', sans-serif;
-      border-radius: 0.1em;
-      padding: 0.15em;
-      background-color: black;
-      text-align: center;
-      color: white;
-      width: 3.125rem;
-      height: 3.125rem;
-      margin-right: clamp(7px, 1vw, 20px);
-      /* margin-bottom: clamp(15px, 1vw, 20px); */
-      padding-bottom: 0.6rem;
+    &__logo-wrp {
+      padding: 0;
     }
     &__link {
-      display: flex;
-      padding: 0 6rem;
-      & div:not(:last-child) {
-        margin-right: 0.7rem;
-      }
-      & div:hover {
-        color: red;
-      }
-    }
-    &__contacts {
-    }
-    &__contacts {
-    }
-    &__about-us {
+      margin-bottom: 0;
+      padding: 0 1rem;
     }
     &__link-icon {
+      align-items: center;
       & a:not(:last-child) {
-        margin-bottom: 0.7rem;
+        margin-bottom: 0;
       }
-    }
-    &__icon {
-    }
-    &__copy-text {
-      display: flex;
-      justify-content: center;
-      padding-top: 2rem;
     }
   }
 }

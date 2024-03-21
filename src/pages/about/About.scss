@@ -1,42 +1,42 @@
 .about {
   padding: 1rem 0;
   background-color: #fff;
-}
-.about__title {
-  margin-bottom: 1rem;
-}
-.about__contact {
+  &__title {
+    margin-bottom: 1rem;
+  }
 }
 .contact {
-}
-.contact__technologies {
-  line-height: 1.5rem;
-  margin-bottom: 1rem;
-}
-.contact__technologies p {
-  margin-bottom: 1rem;
-}
-.contact__my-contact {
-}
-.contact__link:hover {
-  color: red;
-}
-.contact__my-contact > p:not(:last-child) {
-  margin-bottom: 0.6rem;
+  &__technologies {
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    & p {
+      margin-bottom: 1rem;
+    }
+  }
+  &__link:hover {
+    color: red;
+  }
+  &__my-contact {
+    & p:not(:last-child) {
+      margin-bottom: 0.6rem;
+    }
+    &__my-contact-link {
+      & p:not(:last-child) {
+        margin-bottom: 0.6rem;
+        & a {
+          transition: color 0.2s ease-in-out;
+          &:hover {
+            color: red;
+          }
+        }
+      }
+    }
+  }
 }
 
-.contact__my-contact-link > p:not(:last-child) {
-  margin-bottom: 0.6rem;
-}
-.contact__my-contact-link > p > a {
-  transition: color 0.2s ease-in-out;
-}
-.contact__my-contact-link > p > a:hover {
-  color: red;
-}
-.contact__my-contact-mail {
-}
-.contact__my-contact-git-hub {
-}
-.contact__my-contact-skype {
+.my-contact {
+  & a {
+    display: inline-flex;
+    align-items: center;
+  }
 }

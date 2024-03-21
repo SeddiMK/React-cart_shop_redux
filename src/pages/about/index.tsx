@@ -78,49 +78,49 @@ const About: React.FC = () => {
             <div className="contact__my-contact-link">
               <div className="contact__my-contact-mail my-contact">
                 <b>Mail:</b>{' '}
-                <div className="contact__icon icon-wrp">
-                  <img
-                    className="contact__icon img"
-                    src={mailLogo}
-                    alt="mail"
-                  />
-                </div>
                 <a
                   href="https://mail.google.com/mail/u/1/?view=cm&fs=1&to=web.egorovm@gmail.com&tf=1"
                   target="_blank"
                   rel="noreferrer">
+                  <div className="contact__icon icon-wrp">
+                    <img
+                      className="contact__icon img"
+                      src={mailLogo}
+                      alt="mail"
+                    />
+                  </div>
                   web.egorovm@gmail.com
                 </a>
               </div>
               <div className="contact__my-contact-git-hub my-contact">
                 <b>GitHub:</b>{' '}
-                <div className="contact__icon icon-wrp">
-                  <img
-                    className="contact__icon img"
-                    src={githubLogo}
-                    alt="gitHub"
-                  />
-                </div>
                 <a
                   href="https://github.com/SeddiMK"
                   target="_blank"
                   rel="noreferrer">
+                  <div className="contact__icon icon-wrp">
+                    <img
+                      className="contact__icon img"
+                      src={githubLogo}
+                      alt="gitHub"
+                    />
+                  </div>
                   SeddiMK
                 </a>
               </div>
               <div className="contact__my-contact-skype my-contact">
                 <b>Skype:</b>{' '}
-                <div className="contact__icon icon-wrp">
-                  <img
-                    className="contact__icon img"
-                    src={skypeLogo}
-                    alt="gitHub"
-                  />
-                </div>
                 <a
                   href="skype:live:.cid.985f030235657018?add"
                   target="_blank"
                   rel="noreferrer">
+                  <div className="contact__icon icon-wrp">
+                    <img
+                      className="contact__icon img"
+                      src={skypeLogo}
+                      alt="gitHub"
+                    />
+                  </div>
                   Maksim Egorov
                 </a>
               </div>

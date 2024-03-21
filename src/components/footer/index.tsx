@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer__wraper">
-        <div className="footer__logo">
-          <Link to="/" className="header__logo">
+        <div className="footer__logo-wrp">
+          <Link to="/" className="footer__logo">
             ME
             {/* <img src="#" alt="Image logo" /> */}
           </Link>
@@ -23,15 +23,33 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="footer__link-icon">
-          <div className="contact__icon icon-wrp">
-            <img className="contact__icon img" src={mailLogo} alt="gitHub" />
-          </div>
-          <div className="contact__icon icon-wrp">
-            <img className="contact__icon img" src={githubLogo} alt="gitHub" />
-          </div>
-          <div className="contact__icon icon-wrp">
-            <img className="contact__icon img" src={skypeLogo} alt="gitHub" />
-          </div>
+          <a
+            href="https://mail.google.com/mail/u/1/?view=cm&fs=1&to=web.egorovm@gmail.com&tf=1"
+            target="_blank"
+            rel="noreferrer">
+            <div className="contact__icon icon-wrp">
+              <img className="contact__icon img" src={mailLogo} alt="gitHub" />
+            </div>
+          </a>
+
+          <a href="https://github.com/SeddiMK" target="_blank" rel="noreferrer">
+            <div className="contact__icon icon-wrp">
+              <img
+                className="contact__icon img"
+                src={githubLogo}
+                alt="gitHub"
+              />
+            </div>
+          </a>
+
+          <a
+            href="skype:live:.cid.985f030235657018?add"
+            target="_blank"
+            rel="noreferrer">
+            <div className="contact__icon icon-wrp">
+              <img className="contact__icon img" src={skypeLogo} alt="gitHub" />
+            </div>
+          </a>
         </div>
       </div>
       <hr

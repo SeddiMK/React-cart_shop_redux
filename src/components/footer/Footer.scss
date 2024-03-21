@@ -2,7 +2,6 @@
   background-color: hsla(196, 83%, 84%, 1);
 
   width: 100%;
-  padding: 50px 10px;
 
   &__wraper {
   }
@@ -21,5 +20,122 @@
   &__icon {
   }
   &__copy-text {
+  }
+}
+
+@media (min-width: 320px) {
+  .footer {
+    padding: 0.8rem;
+    padding-bottom: 1.8rem;
+
+    &__wraper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+    &__logo-wrp {
+      padding: 1rem 0 2.7rem 0;
+    }
+    &__logo {
+      font-size: 2rem;
+      font-family: 'SuperThing NBP', sans-serif;
+      border-radius: 0.1em;
+      background-color: black;
+      text-align: center;
+      color: white;
+      width: 3.125rem;
+      height: 3.125rem;
+      margin-right: clamp(7px, 1vw, 20px);
+      margin-bottom: 3rem;
+      padding: 0.15em;
+      padding-bottom: 0.6rem;
+    }
+    &__link {
+      display: flex;
+      margin-bottom: 1.5rem;
+      padding: 0 6rem;
+      & div:not(:last-child) {
+        margin-right: 0.7rem;
+      }
+      & div:hover {
+        color: red;
+      }
+      & div a {
+        white-space: nowrap;
+      }
+    }
+    &__contacts {
+    }
+    &__contacts {
+    }
+    &__about-us {
+    }
+    &__link-icon {
+      display: flex;
+      & a:not(:last-child) {
+        margin-right: 1.2rem;
+      }
+    }
+    &__icon {
+    }
+    &__copy-text {
+      display: flex;
+      justify-content: center;
+      padding-top: 2rem;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .footer {
+    &__wraper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+    &__logo {
+      font-size: 2rem;
+      font-family: 'SuperThing NBP', sans-serif;
+      border-radius: 0.1em;
+      padding: 0.15em;
+      background-color: black;
+      text-align: center;
+      color: white;
+      width: 3.125rem;
+      height: 3.125rem;
+      margin-right: clamp(7px, 1vw, 20px);
+      /* margin-bottom: clamp(15px, 1vw, 20px); */
+      padding-bottom: 0.6rem;
+    }
+    &__link {
+      display: flex;
+      padding: 0 6rem;
+      & div:not(:last-child) {
+        margin-right: 0.7rem;
+      }
+      & div:hover {
+        color: red;
+      }
+    }
+    &__contacts {
+    }
+    &__contacts {
+    }
+    &__about-us {
+    }
+    &__link-icon {
+      & a:not(:last-child) {
+        margin-bottom: 0.7rem;
+      }
+    }
+    &__icon {
+    }
+    &__copy-text {
+      display: flex;
+      justify-content: center;
+      padding-top: 2rem;
+    }
   }
 }

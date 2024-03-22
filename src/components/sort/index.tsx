@@ -67,8 +67,9 @@ const SortPopup: React.FC<SortProps> = ({ value, onChangeSort }) => {
         <span>Sort by:</span>
         <span onClick={() => setOpen(!open)}>{nameSort.name}</span>
       </p>
-      {open && (
-        <div className={'sort__popup ' + styles.root}>
+
+      <div className={'sort__popup ' + styles.root}>
+        {open && (
           <ul>
             {listSort.map((obj, i) => (
               <li
@@ -82,8 +83,8 @@ const SortPopup: React.FC<SortProps> = ({ value, onChangeSort }) => {
               </li>
             ))}
           </ul>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

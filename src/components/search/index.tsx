@@ -36,9 +36,6 @@ const Search: React.FC<SearchProps> = ({ value }) => {
   // e: React.ChangeEvent<HTMLInputElement>
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (inputRef.current) {
-      console.log(e.target.value, 'e.target.value+++++++++');
-      console.log(inputRef.current.value, 'inputRef.current.value+++++++++');
-
       updateInpSearchValue(inputRef.current.value);
       setValueSt(inputRef.current.value);
     }

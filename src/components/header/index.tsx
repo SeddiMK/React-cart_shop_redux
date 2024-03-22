@@ -1,7 +1,7 @@
 import './Header.scss';
 import '../../app/Common.scss';
 
-import { ForwardedRef, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -115,24 +115,12 @@ const Header: React.FC = () => {
   };
 
   // burgerClick in window--------------------------------------
-  // useEffect(() => {
-  //   const navHeaderLeft = document.getElementsByClassName('menu__list-left');
-  //   console.log(navHeaderLeft);
-  //   console.log(burgerClick, 'burgerClick');
-  //   // if (burgerClick) console.log(navHeaderLeft.classList.contains('is-open'));
-  // }, [burgerClick]);
-
-  // const onClickBurger = () => {
-  //   console.log('burger click');
-  //   setBurgerClick(!burgerClick);
-  // };
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const _event = e as MouseEvent & {
         composedPath(): Node[];
       };
 
-      console.log(burgRef, 'burgerRef ---!!----------- ');
       // document.getElementById('hamburger')
       if (
         !burgerClick &&
@@ -140,8 +128,6 @@ const Header: React.FC = () => {
           (x: Element | null) => x && _event.composedPath().includes(x)
         )
       ) {
-        console.log(menuListRef.current, 'if-------------!!!!!!!!!!!!!');
-
         setBurgerClick(true);
         // dispath(menuOpen(false));
       }
@@ -174,8 +160,6 @@ const Header: React.FC = () => {
           {/*onClick={() => setBurgerClick(!burgerClick)} <Burger burgerClickMenu={(i: boolean) => setBurgerClick(i)} /> */}
         </div>
         <nav className="header__nav menu">
-          {/* {'menu__list-left' + (burgerClick ? ' activ-nav' : '')}  */}
-
           <ul
             ref={menuListRef}
             className={'menu__list-left' + (!burgerClick ? ' activ-nav' : '')}>

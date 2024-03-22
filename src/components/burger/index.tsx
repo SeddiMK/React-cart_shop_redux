@@ -1,25 +1,15 @@
 import './Burger.scss';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 type burgerProps = {
   burgerClick: boolean;
   setBurgerClick: (i: boolean) => void;
-  // ref: React.MutableRefObject<any>;
   ref: React.ForwardedRef<any>;
 };
 
 const Burger: React.FC<burgerProps> = React.forwardRef(
   ({ burgerClick, setBurgerClick }, burgRef) => {
-    console.log(burgRef, 'burgerRef in BURGER------------');
-
-    // useEffect(() => {
-    //   // console.log(isClosed, 'isClosed---------------');
-    //   // setIsClosed(burgerClick);
-    //   setBurgerClick(burgerClick);
-    // }, [burgerClick]);
-    // () => setBurgerClick(isClosed)   onClick={onClick}
-    // setBurgerClick(true);
     return (
       <>
         <div

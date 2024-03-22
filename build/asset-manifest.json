@@ -1,21 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.61d38891.css",
-    "main.js": "/static/js/main.9cf20986.js",
-    "CartList.css": "/static/css/CartList.0547d733.chunk.css",
-    "CartList.js": "/static/js/CartList.94aa611c.chunk.js",
+    "main.css": "/static/css/main.62d93407.css",
+    "main.js": "/static/js/main.2f6e6318.js",
+    "CartList.css": "/static/css/CartList.0c92d7af.chunk.css",
+    "CartList.js": "/static/js/CartList.d0211be8.chunk.js",
     "static/js/787.767784ac.chunk.js": "/static/js/787.767784ac.chunk.js",
+    "static/media/gitHub.png": "/static/media/gitHub.b986a15565e74ccfe0e7.png",
+    "static/media/gmail.png": "/static/media/gmail.43aede590ddfdd32f924.png",
+    "static/media/skype_icon.svg": "/static/media/skype_icon.b54a28d6e6cdaccfcb7a54d3f1bbc8ac.svg",
+    "static/media/mail_icon.svg": "/static/media/mail_icon.75423c68b2bf20649362c096921d2651.svg",
+    "static/media/github_icon.svg": "/static/media/github_icon.e21209f267368a1bd7975dab65fcd209.svg",
     "static/media/shopping-cart.svg": "/static/media/shopping-cart.46c5e4f590bc934dfc17.svg",
     "index.html": "/index.html",
     "static/media/icon-search.svg": "/static/media/icon-search.8eb08891e08c1318a97e.svg",
-    "main.61d38891.css.map": "/static/css/main.61d38891.css.map",
-    "main.9cf20986.js.map": "/static/js/main.9cf20986.js.map",
-    "CartList.0547d733.chunk.css.map": "/static/css/CartList.0547d733.chunk.css.map",
-    "CartList.94aa611c.chunk.js.map": "/static/js/CartList.94aa611c.chunk.js.map",
+    "main.62d93407.css.map": "/static/css/main.62d93407.css.map",
+    "main.2f6e6318.js.map": "/static/js/main.2f6e6318.js.map",
+    "CartList.0c92d7af.chunk.css.map": "/static/css/CartList.0c92d7af.chunk.css.map",
+    "CartList.d0211be8.chunk.js.map": "/static/js/CartList.d0211be8.chunk.js.map",
     "787.767784ac.chunk.js.map": "/static/js/787.767784ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61d38891.css",
-    "static/js/main.9cf20986.js"
+    "static/css/main.62d93407.css",
+    "static/js/main.2f6e6318.js"
   ]
 }

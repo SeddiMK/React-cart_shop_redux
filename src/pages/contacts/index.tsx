@@ -7,7 +7,7 @@ const Contacts: React.FC = () => {
   return (
     <div className="contacts">
       <div className="contact__my-contact">
-        <p>My contact: click link to bottom.</p>
+        <p>My contact: click link to bottom &darr;</p>
         <p>Связь со мной: нажмите на ссылку внизу &darr;</p>
         <div className="contact__my-contact-link">
           <div className="contact__my-contact-mail my-contact">

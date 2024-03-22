@@ -18,10 +18,11 @@ const About: React.FC = () => {
               SCSS, Mobile-First. The backend is implemented in mockapi.io.
             </p>
             <p>
-              <b>Here we implement:</b>
-              instant search, product category, sorting goods, switching prices
-              in foreign currency (rate 95r), pagination (the library reacts to
-              pages).
+              <b>Implemented here:</b> instant search, product categories,
+              sorting of goods, switching prices in currency (rate 95r),
+              pagination (react-paginate library), skeletons (shows an image of
+              the goods during a request from the backend), preloader,
+              lasy-loading.
             </p>
             <p>
               Cart - adding products, removing products, calculating the total
@@ -44,7 +45,8 @@ const About: React.FC = () => {
             <p>
               <b>Здесь реализовано:</b> мгновенный поиск, категории товаров,
               сортировка товаров, переключение стоимости в валюте(курс 95р),
-              пагинация(библиотека react-paginate).
+              пагинация(библиотека react-paginate), skeletons(показывает образ
+              товаров во время запроса с бекенда), preloader, lasy-loading.
             </p>
             <p>
               Корзина- добавление товаров, удаление товаров, подсчет итоговой

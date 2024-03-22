@@ -1,7 +1,7 @@
 import './Footer.scss';
-import mailLogo from '../../assets/image/icon/gmail.png';
-import githubLogo from '../../assets/image/icon/gitHub.png';
-import skypeLogo from '../../assets/image/icon/skype.png';
+import mailLogo from '../../assets/image/icon/mail_icon.svg';
+import githubLogo from '../../assets/image/icon/github_icon.svg';
+import skypeLogo from '../../assets/image/icon/skype_icon.svg';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {

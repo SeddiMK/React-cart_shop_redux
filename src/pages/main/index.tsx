@@ -2,7 +2,7 @@ import './Main.scss';
 import React from 'react';
 
 import GoodsList from '../../containers/GoodsList';
-import Pagination from '../pagination';
+import Pagination from '../../components/pagination';
 
 // import CartList from '../../containers/CartList';
 const CartList = React.lazy(

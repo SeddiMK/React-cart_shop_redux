@@ -1,4 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  LegacyRef,
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import { useSelector } from 'react-redux';
 
 import {
@@ -19,9 +25,10 @@ import {
 } from '../store/cartSlice';
 import { itemsReindexing } from '../store/furnitureSlice';
 
-import Cart from '../components/cart/Cart';
+import Cart from '../components/cart';
 import ErrorBeckend from '../components/ErrorBeckend';
 import { useAppDispatch } from '../store';
+import { iconCartContext } from '../app/App';
 
 const CartList: React.FC = () => {
   const dispath = useAppDispatch();
@@ -32,9 +39,11 @@ const CartList: React.FC = () => {
   const goodsReindex: any = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
 
-  const catCartRef = useRef(null);
+  const catCartRef: React.MutableRefObject<null> = useRef(null);
+  const iconCartRef: React.MutableRefObject<null> | null =
+    useContext(iconCartContext);
 
-  let fullQuantityGoodsCart = useSelector(fullQuantityGoods);
+  let fullQuantityGoodsCart: number = useSelector(fullQuantityGoods);
 
   // fullPrice ----------------------------------------------------------
   const fullPrice = (): number => {
@@ -72,21 +81,18 @@ const CartList: React.FC = () => {
   // cart close in btn-close ===========================================================================
   const hadlerClose = (e: any) => {
     if (catCartRef.current && fullQuantityGoodsCart !== 0) {
-      // catCartRef.current.classList.toggle('activ');
       dispath(cartOpen(false));
     }
   };
   // cart close in window ===========================================================================
   useEffect(() => {
-    const cartIcon: Element = document.getElementsByClassName('cart-btn')[0];
-
     const handleClickOutside = (e: MouseEvent) => {
       const _event = e as MouseEvent & {
         composedPath(): Node[];
       };
       if (
-        ![catCartRef.current, cartIcon].some(
-          (x: Element | null) => x && _event.composedPath().includes(x)
+        ![catCartRef.current, iconCartRef?.current].some(
+          (x: any) => x && _event.composedPath().includes(x)
         )
       ) {
         dispath(cartOpen(false));

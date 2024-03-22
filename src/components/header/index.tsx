@@ -1,7 +1,7 @@
 import './Header.scss';
 import '../../app/Common.scss';
 
-import { LegacyRef, forwardRef, useEffect, useRef, useState } from 'react';
+import { ForwardedRef, useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -31,6 +31,7 @@ import {
 } from '../../store/cartSlice';
 import { itemsReindexing } from '../../store/furnitureSlice';
 import { RootState } from '../../store';
+import { iconCartContext } from '../../app/App';
 
 // data-header-nav-link --// можно вынести в отдельный файл------------
 const linkHeaderArr = [
@@ -49,9 +50,11 @@ const Header: React.FC = () => {
   const isMounted = useRef(false);
 
   const menuListRef = useRef<HTMLUListElement>(null);
-  // const burgerRef = forwardRef<null | HTMLDivElement>();
+  const burgRef: React.ForwardedRef<any> = useRef();
 
-  const goodsReindex: any = useSelector(itemsReindexing);
+  const iconCartRef: React.ForwardedRef<any> = useContext(iconCartContext);
+
+  const goodsReindex: {} = useSelector(itemsReindexing);
   const cart: CartItem = useSelector(selectCart);
   const sortValue = useSelector((state: RootState) => state.filter.sort);
 
@@ -124,26 +127,16 @@ const Header: React.FC = () => {
   //   setBurgerClick(!burgerClick);
   // };
   useEffect(() => {
-    // const cartIcon: Element = document.getElementsByClassName('cart-btn')[0];
-
     const handleClickOutside = (e: MouseEvent) => {
       const _event = e as MouseEvent & {
         composedPath(): Node[];
       };
 
-      // console.log(burgerRef, 'burgerRef.current----------- ');
-      console.log(!burgerClick, '!burgerClick ---!!----------- ');
-      console.log(
-        ![menuListRef.current].some(
-          (x: Element | null) => x && _event.composedPath().includes(x)
-        ),
-        '![menuListRef.current] some -- composedPath()-------------- '
-      );
-
+      console.log(burgRef, 'burgerRef ---!!----------- ');
       // document.getElementById('hamburger')
       if (
         !burgerClick &&
-        ![menuListRef.current, document.getElementById('hamburger')].some(
+        ![menuListRef.current, burgRef.current].some(
           (x: Element | null) => x && _event.composedPath().includes(x)
         )
       ) {
@@ -152,13 +145,6 @@ const Header: React.FC = () => {
         setBurgerClick(true);
         // dispath(menuOpen(false));
       }
-      // if (
-      //   ![catCartRef.current, cartIcon].some(
-      //     (x: Element | null) => x && _event.composedPath().includes(x)
-      //   )
-      // ) {
-      //   dispath(cartOpen(false));
-      // }
     };
 
     document.body.addEventListener('click', handleClickOutside);
@@ -215,8 +201,12 @@ const Header: React.FC = () => {
 
             <div className="block-search-cart__cart cart-header">
               <div className="cart-header__icon">
-                <span className="cart-header__cart-icon" onClick={handleCart}>
-                  <button className="cart-header__btn cart-btn"></button>
+                <span className="cart-header__cart-icon">
+                  <button
+                    id="cartIcon"
+                    ref={iconCartRef}
+                    onClick={handleCart}
+                    className="cart-header__btn cart-btn"></button>
                 </span>
                 <span className="cart-header__quantity-goods">
                   {fullQuantityGoodsCart}
@@ -246,8 +236,7 @@ const Header: React.FC = () => {
           </ul>
         </nav>
         <Burger
-          // ref={burgerRef}
-
+          ref={burgRef}
           burgerClick={burgerClick}
           setBurgerClick={setBurgerClick}
         />

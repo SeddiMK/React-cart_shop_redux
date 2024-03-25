@@ -3,6 +3,8 @@
   /* font-size: calc(1vw + 0.6em); */
   /* font-size: clamp(20px, 2vw, 32px); */
   background-color: var(--bg-color-body);
+  overflow-y: hidden;
+  overflow-x: hidden;
 
   --base-font: 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;

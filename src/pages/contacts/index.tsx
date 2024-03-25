@@ -13,18 +13,20 @@ const Contacts: React.FC = () => {
           <div className="contact__my-contact-mail my-contact">
             <b>Mail:</b>{' '}
             <a
+              className="my-contact__link"
               href="https://mail.google.com/mail/u/1/?view=cm&fs=1&to=web.egorovm@gmail.com&tf=1"
               target="_blank"
               rel="noreferrer">
               <div className="contact__icon icon-wrp">
                 <img className="contact__icon img" src={mailLogo} alt="mail" />
               </div>
-              web.egorovm@gmail.com
+              <span>web.egorovm@gmail.com</span>
             </a>
           </div>
           <div className="contact__my-contact-git-hub my-contact">
             <b>GitHub:</b>{' '}
             <a
+              className="my-contact__link"
               href="https://github.com/SeddiMK"
               target="_blank"
               rel="noreferrer">
@@ -35,12 +37,13 @@ const Contacts: React.FC = () => {
                   alt="gitHub"
                 />
               </div>
-              SeddiMK
+              <span>SeddiMK</span>
             </a>
           </div>
           <div className="contact__my-contact-skype my-contact">
             <b>Skype:</b>{' '}
             <a
+              className="my-contact__link"
               href="skype:live:.cid.985f030235657018?add"
               target="_blank"
               rel="noreferrer">
@@ -51,7 +54,7 @@ const Contacts: React.FC = () => {
                   alt="gitHub"
                 />
               </div>
-              Maksim Egorov
+              <span>Maksim Egorov</span>
             </a>
           </div>
         </div>

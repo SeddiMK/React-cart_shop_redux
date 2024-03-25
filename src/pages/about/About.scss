@@ -35,8 +35,11 @@
 }
 
 .my-contact {
-  & a {
+  &__link {
     display: inline-flex;
     align-items: center;
+  }
+  &__link:hover {
+    color: red;
   }
 }

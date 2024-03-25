@@ -14,10 +14,14 @@
 .my-contact {
   display: flex;
   align-items: center;
-}
-.my-contact b {
-  margin-right: 0.3rem;
-}
-.my-contact div {
-  margin-right: 0.3rem;
+
+  & b {
+    margin-right: 0.3rem;
+  }
+  & div {
+    margin-right: 0.3rem;
+  }
+  &__link:hover {
+    color: red;
+  }
 }

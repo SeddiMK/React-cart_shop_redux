@@ -15,7 +15,7 @@ const About: React.FC = () => {
             <p>
               This application was developed using the React library, and same
               Redux-toolkit,Configure-store, Axios,TypeScript, JavaScript, HTML,
-              SCSS, Mobile-First. The backend is implemented in mockapi.io.
+              BEM, SCSS, Mobile-First. The backend is implemented in mockapi.io.
             </p>
             <p>
               <b>Implemented here:</b> instant search, product categories,
@@ -39,8 +39,8 @@ const About: React.FC = () => {
             </p>
             <p>
               Данное приложение разаработано с применением библиотеки React, а
-              так же Redux-toolkit, Axios,TypeScript, JavaScript, HTML, SCSS,
-              Mobile-First. Backend реализован в mockapi.io.
+              так же Redux-toolkit, Axios,TypeScript, JavaScript, HTML, БЭМ,
+              SCSS, Mobile-First. Backend реализован в mockapi.io.
             </p>
             <p>
               <b>Здесь реализовано:</b> мгновенный поиск, категории товаров,
@@ -81,6 +81,7 @@ const About: React.FC = () => {
               <div className="contact__my-contact-mail my-contact">
                 <b>Mail:</b>{' '}
                 <a
+                  className="my-contact__link"
                   href="https://mail.google.com/mail/u/1/?view=cm&fs=1&to=web.egorovm@gmail.com&tf=1"
                   target="_blank"
                   rel="noreferrer">
@@ -91,12 +92,13 @@ const About: React.FC = () => {
                       alt="mail"
                     />
                   </div>
-                  web.egorovm@gmail.com
+                  <span>web.egorovm@gmail.com</span>
                 </a>
               </div>
               <div className="contact__my-contact-git-hub my-contact">
                 <b>GitHub:</b>{' '}
                 <a
+                  className="my-contact__link"
                   href="https://github.com/SeddiMK"
                   target="_blank"
                   rel="noreferrer">
@@ -107,12 +109,13 @@ const About: React.FC = () => {
                       alt="gitHub"
                     />
                   </div>
-                  SeddiMK
+                  <span>SeddiMK</span>
                 </a>
               </div>
               <div className="contact__my-contact-skype my-contact">
                 <b>Skype:</b>{' '}
                 <a
+                  className="my-contact__link"
                   href="skype:live:.cid.985f030235657018?add"
                   target="_blank"
                   rel="noreferrer">
@@ -123,7 +126,7 @@ const About: React.FC = () => {
                       alt="gitHub"
                     />
                   </div>
-                  Maksim Egorov
+                  <span>Maksim Egorov</span>
                 </a>
               </div>
             </div>

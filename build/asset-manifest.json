@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4581539b.css",
-    "main.js": "/static/js/main.a3c8aa53.js",
+    "main.js": "/static/js/main.ed8185e2.js",
     "CartList.css": "/static/css/CartList.38b98ce6.chunk.css",
     "CartList.js": "/static/js/CartList.d0211be8.chunk.js",
     "static/js/787.767784ac.chunk.js": "/static/js/787.767784ac.chunk.js",
@@ -10,17 +10,17 @@
     "static/media/skype_icon.svg": "/static/media/skype_icon.b54a28d6e6cdaccfcb7a54d3f1bbc8ac.svg",
     "static/media/mail_icon.svg": "/static/media/mail_icon.75423c68b2bf20649362c096921d2651.svg",
     "static/media/github_icon.svg": "/static/media/github_icon.e21209f267368a1bd7975dab65fcd209.svg",
-    "static/media/shopping-cart.svg": "/static/media/shopping-cart.46c5e4f590bc934dfc17.svg",
     "index.html": "/index.html",
+    "static/media/shopping-cart.svg": "/static/media/shopping-cart.46c5e4f590bc934dfc17.svg",
     "static/media/icon-search.svg": "/static/media/icon-search.8eb08891e08c1318a97e.svg",
     "main.4581539b.css.map": "/static/css/main.4581539b.css.map",
-    "main.a3c8aa53.js.map": "/static/js/main.a3c8aa53.js.map",
+    "main.ed8185e2.js.map": "/static/js/main.ed8185e2.js.map",
     "CartList.38b98ce6.chunk.css.map": "/static/css/CartList.38b98ce6.chunk.css.map",
     "CartList.d0211be8.chunk.js.map": "/static/js/CartList.d0211be8.chunk.js.map",
     "787.767784ac.chunk.js.map": "/static/js/787.767784ac.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4581539b.css",
-    "static/js/main.a3c8aa53.js"
+    "static/js/main.ed8185e2.js"
   ]
 }

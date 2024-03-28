@@ -11,7 +11,6 @@ import Contacts from '../pages/contacts';
 import FullOptions from '../pages/fullOption';
 
 import { Route, Routes } from 'react-router-dom';
-// import { createContext } from 'vm';
 import React, { useRef } from 'react';
 
 export const iconCartContext =

@@ -129,6 +129,25 @@ const About: React.FC = () => {
                   <span>Maksim Egorov</span>
                 </a>
               </div>
+              <div className="contact__my-contact-link-project my-contact">
+                <b>Link to project from github:</b>{' '}
+                <a
+                  className="my-contact__link"
+                  href="https://github.com/SeddiMK/React-cart_shop_redux/tree/main/build"
+                  target="_blank"
+                  rel="noreferrer">
+                  <div className="contact__icon icon-wrp">
+                    <i className="contact__icon img fa fa-link fa-2x"></i>
+                    {/* <img
+                      className="contact__icon img"
+                      src={linkLogo}
+                      alt="link to
+                      project from github"
+                    /> */}
+                  </div>
+                  <span>React-cart_shop_redux</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

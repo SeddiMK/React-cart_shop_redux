@@ -138,12 +138,6 @@ const About: React.FC = () => {
                   rel="noreferrer">
                   <div className="contact__icon icon-wrp">
                     <i className="contact__icon img fa fa-link fa-2x"></i>
-                    {/* <img
-                      className="contact__icon img"
-                      src={linkLogo}
-                      alt="link to
-                      project from github"
-                    /> */}
                   </div>
                   <span>React-cart_shop_redux</span>
                 </a>
